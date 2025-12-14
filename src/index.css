@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital,wght@0,400;1,400&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+  }
+
+  body {
+    @apply bg-black text-gray-200 antialiased font-sans;
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-6xl mx-auto px-8 sm:px-12 lg:px-16;
+  }
+
+  .section-title {
+    @apply text-xs uppercase tracking-wider text-gray-500 font-medium mb-6 font-sans;
+  }
+
+  .card {
+    @apply border border-gray-800 rounded-lg p-6 hover:border-gray-700 transition-colors bg-[#0a0a0a];
+  }
+
+  .link-hover {
+    @apply hover:text-emerald-500 transition-colors;
+  }
+
+  .nav-link {
+    @apply text-gray-400 hover:text-white transition-colors text-sm font-medium;
+  }
+}
+
+@layer utilities {
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  .animate-ripple {
+    animation: ripple 0.6s ease-out;
+  }
+}
+
+/* View Transition API for dark mode animation */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 999;
+}
+
+/* Light theme styles */
+[data-theme="light"] {
+  .card {
+    @apply border-gray-200 bg-gray-50 hover:border-gray-300;
+  }
+
+  .section-title {
+    @apply text-gray-600;
+  }
+
+  .nav-link {
+    @apply text-gray-600 hover:text-black;
+  }
+}
