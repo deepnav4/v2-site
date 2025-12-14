@@ -32,11 +32,11 @@ export default function ProjectDetail() {
   if (!project) {
     return (
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-        <div className="container py-16 text-center">
-          <h1 className={`text-4xl font-bold mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+        <div className="container py-12 sm:py-16 text-center">
+          <h1 className={`text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Project not found
           </h1>
-          <Link to="/projects" className="text-emerald-500 hover:text-emerald-400 transition-colors font-sans">
+          <Link to="/projects" className="text-sm sm:text-base text-emerald-500 hover:text-emerald-400 transition-colors font-sans">
             Back to projects
           </Link>
         </div>
@@ -46,9 +46,9 @@ export default function ProjectDetail() {
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-      <div className="container py-24">
+      <div className="container py-12 sm:py-16 md:py-24">
         {/* Breadcrumb Navigation */}
-        <div className={`mb-12 text-base font-sans ${
+        <div className={`mb-8 sm:mb-10 md:mb-12 text-sm sm:text-base font-sans ${
           theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
         }`}>
           <Link to="/" className="hover:text-emerald-500 transition-colors">Home</Link>
@@ -59,10 +59,10 @@ export default function ProjectDetail() {
         </div>
 
         <article className="max-w-4xl">
-          <header className="mb-16">
+          <header className="mb-10 sm:mb-12 md:mb-16">
             {/* Category Badge */}
-            <div className="mb-6">
-              <span className={`inline-block px-3 py-1 text-xs rounded-lg font-mono ${
+            <div className="mb-4 sm:mb-6">
+              <span className={`inline-block px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs rounded-lg font-mono ${
                 theme === 'dark'
                   ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
                   : 'bg-emerald-500/10 text-emerald-600 border border-emerald-500/20'
@@ -72,19 +72,19 @@ export default function ProjectDetail() {
             </div>
 
             {/* Project Title */}
-            <h1 className={`text-5xl md:text-6xl font-normal mb-8 leading-tight font-serif ${
+            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mb-6 sm:mb-8 leading-tight font-serif ${
               theme === 'dark' ? 'text-white' : 'text-black'
             }`}>
               {project.title}
             </h1>
             
             {/* Project Description */}
-            <p className={`text-xl leading-relaxed font-sans mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-base sm:text-lg md:text-xl leading-relaxed font-sans mb-6 sm:mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
               {project.description}
             </p>
 
             {/* Links */}
-            <div className="flex flex-wrap gap-4 mb-8">
+            <div className="flex flex-wrap gap-3 sm:gap-4 mb-6 sm:mb-8">
               {project.github && (
                 <a
                   href={project.github}
@@ -118,7 +118,7 @@ export default function ProjectDetail() {
             </div>
             
             {/* Technologies */}
-            <div className={`flex flex-wrap gap-3 text-sm ${
+            <div className={`flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm ${
               theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
             }`}>
               {project.technologies.map((tech, index) => (
@@ -134,7 +134,7 @@ export default function ProjectDetail() {
 
           {/* Project Content */}
           {markdownContent && (
-            <div className={`prose prose-lg max-w-none font-sans ${
+            <div className={`prose sm:prose-lg max-w-none font-sans ${
               theme === 'dark' 
                 ? 'prose-invert prose-headings:font-serif prose-headings:text-white prose-p:text-gray-400 prose-strong:text-white prose-code:text-gray-300 prose-code:font-mono prose-a:text-emerald-500 hover:prose-a:text-emerald-400 prose-li:text-gray-400' 
                 : 'prose-headings:font-serif prose-headings:text-black prose-p:text-gray-900 prose-strong:text-black prose-code:text-gray-900 prose-code:font-mono prose-a:text-emerald-600 hover:prose-a:text-emerald-700 prose-li:text-gray-900'
@@ -161,12 +161,12 @@ export default function ProjectDetail() {
         </article>
 
         {/* Back Link */}
-        <div className={`mt-20 pt-8 border-t max-w-4xl ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
+        <div className={`mt-12 sm:mt-16 md:mt-20 pt-6 sm:pt-8 border-t max-w-4xl ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
           <Link 
             to="/projects" 
-            className="inline-flex items-center gap-2 text-emerald-500 hover:text-emerald-400 transition-colors font-sans font-medium"
+            className="inline-flex items-center gap-2 text-sm sm:text-base text-emerald-500 hover:text-emerald-400 transition-colors font-sans font-medium"
           >
-            <ArrowLeft size={18} strokeWidth={1.5} />
+            <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" strokeWidth={1.5} />
             Back to all projects
           </Link>
         </div>

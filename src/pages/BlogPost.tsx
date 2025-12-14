@@ -107,11 +107,11 @@ export default function BlogPost() {
   if (!post) {
     return (
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-        <div className="container py-16 text-center">
-          <h1 className={`text-4xl font-bold mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+        <div className="container py-12 sm:py-16 text-center">
+          <h1 className={`text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Post not found
           </h1>
-          <Link to="/blog" className="text-emerald-500 hover:text-emerald-400 transition-colors font-sans">
+          <Link to="/blog" className="text-sm sm:text-base text-emerald-500 hover:text-emerald-400 transition-colors font-sans">
             Back to blog
           </Link>
         </div>
@@ -143,9 +143,9 @@ export default function BlogPost() {
         </div> */}
       </div>
 
-      {/* Progress Percentage Display with TOC */}
+      {/* Progress Percentage Display with TOC - Hidden on mobile */}
       <div 
-        className="fixed top-1/2 -translate-y-1/2 right-8 z-50"
+        className="hidden lg:block fixed top-1/2 -translate-y-1/2 right-4 lg:right-8 z-50"
         onMouseEnter={() => setShowTOC(true)}
         onMouseLeave={() => setShowTOC(false)}
       >
@@ -278,8 +278,8 @@ export default function BlogPost() {
         `}</style>
       </div>
 
-      <div className="container py-24">
-        <div className={`mb-12 text-base font-sans ${
+      <div className="container py-12 sm:py-16 md:py-24">
+        <div className={`mb-8 sm:mb-10 md:mb-12 text-sm sm:text-base font-sans ${
           theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
         }`}>
           <Link to="/" className="hover:text-emerald-500 transition-colors">Home</Link>
@@ -290,8 +290,8 @@ export default function BlogPost() {
         </div>
 
         <article className="max-w-4xl">
-            <header className="mb-16">
-              <div className={`flex items-center gap-3 mb-6 text-sm font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+            <header className="mb-10 sm:mb-12 md:mb-16">
+              <div className={`flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
                 <time>{post.date}</time>
                 <span className={theme === 'dark' ? 'text-gray-700' : 'text-gray-400'}>•</span>
                 <span>{post.readTime}</span>
@@ -299,17 +299,17 @@ export default function BlogPost() {
                 <span className="font-mono">{post.category}</span>
               </div>
             
-            <h1 className={`text-5xl md:text-6xl font-normal mb-8 leading-tight font-serif ${
+            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mb-6 sm:mb-8 leading-tight font-serif ${
               theme === 'dark' ? 'text-white' : 'text-black'
             }`}>
               {post.title}
             </h1>
             
-            <p className={`text-xl leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-base sm:text-lg md:text-xl leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
               {post.excerpt}
             </p>
             
-            <div className={`flex flex-wrap gap-3 mt-8 text-sm ${
+            <div className={`flex flex-wrap gap-2 sm:gap-3 mt-6 sm:mt-8 text-xs sm:text-sm ${
               theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
             }`}>
               {post.tags.map((tag, index) => (
@@ -326,7 +326,7 @@ export default function BlogPost() {
             </div>
           </header>
 
-          <div className={`prose prose-lg max-w-none font-sans ${
+          <div className={`prose sm:prose-lg max-w-none font-sans ${
             theme === 'dark' 
               ? 'prose-invert prose-headings:font-serif prose-headings:text-white prose-p:text-gray-400 prose-strong:text-white prose-code:text-gray-300 prose-code:font-mono prose-a:text-emerald-500 hover:prose-a:text-emerald-400 prose-li:text-gray-400' 
               : 'prose-headings:font-serif prose-headings:text-black prose-p:text-gray-900 prose-strong:text-black prose-code:text-gray-900 prose-code:font-mono prose-a:text-emerald-600 hover:prose-a:text-emerald-700 prose-li:text-gray-900'
@@ -407,12 +407,12 @@ export default function BlogPost() {
           </div>
         </article>
 
-        <div className={`mt-20 pt-8 border-t max-w-4xl ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
+        <div className={`mt-12 sm:mt-16 md:mt-20 pt-6 sm:pt-8 border-t max-w-4xl ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
           <Link 
             to="/blog" 
-            className="inline-flex items-center gap-2 text-emerald-500 hover:text-emerald-400 transition-colors font-sans font-medium"
+            className="inline-flex items-center gap-2 text-sm sm:text-base text-emerald-500 hover:text-emerald-400 transition-colors font-sans font-medium"
           >
-            <ArrowLeft size={18} strokeWidth={1.5} />
+            <ArrowLeft size={16} className="sm:w-[18px] sm:h-[18px]" strokeWidth={1.5} />
             Back to all posts
           </Link>
         </div>

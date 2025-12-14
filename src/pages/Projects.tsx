@@ -20,25 +20,25 @@ export default function Projects() {
         url="https://navdeep.dev/projects"
       />
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-      <div className="container py-16">
-        <div className="mb-16 flex items-start justify-between">
-          <div>
-            <h1 className={`text-5xl md:text-6xl font-normal mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+      <div className="container py-12 sm:py-16">
+        <div className="mb-10 sm:mb-12 md:mb-16">
+          <div className="mb-6">
+            <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               Projects
             </h1>
-            <p className={`text-base font-sans mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-sm sm:text-base font-sans mb-3 sm:mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
               Complete collection spanning different domains and technologies
             </p>
-            <p className={`text-sm font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
+            <p className={`text-xs sm:text-sm font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
               {filteredProjects.length} projects
             </p>
           </div>
 
           {/* Filter Buttons */}
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             <button
               onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 font-sans ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 font-sans ${
                 filter === 'all'
                   ? 'bg-emerald-500 text-black'
                   : theme === 'dark'
@@ -50,7 +50,7 @@ export default function Projects() {
             </button>
             <button
               onClick={() => setFilter('featured')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 font-sans ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 font-sans ${
                 filter === 'featured'
                   ? 'bg-emerald-500 text-black'
                   : theme === 'dark'
@@ -62,7 +62,7 @@ export default function Projects() {
             </button>
             <button
               onClick={() => setFilter('personal')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 font-sans ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 font-sans ${
                 filter === 'personal'
                   ? 'bg-emerald-500 text-black'
                   : theme === 'dark'
@@ -74,7 +74,7 @@ export default function Projects() {
             </button>
             <button
               onClick={() => setFilter('hackathon')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 font-sans ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 font-sans ${
                 filter === 'hackathon'
                   ? 'bg-emerald-500 text-black'
                   : theme === 'dark'
@@ -88,42 +88,42 @@ export default function Projects() {
         </div>
 
         {/* Projects List */}
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {filteredProjects.map((project, index) => (
-            <div key={project.id} className={`pb-8 ${index !== filteredProjects.length - 1 ? 'border-b' : ''} ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
-              <div className="mb-4 flex items-start gap-4">
-                <span className={`text-sm font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>
+            <div key={project.id} className={`pb-6 sm:pb-8 ${index !== filteredProjects.length - 1 ? 'border-b' : ''} ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
+              <div className="mb-3 sm:mb-4 flex items-start gap-3 sm:gap-4">
+                <span className={`text-xs sm:text-sm font-mono flex-shrink-0 ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>
                   0{index + 1}
                 </span>
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-xs uppercase tracking-wider text-gray-500 font-medium font-sans">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                    <span className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium font-sans">
                       {project.category}
                     </span>
                   </div>
                   
                   <Link to={`/projects/${project.slug}`}>
-                    <h3 className={`text-2xl font-normal mb-3 font-serif hover:text-emerald-500 transition-colors cursor-pointer ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                    <h3 className={`text-xl sm:text-2xl font-normal mb-2 sm:mb-3 font-serif hover:text-emerald-500 transition-colors cursor-pointer ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                       {project.title}
                     </h3>
                   </Link>
                   
-                  <p className={`text-sm mb-4 leading-relaxed font-sans max-w-3xl ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <p className={`text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed font-sans max-w-3xl line-clamp-3 sm:line-clamp-none ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                     {project.technologies.map(tech => (
                       <span 
                         key={tech}
-                        className={`text-xs font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}
+                        className={`text-[10px] sm:text-xs font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <div className="flex gap-4 text-sm items-center">
+                  <div className="flex gap-3 sm:gap-4 text-xs sm:text-sm items-center">
                     {project.github && (
                       <a 
                         href={project.github}
@@ -145,7 +145,7 @@ export default function Projects() {
         </div>
 
         {filteredProjects.length === 0 && (
-          <div className={`text-center py-16 font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+          <div className={`text-center py-12 sm:py-16 text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
             No projects found in this category.
           </div>
         )}

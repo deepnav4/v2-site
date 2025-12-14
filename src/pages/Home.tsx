@@ -61,116 +61,117 @@ export default function Home() {
       <SEO 
         title="Navdeep Singh - Software Developer & Student"
         description="Information Technology student at NIT Jalandhar. Building web applications, exploring algorithms, and sharing knowledge through code."
-        url="https://navdeep.dev"
+        url="https://navdeep.site"
       />
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
       {/* Hero Section */}
-      <section className="container py-24">
-        <div className="max-w-5xl">
-          <p className="text-sm text-gray-500 mb-8 font-mono tracking-wide">
-            Information Technology Student / Developer / Writer
+      <section className="container py-12 sm:py-16 md:py-24">
+        <div className="max-w-5xl py-8 md:px-0">
+          <p className="text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8 font-mono tracking-wide">
+            Information Technology Student <br className="sm:hidden" /> <span className="hidden sm:inline">/ </span>Developer / Writer
           </p>
           
-          <h1 className={`text-6xl md:text-7xl lg:text-8xl font-normal mb-8 leading-tight font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-            I experiment with things<br />that fascinate me.
+          <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-8xl font-normal mb-6 sm:mb-8 leading-tight font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+            I experiment with things<br className="hidden sm:block" />
+            <span className="sm:hidden"> </span>that fascinate me.
           </h1>
           
-          <p className={`text-lg mb-12 max-w-2xl font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-lg sm:text-base mb-12 sm:mb-12 max-w-2xl font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
             I build full-stack applications with Docker, Redis, and real-time collaboration. Welcome to my lab notebook where I share experiments in software, design, and technology.
           </p>
           
-          <div className="flex items-center gap-6 mb-12">
+          <div className="flex items-center gap-4 sm:gap-6 mb-12 sm:mb-12">
             <div>
-              <p className={`font-semibold font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Navdeep Singh</p>
-              <p className="text-sm text-gray-500 font-sans">Information Technology @ NIT Jalandhar</p>
+              <p className={`text-sm sm:text-base font-semibold font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Navdeep Singh</p>
+              <p className="text-xs sm:text-sm text-gray-500 font-sans">Information Technology @ NIT Jalandhar</p>
             </div>
           </div>
           
-          <div className="flex gap-4">
+          <div className="flex flex-row gap-2 sm:gap-4 max-w-[260px] sm:max-w-none">
             <a 
               href="https://drive.google.com/file/d/1eHJiTlWrVIQ0Bp_LMxIZODbDuqINp9F3/view" 
               target="_blank"
               rel="noopener noreferrer"
-              className={`px-6 py-3 rounded-lg transition-all duration-200 font-sans font-medium inline-flex items-center gap-2 ${
+              className={`flex-1 sm:flex-none sm:px-6 px-2 py-2.5 sm:py-3 rounded-lg transition-all duration-200 font-sans font-medium inline-flex items-center justify-center gap-1 text-xs sm:text-base ${
                 theme === 'dark' 
                   ? 'bg-white text-black hover:bg-gray-200' 
                   : 'bg-black text-white hover:bg-gray-800'
               }`}
             >
-              View Resume
-              <span className="text-lg">→</span>
+              Resume
+              <span className="text-sm sm:text-lg">→</span>
             </a>
             <Link 
               to="/about" 
-              className={`px-6 py-3 border rounded-lg transition-all duration-200 font-sans font-medium ${
+              className={`flex-1 sm:flex-none sm:px-6 px-2 py-2.5 sm:py-3 border rounded-lg transition-all duration-200 font-sans font-medium text-center text-xs sm:text-base ${
                 theme === 'dark'
                   ? 'border-gray-700 text-gray-300 hover:border-gray-600 hover:text-white'
                   : 'border-gray-300 text-gray-700 hover:border-gray-400 hover:text-black'
               }`}
             >
-              More about me
+              About me
             </Link>
           </div>
         </div>
       </section>
 
       {/* Blog Posts Section */}
-      <section className="container py-16">
-        <div className="mb-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-4 font-sans font-medium">LATE NIGHT THINKING</p>
-          <h2 className={`text-3xl md:text-4xl font-normal mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Things I've figured out</h2>
-          <p className={`font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Notes on systems, algorithms, and patterns worth remembering</p>
+      <section className="container py-12 sm:py-16">
+        <div className="mb-6 sm:mb-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">LATE NIGHT THINKING</p>
+          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-3 sm:mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Things I've figured out</h2>
+          <p className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Notes on systems, algorithms, and patterns worth remembering</p>
         </div>
         
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {latestPosts.map(post => (
             <Link 
               key={post.id}
               to={`/blog/${post.slug}`}
               className="block card hover:shadow-sm hover:border-emerald-500/30"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className={`text-sm mb-2 font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+              <div className="flex items-start justify-between gap-3 sm:gap-4">
+                <div className="flex-1 min-w-0">
+                  <div className={`text-xs sm:text-sm mb-2 font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
                     {post.date} · <span className="font-mono">{post.category}</span>
                   </div>
-                  <h3 className={`text-xl font-normal mb-2 hover:text-emerald-500 transition-colors font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                  <h3 className={`text-base sm:text-lg md:text-xl font-normal mb-2 hover:text-emerald-500 transition-colors font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                     {post.title}
                   </h3>
-                  <p className={`font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{post.excerpt}</p>
+                  <p className={`text-sm sm:text-base font-sans line-clamp-2 sm:line-clamp-none ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{post.excerpt}</p>
                 </div>
               </div>
             </Link>
           ))}
         </div>
         
-        <Link to="/blog" className="inline-block mt-8 text-emerald-500 hover:text-emerald-400 font-medium font-sans">
+        <Link to="/blog" className="inline-block mt-6 sm:mt-8 text-sm sm:text-base text-emerald-500 hover:text-emerald-400 font-medium font-sans">
           View all posts →
         </Link>
       </section>
 
       {/* Projects Section */}
-      <section className="container py-16">
-        <div className="mb-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-4 font-sans font-medium">2AM QUESTIONS</p>
-          <h2 className={`text-3xl md:text-4xl font-normal mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>What I've built</h2>
-          <p className={`font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Experiments that started with 'I wonder if...'</p>
+      <section className="container py-12 sm:py-16">
+        <div className="mb-6 sm:mb-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">2AM QUESTIONS</p>
+          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-3 sm:mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>What I've built</h2>
+          <p className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Experiments that started with 'I wonder if...'</p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {featuredProjects.map(project => (
             <div key={project.id} className="card hover:border-emerald-500/30 transition-all">
-              <div className="mb-4">
+              <div className="mb-3 sm:mb-4">
                 <span className={`text-xs uppercase tracking-wider font-medium font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
                   {project.category}
                 </span>
                 <span className={`text-xs ml-2 font-sans ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>{project.date}</span>
               </div>
-              <h3 className={`text-lg font-normal mb-3 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{project.title}</h3>
-              <p className={`text-sm mb-4 font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
+              <h3 className={`text-sm sm:text-base md:text-lg font-normal mb-2 sm:mb-3 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{project.title}</h3>
+              <p className={`text-xs sm:text-sm md:text-base mb-3 sm:mb-4 font-sans line-clamp-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                 {project.technologies.slice(0, 3).map(tech => (
-                  <span key={tech} className={`text-xs px-2 py-1 rounded border font-mono ${
+                  <span key={tech} className={`text-[10px] sm:text-xs px-2 py-1 rounded border font-mono ${
                     theme === 'dark' 
                       ? 'bg-gray-900 text-gray-400 border-gray-800' 
                       : 'bg-gray-100 text-gray-600 border-gray-300'
@@ -179,15 +180,15 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-              <div className="flex gap-3 text-sm">
+              <div className="flex gap-3 text-xs sm:text-sm">
                 {project.github && (
                   <a href={project.github} className="text-emerald-500 hover:text-emerald-400 flex items-center gap-1 font-sans">
-                    Source <ExternalLink size={14} />
+                    Source <ExternalLink size={12} className="sm:w-3.5 sm:h-3.5" />
                   </a>
                 )}
                 {project.demo && (
                   <a href={project.demo} className="text-emerald-500 hover:text-emerald-400 flex items-center gap-1 font-sans">
-                    Demo <ExternalLink size={14} />
+                    Demo <ExternalLink size={12} className="sm:w-3.5 sm:h-3.5" />
                   </a>
                 )}
               </div>
@@ -195,28 +196,28 @@ export default function Home() {
           ))}
         </div>
         
-        <Link to="/projects" className="inline-block mt-8 text-emerald-500 hover:text-emerald-400 font-medium font-sans">
+        <Link to="/projects" className="inline-block mt-6 sm:mt-8 text-sm sm:text-base text-emerald-500 hover:text-emerald-400 font-medium font-sans">
           View all projects →
         </Link>
       </section>
 
       {/* GitHub Contributions */}
-      <section className="container py-16">
-        <div className="mb-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-4 font-sans font-medium">CONSISTENCY &gt; INTENSITY</p>
-          <h2 className={`text-3xl md:text-4xl font-normal mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>The work shows up here</h2>
-          <p className={`font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>When I remember to push</p>
+      <section className="container py-12 sm:py-16">
+        <div className="mb-6 sm:mb-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">CONSISTENCY &gt; INTENSITY</p>
+          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-3 sm:mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>The work shows up here</h2>
+          <p className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>When I remember to push</p>
         </div>
         
         {/* Contribution Heatmap */}
         {loading ? (
-          <div className={`text-center py-12 font-mono ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+          <div className={`text-center py-12 text-xs sm:text-sm font-mono ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
             Loading contribution data...
           </div>
         ) : contributionData ? (
           <div className="pb-6 relative">
-            {/* Month labels row */}
-            <div className="flex gap-[3px] mb-2 pl-[60px]">
+            {/* Month labels row - hidden on mobile */}
+            <div className="hidden sm:flex gap-[3px] mb-2 pl-[60px]">
               {calendarData.weeks.map((week: any, weekIndex: number) => {
                 const monthLabel = calendarData.monthLabels.find((label: any) => label.weekIndex === weekIndex);
                 return (
@@ -231,28 +232,28 @@ export default function Home() {
               })}
             </div>
 
-            {/* Contribution grid */}
-            <div className="flex gap-[3px] overflow-x-auto">
-              {/* Day labels */}
-              <div className="flex flex-col gap-[3px] justify-around flex-shrink-0 pr-2">
-                <div className={`text-[11px] font-mono font-medium h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>Sun</div>
-                <div className={`text-[11px] font-mono font-medium h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>Mon</div>
-                <div className="h-3"></div>
-                <div className={`text-[11px] font-mono font-medium h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>Wed</div>
-                <div className="h-3"></div>
-                <div className={`text-[11px] font-mono font-medium h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>Fri</div>
-                <div className="h-3"></div>
+            {/* Contribution grid - smaller on mobile */}
+            <div className="flex gap-[2px] sm:gap-[3px] overflow-x-auto pb-2">
+              {/* Day labels - smaller on mobile */}
+              <div className="flex flex-col gap-[2px] sm:gap-[3px] justify-around flex-shrink-0 pr-1 sm:pr-2">
+                <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>Sun</div>
+                <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>Mon</div>
+                <div className="h-[10px] sm:h-3"></div>
+                <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>Wed</div>
+                <div className="h-[10px] sm:h-3"></div>
+                <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>Fri</div>
+                <div className="h-[10px] sm:h-3"></div>
               </div>
 
-              {/* Week columns - each column is one week */}
+              {/* Week columns - smaller squares on mobile */}
               {calendarData.weeks.map((week: any, weekIndex: number) => {
                 // If it's a gap week, render empty column
                 if (week.isGap) {
-                  return <div key={weekIndex} className="w-3" />;
+                  return <div key={weekIndex} className="w-[10px] sm:w-3" />;
                 }
                 
                 return (
-                  <div key={weekIndex} className="flex flex-col gap-[3px]">
+                  <div key={weekIndex} className="flex flex-col gap-[2px] sm:gap-[3px]">
                     {week.contributionDays.map((day: any, dayIndex: number) => {
                       const count = day.contributionCount;
                       const date = new Date(day.date);
@@ -266,10 +267,10 @@ export default function Home() {
                       return (
                         <div
                           key={dayIndex}
-                          className={`w-3 h-3 rounded-[3px] transition-all duration-150 hover:ring-2 hover:ring-offset-1 cursor-pointer ${
+                          className={`w-[10px] h-[10px] sm:w-3 sm:h-3 rounded-[2px] sm:rounded-[3px] transition-all duration-150 ${
                             theme === 'dark' 
-                              ? 'hover:ring-emerald-400 hover:ring-offset-black' 
-                              : 'hover:ring-emerald-500 hover:ring-offset-white'
+                              ? 'hover:ring-1 sm:hover:ring-2 hover:ring-emerald-400 hover:ring-offset-black' 
+                              : 'hover:ring-1 sm:hover:ring-2 hover:ring-emerald-500 hover:ring-offset-white'
                           }`}
                           style={{ 
                             backgroundColor: bgColor,
@@ -286,20 +287,20 @@ export default function Home() {
             </div>
             
             {/* Legend */}
-            <div className="flex items-center justify-between mt-6 px-1">
-                <span className={`text-[13px] font-mono ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-4 sm:mt-6 px-1 gap-3 sm:gap-0">
+                <span className={`text-[11px] sm:text-[13px] font-mono ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
                   {hoveredDate 
                     ? `${hoveredDate.count} contribution${hoveredDate.count !== 1 ? 's' : ''} on ${hoveredDate.date}`
                     : `${contributionData.totalContributions} contributions in the last year`
                   }
                 </span>
-                <div className="flex items-center gap-3">
-                  <span className={`text-[11px] font-mono font-medium ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>Less</span>
-                  <div className="flex gap-1.5">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <span className={`text-[10px] sm:text-[11px] font-mono font-medium ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>Less</span>
+                  <div className="flex gap-1 sm:gap-1.5">
                     {[0, 1, 2, 3, 4].map(level => (
                       <div 
                         key={level}
-                        className="w-2.5 h-2.5 rounded-[2px]"
+                        className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-[2px]"
                         style={{ 
                           backgroundColor: level === 0 
                             ? (theme === 'dark' ? '#2d333b' : '#ebedf0')
@@ -315,91 +316,91 @@ export default function Home() {
                       />
                     ))}
                   </div>
-                  <span className={`text-xs font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>More</span>
+                  <span className={`text-[10px] sm:text-xs font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>More</span>
                 </div>
               </div>
           </div>
         ) : (
-          <div className={`text-center py-12 font-mono ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+          <div className={`text-center py-12 text-xs sm:text-sm font-mono ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
             Failed to load contribution data. Check console for details.
           </div>
         )}
       </section>
 
       {/* Competitive Programming */}
-      <section className="container py-16">
-        <div className="mb-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-4 font-sans font-medium">ALGORITHMIC TRAINING</p>
-          <h2 className={`text-3xl md:text-4xl font-normal mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Problem solving practice</h2>
-          <p className={`font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Where I learn to think and optimize</p>
+      <section className="container py-12 sm:py-16">
+        <div className="mb-6 sm:mb-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">ALGORITHMIC TRAINING</p>
+          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-3 sm:mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Problem solving practice</h2>
+          <p className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Where I learn to think and optimize</p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <a href="https://leetcode.com/u/deepnav4" target="_blank" rel="noopener noreferrer" className="card hover:border-emerald-500/30 transition-all">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center border border-emerald-500/30">
-                <span className="font-bold text-emerald-500 font-mono">LC</span>
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center border border-emerald-500/30 flex-shrink-0">
+                <span className="font-bold text-sm sm:text-base text-emerald-500 font-mono">LC</span>
               </div>
-              <div>
-                <h3 className={`font-semibold font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>LeetCode</h3>
-                <p className={`text-sm font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>500+ Problems Solved</p>
+              <div className="min-w-0">
+                <h3 className={`text-sm sm:text-base font-semibold font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>LeetCode</h3>
+                <p className={`text-xs sm:text-sm font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>500+ Problems Solved</p>
               </div>
             </div>
           </a>
           
           <Link to="/ladder" className="card hover:border-emerald-500/30 transition-all">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className={`font-semibold font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>CF Ladder Tool</h3>
-                <p className={`text-sm font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Personalized practice problems</p>
+            <div className="flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <h3 className={`text-sm sm:text-base font-semibold font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>CF Ladder Tool</h3>
+                <p className={`text-xs sm:text-sm font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Personalized practice problems</p>
               </div>
-              <ExternalLink size={20} className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'} />
+              <ExternalLink size={18} className={`flex-shrink-0 sm:w-5 sm:h-5 ${theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}`} />
             </div>
           </Link>
         </div>
       </section>
 
       {/* Achievements & Activities */}
-      <section className="container py-16">
-        <div className="mb-12">
-          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-4 font-sans font-medium">ACHIEVEMENTS & LEADERSHIP</p>
-          <h2 className={`text-3xl md:text-4xl font-normal mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Making an impact</h2>
-          <p className={`font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Contributions, competitions, and community work</p>
+      <section className="container py-12 sm:py-16 pb-16 sm:pb-20">
+        <div className="mb-8 sm:mb-12">
+          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">ACHIEVEMENTS & LEADERSHIP</p>
+          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-3 sm:mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Making an impact</h2>
+          <p className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Contributions, competitions, and community work</p>
         </div>
         
-        <div className="space-y-8 max-w-3xl">
-          <div className={`border-l-2 pl-6 ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
-            <h3 className={`text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+        <div className="space-y-6 sm:space-y-8 max-w-3xl">
+          <div className={`border-l-2 pl-4 sm:pl-6 ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
+            <h3 className={`text-base sm:text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               Core Member - CyberNauts & XCEED
             </h3>
-            <p className={`text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-xs sm:text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
               Organized technical workshops, mentored 50+ juniors in web development, and contributed to NIT Jalandhar's web infrastructure projects.
             </p>
           </div>
 
-          <div className={`border-l-2 pl-6 ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
-            <h3 className={`text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <div className={`border-l-2 pl-4 sm:pl-6 ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
+            <h3 className={`text-base sm:text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               Open Source Contributions
             </h3>
-            <p className={`text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-xs sm:text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
               Contributed to NIT Jalandhar's Training & Placement website and 2 conference websites (it1dxpert.org, eaicnitj.com).
             </p>
           </div>
 
-          <div className={`border-l-2 pl-6 ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
-            <h3 className={`text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <div className={`border-l-2 pl-4 sm:pl-6 ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
+            <h3 className={`text-base sm:text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               500+ LeetCode Problems
             </h3>
-            <p className={`text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-xs sm:text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
               Active competitive programmer solving algorithmic challenges and improving problem-solving skills daily.
             </p>
           </div>
 
-          <div className={`border-l-2 pl-6 ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
-            <h3 className={`text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <div className={`border-l-2 pl-4 sm:pl-6 ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
+            <h3 className={`text-base sm:text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               NSS Volunteer
             </h3>
-            <p className={`text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-xs sm:text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
               Participated in campus social impact projects and community service initiatives at NIT Jalandhar.
             </p>
           </div>
