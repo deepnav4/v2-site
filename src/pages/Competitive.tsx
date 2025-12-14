@@ -3,7 +3,7 @@ import { useTheme } from '../store/themeStore';
 import { TrendingUp, Target, Sparkles, BookOpen, TrendingDown, Minus, LineChart, BarChart3, Activity } from 'lucide-react';
 import SEO from '../components/SEO';
 import { getLeetCodeContestData, type LeetCodeContestData } from '../services/leetcodeService';
-import { LineChart as RechartsLine, BarChart as RechartsBar, AreaChart, Area, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart as RechartsLine, BarChart as RechartsBar, AreaChart, Area, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 function Competitive() {
   const { theme } = useTheme();
