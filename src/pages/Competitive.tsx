@@ -1,29 +1,32 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from '../store/themeStore';
-import { TrendingUp, Target, Sparkles, BookOpen, Trophy } from 'lucide-react';
+import { TrendingUp, Target, Sparkles, BookOpen, TrendingDown, Minus, LineChart, BarChart3, Activity } from 'lucide-react';
 import SEO from '../components/SEO';
-import { getLeetCodeStats } from '../services/leetcodeService';
+import { getLeetCodeContestData, type LeetCodeContestData } from '../services/leetcodeService';
+import { LineChart as RechartsLine, BarChart as RechartsBar, AreaChart, Area, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 function Competitive() {
   const { theme } = useTheme();
-  const [leetcodeStats, setLeetcodeStats] = useState<any>(null);
+  const [contestData, setContestData] = useState<LeetCodeContestData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [chartType, setChartType] = useState<'line' | 'bar' | 'area'>('area');
 
   useEffect(() => {
-    async function fetchStats() {
+    async function fetchData() {
       try {
-        const stats = await getLeetCodeStats('unknown_man4');
-        setLeetcodeStats(stats);
-        setError(false);
+        const username = import.meta.env.VITE_LEETCODE_USERNAME || 'unknown_man4';
+        const data = await getLeetCodeContestData(username);
+        setContestData(data);
+        setError(!data);
       } catch (err) {
-        console.error('Failed to fetch stats:', err);
+        console.error('Failed to fetch contest data:', err);
         setError(true);
       } finally {
         setLoading(false);
       }
     }
-    fetchStats();
+    fetchData();
   }, []);
 
   return (
@@ -95,178 +98,456 @@ function Competitive() {
             </div>
           </div>
 
-          {/* LeetCode Stats */}
+          {/* LeetCode Contest Stats */}
           <div className="mb-16">
             <div className="mb-8">
               <h2 className={`text-3xl font-normal font-serif ${
                 theme === 'dark' ? 'text-white' : 'text-black'
               }`}>
-                LeetCode Progress
+                LeetCode Contest Performance
               </h2>
             </div>
 
             {loading ? (
               <div className={`text-center py-12 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                <div className="animate-pulse">Loading stats...</div>
+                <div className="animate-pulse">Loading contest data...</div>
               </div>
-            ) : error ? (
+            ) : error || !contestData ? (
               <div className={`text-center py-12 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                <p className="mb-2">Unable to fetch live data.</p>
-                <p className="text-sm">Showing approximate statistics.</p>
+                <p className="mb-2">Unable to fetch live contest data.</p>
               </div>
-            ) : null}
-            
-            {leetcodeStats && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                {/* Contest Rating */}
-                <div className={`p-8 rounded-lg border ${
-                  theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
-                }`}>
-                  <div className="flex items-start gap-4">
-                    <div className={`p-3 rounded-lg flex-shrink-0 ${
-                      theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-100'
-                    }`}>
-                      <Trophy className="text-emerald-500" size={24} />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className={`text-sm uppercase tracking-wider mb-2 font-sans ${
-                        theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
-                      }`}>
-                        Contest Rating
-                      </h3>
-                      <p className={`text-5xl font-bold font-mono mb-2 ${
+            ) : (
+              <>
+                {/* Two Column Layout: Graph (Left) and Stats (Right) */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                  {/* Left: Rating Progress Graph */}
+                  <div className={`p-6 rounded-lg border ${
+                    theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
+                  }`}>
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className={`text-base font-normal font-serif ${
                         theme === 'dark' ? 'text-white' : 'text-black'
                       }`}>
-                        {leetcodeStats?.contestData?.rating || 'N/A'}
-                      </p>
-                      <p className={`text-sm font-sans ${
-                        theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                        Rating Progression
+                      </h3>
+                      {/* Chart Type Switcher */}
+                      <div className={`flex gap-1 p-1 rounded-lg border ${
+                        theme === 'dark' ? 'bg-gray-800/50 border-gray-700' : 'bg-white border-gray-300'
                       }`}>
-                        Global Ranking: {leetcodeStats?.ranking?.toLocaleString() || 'N/A'}
-                      </p>
+                        <button
+                          onClick={() => setChartType('area')}
+                          className={`p-1.5 rounded transition-all ${
+                            chartType === 'area'
+                              ? theme === 'dark' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-emerald-100 text-emerald-600'
+                              : theme === 'dark' ? 'text-gray-400 hover:text-gray-300' : 'text-gray-600 hover:text-gray-900'
+                          }`}
+                          title="Area Chart"
+                        >
+                          <Activity size={16} />
+                        </button>
+                        <button
+                          onClick={() => setChartType('line')}
+                          className={`p-1.5 rounded transition-all ${
+                            chartType === 'line'
+                              ? theme === 'dark' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-emerald-100 text-emerald-600'
+                              : theme === 'dark' ? 'text-gray-400 hover:text-gray-300' : 'text-gray-600 hover:text-gray-900'
+                          }`}
+                          title="Line Chart"
+                        >
+                          <LineChart size={16} />
+                        </button>
+                        <button
+                          onClick={() => setChartType('bar')}
+                          className={`p-1.5 rounded transition-all ${
+                            chartType === 'bar'
+                              ? theme === 'dark' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-emerald-100 text-emerald-600'
+                              : theme === 'dark' ? 'text-gray-400 hover:text-gray-300' : 'text-gray-600 hover:text-gray-900'
+                          }`}
+                          title="Bar Chart"
+                        >
+                          <BarChart3 size={16} />
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <div style={{ width: '100%', height: '300px' }}>
+                      <ResponsiveContainer width="100%" height="100%">
+                        {chartType === 'area' ? (
+                          <AreaChart
+                            data={contestData.contestParticipation.map((contest, idx) => ({
+                              name: `#${idx + 1}`,
+                              rating: Math.round(contest.rating),
+                              rank: contest.ranking,
+                              contest: contest.contest.title,
+                              solved: contest.problemsSolved,
+                              total: contest.totalProblems,
+                            }))}
+                            margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+                          >
+                            <defs>
+                              <linearGradient id="colorRating" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
+                                <stop offset="95%" stopColor="#10b981" stopOpacity={0.05}/>
+                              </linearGradient>
+                            </defs>
+                            <CartesianGrid 
+                              strokeDasharray="3 3" 
+                              stroke={theme === 'dark' ? '#374151' : '#e5e7eb'} 
+                              opacity={0.3}
+                            />
+                            <XAxis 
+                              dataKey="name" 
+                              stroke={theme === 'dark' ? '#6b7280' : '#9ca3af'}
+                              tick={{ fontSize: 11, fill: theme === 'dark' ? '#6b7280' : '#9ca3af' }}
+                            />
+                            <YAxis 
+                              domain={[1200, 'auto']}
+                              stroke={theme === 'dark' ? '#6b7280' : '#9ca3af'}
+                              tick={{ fontSize: 11, fill: theme === 'dark' ? '#6b7280' : '#9ca3af' }}
+                            />
+                            <Tooltip
+                              contentStyle={{
+                                backgroundColor: theme === 'dark' ? 'rgba(31, 41, 55, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                                border: `1px solid ${theme === 'dark' ? '#374151' : '#e5e7eb'}`,
+                                borderRadius: '8px',
+                                padding: '12px',
+                                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                                backdropFilter: 'blur(8px)',
+                              }}
+                              labelStyle={{ 
+                                color: theme === 'dark' ? '#9ca3af' : '#6b7280',
+                                fontSize: '12px',
+                                marginBottom: '4px',
+                              }}
+                              itemStyle={{ 
+                                color: theme === 'dark' ? '#10b981' : '#059669',
+                                fontSize: '13px',
+                                fontWeight: '600',
+                              }}
+                              formatter={(value: any, name: string, props: any) => {
+                                if (name === 'rating') {
+                                  return [
+                                    <div key="tooltip" className="space-y-1">
+                                      <div className={`text-sm font-semibold ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>
+                                        Rating: {value}
+                                      </div>
+                                      <div className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                                        Rank: {props.payload.rank.toLocaleString()}
+                                      </div>
+                                      <div className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                                        Solved: {props.payload.solved}/{props.payload.total}
+                                      </div>
+                                    </div>,
+                                    ''
+                                  ];
+                                }
+                                return [value, name];
+                              }}
+                            />
+                            <Area 
+                              type="monotone" 
+                              dataKey="rating" 
+                              stroke="#10b981" 
+                              strokeWidth={2.5}
+                              fill="url(#colorRating)"
+                              animationDuration={1000}
+                              animationEasing="ease-in-out"
+                            />
+                          </AreaChart>
+                        ) : chartType === 'line' ? (
+                          <RechartsLine
+                            data={contestData.contestParticipation.map((contest, idx) => ({
+                              name: `#${idx + 1}`,
+                              rating: Math.round(contest.rating),
+                              rank: contest.ranking,
+                              contest: contest.contest.title,
+                              solved: contest.problemsSolved,
+                              total: contest.totalProblems,
+                            }))}
+                            margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+                          >
+                            <CartesianGrid 
+                              strokeDasharray="3 3" 
+                              stroke={theme === 'dark' ? '#374151' : '#e5e7eb'} 
+                              opacity={0.3}
+                            />
+                            <XAxis 
+                              dataKey="name" 
+                              stroke={theme === 'dark' ? '#6b7280' : '#9ca3af'}
+                              tick={{ fontSize: 11, fill: theme === 'dark' ? '#6b7280' : '#9ca3af' }}
+                            />
+                            <YAxis 
+                              domain={[1200, 'auto']}
+                              stroke={theme === 'dark' ? '#6b7280' : '#9ca3af'}
+                              tick={{ fontSize: 11, fill: theme === 'dark' ? '#6b7280' : '#9ca3af' }}
+                            />
+                            <Tooltip
+                              contentStyle={{
+                                backgroundColor: theme === 'dark' ? 'rgba(31, 41, 55, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                                border: `1px solid ${theme === 'dark' ? '#374151' : '#e5e7eb'}`,
+                                borderRadius: '8px',
+                                padding: '12px',
+                                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                                backdropFilter: 'blur(8px)',
+                              }}
+                              labelStyle={{ 
+                                color: theme === 'dark' ? '#9ca3af' : '#6b7280',
+                                fontSize: '12px',
+                                marginBottom: '4px',
+                              }}
+                              formatter={(value: any, name: string, props: any) => {
+                                if (name === 'rating') {
+                                  return [
+                                    <div key="tooltip" className="space-y-1">
+                                      <div className={`text-sm font-semibold ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>
+                                        Rating: {value}
+                                      </div>
+                                      <div className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                                        Rank: {props.payload.rank.toLocaleString()}
+                                      </div>
+                                      <div className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                                        Solved: {props.payload.solved}/{props.payload.total}
+                                      </div>
+                                    </div>,
+                                    ''
+                                  ];
+                                }
+                                return [value, name];
+                              }}
+                            />
+                            <Line 
+                              type="monotone" 
+                              dataKey="rating" 
+                              stroke="#10b981" 
+                              strokeWidth={2.5}
+                              dot={{ fill: '#10b981', strokeWidth: 2, r: 4 }}
+                              activeDot={{ r: 6, strokeWidth: 2 }}
+                              animationDuration={1000}
+                              animationEasing="ease-in-out"
+                            />
+                          </RechartsLine>
+                        ) : (
+                          <RechartsBar
+                            data={contestData.contestParticipation.map((contest, idx) => ({
+                              name: `#${idx + 1}`,
+                              rating: Math.round(contest.rating),
+                              rank: contest.ranking,
+                              contest: contest.contest.title,
+                              solved: contest.problemsSolved,
+                              total: contest.totalProblems,
+                            }))}
+                            margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+                          >
+                            <CartesianGrid 
+                              strokeDasharray="3 3" 
+                              stroke={theme === 'dark' ? '#374151' : '#e5e7eb'} 
+                              opacity={0.3}
+                            />
+                            <XAxis 
+                              dataKey="name" 
+                              stroke={theme === 'dark' ? '#6b7280' : '#9ca3af'}
+                              tick={{ fontSize: 11, fill: theme === 'dark' ? '#6b7280' : '#9ca3af' }}
+                            />
+                            <YAxis 
+                              domain={[1200, 'auto']}
+                              stroke={theme === 'dark' ? '#6b7280' : '#9ca3af'}
+                              tick={{ fontSize: 11, fill: theme === 'dark' ? '#6b7280' : '#9ca3af' }}
+                            />
+                            <Tooltip
+                              cursor={false}
+                              contentStyle={{
+                                backgroundColor: 'transparent',
+                                border: 'none',
+                                padding: 0,
+                              }}
+                              content={({ active, payload }) => {
+                                if (active && payload && payload.length) {
+                                  const data = payload[0].payload;
+                                  return (
+                                    <div 
+                                      className={`rounded-lg border shadow-lg p-3 ${
+                                        theme === 'dark' 
+                                          ? 'bg-gray-800/95 border-gray-700' 
+                                          : 'bg-white/95 border-gray-200'
+                                      }`}
+                                      style={{ backdropFilter: 'blur(8px)' }}
+                                    >
+                                      <div className="space-y-1">
+                                        <div className={`text-sm font-semibold ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>
+                                          Rating: {data.rating}
+                                        </div>
+                                        <div className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                                          Rank: {data.rank.toLocaleString()}
+                                        </div>
+                                        <div className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                                          Solved: {data.solved}/{data.total}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  );
+                                }
+                                return null;
+                              }}
+                            />
+                            <Bar 
+                              dataKey="rating" 
+                              fill="#10b981"
+                              radius={[8, 8, 0, 0]}
+                              animationDuration={1000}
+                              animationEasing="ease-in-out"
+                            />
+                          </RechartsBar>
+                        )}
+                      </ResponsiveContainer>
                     </div>
                   </div>
-                </div>
 
-                {/* Contests Attended */}
-                <div className={`p-8 rounded-lg border ${
-                  theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
-                }`}>
-                  <div className="flex items-start gap-4">
-                    <div className={`p-3 rounded-lg flex-shrink-0 ${
-                      theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-100'
+                  {/* Right: Stats Summary */}
+                  <div className="space-y-4">
+                    <div className={`p-5 rounded-lg border ${
+                      theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
                     }`}>
-                      <Target className="text-emerald-500" size={24} />
+                      <p className={`text-xs uppercase tracking-wider mb-2 font-sans ${
+                        theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
+                      }`}>
+                        Current Rating
+                      </p>
+                      <p className={`text-3xl font-semibold font-sans mb-1 ${
+                        theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'
+                      }`}>
+                        {Math.round(contestData.contestRating)}
+                      </p>
+                      <p className={`text-xs font-sans ${
+                        theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
+                      }`}>
+                        Rank {contestData.contestGlobalRanking?.toLocaleString()}
+                      </p>
                     </div>
-                    <div className="flex-1">
-                      <h3 className={`text-sm uppercase tracking-wider mb-2 font-sans ${
+
+                    <div className={`p-5 rounded-lg border ${
+                      theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
+                    }`}>
+                      <p className={`text-xs uppercase tracking-wider mb-2 font-sans ${
                         theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
                       }`}>
                         Contests Attended
-                      </h3>
-                      <p className={`text-5xl font-bold font-mono mb-2 ${
+                      </p>
+                      <p className={`text-3xl font-semibold font-sans mb-1 ${
                         theme === 'dark' ? 'text-white' : 'text-black'
                       }`}>
-                        {leetcodeStats?.contestData?.attendedContestsCount || 0}
+                        {contestData.contestAttend}
                       </p>
-                      <p className={`text-sm font-sans ${
-                        theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                      <p className={`text-xs font-sans ${
+                        theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
                       }`}>
-                        Top {leetcodeStats?.contestData?.topPercentage?.toFixed(1) || '0'}%
+                        Active participation
+                      </p>
+                    </div>
+
+                    <div className={`p-5 rounded-lg border ${
+                      theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
+                    }`}>
+                      <p className={`text-xs uppercase tracking-wider mb-2 font-sans ${
+                        theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
+                      }`}>
+                        Top Percentage
+                      </p>
+                      <p className={`text-3xl font-semibold font-sans mb-1 ${
+                        theme === 'dark' ? 'text-white' : 'text-black'
+                      }`}>
+                        {contestData.contestTopPercentage.toFixed(1)}%
+                      </p>
+                      <p className={`text-xs font-sans ${
+                        theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
+                      }`}>
+                        of {(contestData.totalParticipants / 1000).toFixed(0)}k users
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
+
+                {/* Contest History - Latest First */}
+                <div>
+                  <h3 className={`text-xl font-normal mb-6 font-serif ${
+                    theme === 'dark' ? 'text-white' : 'text-black'
+                  }`}>
+                    Recent Contests
+                  </h3>
+                  <div className="space-y-3">
+                    {contestData.contestParticipation.slice().reverse().map((contest, idx) => {
+                      const TrendIcon = contest.trendDirection === 'UP' ? TrendingUp : 
+                                       contest.trendDirection === 'DOWN' ? TrendingDown : Minus;
+                      const trendColor = contest.trendDirection === 'UP' ? 'text-emerald-500' : 
+                                        contest.trendDirection === 'DOWN' ? 'text-red-500' : 'text-gray-500';
+                      
+                      return (
+                        <div
+                          key={idx}
+                          className={`p-4 rounded-lg border hover:border-emerald-500/50 transition-colors ${
+                            theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-4 mb-3">
+                            <div className="flex items-center gap-2 flex-1">
+                              <h4 className={`text-sm font-medium font-sans ${
+                                theme === 'dark' ? 'text-white' : 'text-black'
+                              }`}>
+                                {contest.contest.title}
+                              </h4>
+                              <TrendIcon className={`${trendColor} flex-shrink-0`} size={14} />
+                            </div>
+                            <p className={`text-xs font-sans ${
+                              theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
+                            }`}>
+                              {new Date(contest.contest.startTime * 1000).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric'
+                              })}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-6 text-xs">
+                            <div>
+                              <span className={`font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Rating: </span>
+                              <span className={`font-semibold font-mono ${
+                                theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'
+                              }`}>
+                                {Math.round(contest.rating)}
+                              </span>
+                            </div>
+                            <div>
+                              <span className={`font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Rank: </span>
+                              <span className={`font-semibold font-mono ${
+                                theme === 'dark' ? 'text-white' : 'text-black'
+                              }`}>
+                                {contest.ranking.toLocaleString()}
+                              </span>
+                            </div>
+                            <div>
+                              <span className={`font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Solved: </span>
+                              <span className={`font-semibold font-mono ${
+                                theme === 'dark' ? 'text-white' : 'text-black'
+                              }`}>
+                                {contest.problemsSolved}/{contest.totalProblems}
+                              </span>
+                            </div>
+                            {contest.finishTimeInSeconds > 0 && (
+                              <div>
+                                <span className={`font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Time: </span>
+                                <span className={`font-semibold font-mono ${
+                                  theme === 'dark' ? 'text-white' : 'text-black'
+                                }`}>
+                                  {Math.floor(contest.finishTimeInSeconds / 60)}m
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
             )}
-          </div>
-
-          {/* Contest History */}
-          <div className="mb-16">
-            <h2 className={`text-3xl font-normal mb-8 font-serif ${
-              theme === 'dark' ? 'text-white' : 'text-black'
-            }`}>
-              Contest Performance
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Overall Contest Stats */}
-              <div className={`p-6 rounded-lg border ${
-                theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
-              }`}>
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-lg flex-shrink-0 ${
-                    theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-100'
-                  }`}>
-                    <Trophy className="text-emerald-500" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className={`text-lg font-semibold mb-2 font-sans ${
-                      theme === 'dark' ? 'text-white' : 'text-black'
-                    }`}>
-                      Contest Statistics
-                    </h3>
-                    <p className={`text-sm font-sans leading-relaxed mb-3 ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
-                      Regular participation in contests to test problem-solving skills under time pressure.
-                    </p>
-                    <div className="flex items-center gap-4">
-                      <div>
-                        <p className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Total Attended</p>
-                        <p className={`text-xl font-bold font-mono ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-                          {leetcodeStats?.contestData?.attendedContestsCount || '50+'}
-                        </p>
-                      </div>
-                      <div>
-                        <p className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Current Rating</p>
-                        <p className={`text-xl font-bold font-mono ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>
-                          {leetcodeStats?.contestData?.rating || '1650'}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Best Performance */}
-              <div className={`p-6 rounded-lg border ${
-                theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
-              }`}>
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-lg flex-shrink-0 ${
-                    theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-100'
-                  }`}>
-                    <Trophy className="text-emerald-500" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className={`text-lg font-semibold mb-2 font-sans ${
-                      theme === 'dark' ? 'text-white' : 'text-black'
-                    }`}>
-                      Best Performance
-                    </h3>
-                    <p className={`text-sm font-sans leading-relaxed mb-3 ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
-                      Consistent improvement and achieving better ranks in competitive programming contests.
-                    </p>
-                    <div className="flex items-center gap-4">
-                      <div>
-                        <p className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Top Percentage</p>
-                        <p className={`text-xl font-bold font-mono ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>
-                          Top {leetcodeStats?.contestData?.topPercentage?.toFixed(1) || '15'}%
-                        </p>
-                      </div>
-                      <div>
-                        <p className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Streak</p>
-                        <p className={`text-xl font-bold font-mono ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-                          Active
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Learning Principles */}

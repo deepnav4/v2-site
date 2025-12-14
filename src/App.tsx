@@ -9,7 +9,7 @@ import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import Tags from './pages/Tags';
 import NotFound from './pages/NotFound';
-import Competitive from './pages/Competitive.tsx';
+import Competitive from './pages/Competitive';
 import Creator from './pages/Creator';
 
 function App() {
