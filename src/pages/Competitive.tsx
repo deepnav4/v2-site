@@ -552,113 +552,93 @@ function Competitive() {
 
           {/* Learning Principles */}
           <div className="mb-16">
-            <h2 className={`text-3xl font-normal mb-8 font-serif ${
+            <h2 className={`text-3xl font-normal mb-12 font-serif ${
               theme === 'dark' ? 'text-white' : 'text-black'
             }`}>
               Key Learning Principles
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Daily Practice */}
-              <div className={`p-6 rounded-lg border ${
-                theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
-              }`}>
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-lg flex-shrink-0 ${
-                    theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-100'
+            <div className="space-y-6 max-w-3xl">
+              {/* Daily Consistency */}
+              <div className="flex items-start gap-6">
+                <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+                  theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-50'
+                }`}>
+                  <Target className="text-emerald-500" size={20} />
+                </div>
+                <div className="flex-1">
+                  <h3 className={`text-lg font-medium mb-2 font-sans ${
+                    theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
-                    <Target className="text-emerald-500" size={24} />
-                  </div>
-                  <div>
-                    <h3 className={`text-lg font-semibold mb-2 font-sans ${
-                      theme === 'dark' ? 'text-white' : 'text-black'
-                    }`}>
-                      Daily Consistency
-                    </h3>
-                    <p className={`text-sm font-sans leading-relaxed ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
-                      Solving at least one problem daily builds pattern recognition and muscle memory. 
-                      Small consistent efforts compound over time.
-                    </p>
-                  </div>
+                    Daily Consistency
+                  </h3>
+                  <p className={`text-sm font-sans leading-relaxed ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
+                    Solving at least one problem daily builds pattern recognition and muscle memory. Small consistent efforts compound over time.
+                  </p>
                 </div>
               </div>
 
               {/* Deep Understanding */}
-              <div className={`p-6 rounded-lg border ${
-                theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
-              }`}>
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-lg flex-shrink-0 ${
-                    theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-100'
+              <div className="flex items-start gap-6">
+                <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+                  theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-50'
+                }`}>
+                  <BookOpen className="text-emerald-500" size={20} />
+                </div>
+                <div className="flex-1">
+                  <h3 className={`text-lg font-medium mb-2 font-sans ${
+                    theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
-                    <BookOpen className="text-emerald-500" size={24} />
-                  </div>
-                  <div>
-                    <h3 className={`text-lg font-semibold mb-2 font-sans ${
-                      theme === 'dark' ? 'text-white' : 'text-black'
-                    }`}>
-                      Deep Understanding
-                    </h3>
-                    <p className={`text-sm font-sans leading-relaxed ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
-                      Don't just memorize solutions. Understand why an approach works, its time complexity, 
-                      and when to apply it.
-                    </p>
-                  </div>
+                    Deep Understanding
+                  </h3>
+                  <p className={`text-sm font-sans leading-relaxed ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
+                    Don't just memorize solutions. Understand why an approach works, its time complexity, and when to apply it.
+                  </p>
                 </div>
               </div>
 
               {/* Pattern Recognition */}
-              <div className={`p-6 rounded-lg border ${
-                theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
-              }`}>
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-lg flex-shrink-0 ${
-                    theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-100'
+              <div className="flex items-start gap-6">
+                <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+                  theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-50'
+                }`}>
+                  <TrendingUp className="text-emerald-500" size={20} />
+                </div>
+                <div className="flex-1">
+                  <h3 className={`text-lg font-medium mb-2 font-sans ${
+                    theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
-                    <TrendingUp className="text-emerald-500" size={24} />
-                  </div>
-                  <div>
-                    <h3 className={`text-lg font-semibold mb-2 font-sans ${
-                      theme === 'dark' ? 'text-white' : 'text-black'
-                    }`}>
-                      Pattern Recognition
-                    </h3>
-                    <p className={`text-sm font-sans leading-relaxed ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
-                      Learn to recognize common patterns: sliding window, two pointers, DFS/BFS, 
-                      dynamic programming states, and greedy choices.
-                    </p>
-                  </div>
+                    Pattern Recognition
+                  </h3>
+                  <p className={`text-sm font-sans leading-relaxed ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
+                    Learn to recognize common patterns: sliding window, two pointers, DFS/BFS, dynamic programming states, and greedy choices.
+                  </p>
                 </div>
               </div>
 
               {/* Review & Reflect */}
-              <div className={`p-6 rounded-lg border ${
-                theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
-              }`}>
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-lg flex-shrink-0 ${
-                    theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-100'
+              <div className="flex items-start gap-6">
+                <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+                  theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-50'
+                }`}>
+                  <Sparkles className="text-emerald-500" size={20} />
+                </div>
+                <div className="flex-1">
+                  <h3 className={`text-lg font-medium mb-2 font-sans ${
+                    theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
-                    <Sparkles className="text-emerald-500" size={24} />
-                  </div>
-                  <div>
-                    <h3 className={`text-lg font-semibold mb-2 font-sans ${
-                      theme === 'dark' ? 'text-white' : 'text-black'
-                    }`}>
-                      Review & Reflect
-                    </h3>
-                    <p className={`text-sm font-sans leading-relaxed ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
-                      Revisit old problems. The same problem after a month reveals how much you've grown. 
-                      Write explanations to solidify understanding.
-                    </p>
-                  </div>
+                    Review & Reflect
+                  </h3>
+                  <p className={`text-sm font-sans leading-relaxed ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
+                    Revisit old problems. The same problem after a month reveals how much you've grown. Write explanations to solidify understanding.
+                  </p>
                 </div>
               </div>
             </div>

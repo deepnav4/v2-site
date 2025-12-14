@@ -7,7 +7,6 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
-import Tags from './pages/Tags';
 import NotFound from './pages/NotFound';
 import Competitive from './pages/Competitive';
 import Creator from './pages/Creator';
@@ -24,8 +23,6 @@ function App() {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
-          <Route path="/tags" element={<Tags />} />
-          <Route path="/tags/:tag" element={<Blog />} />
           <Route path="/competitive" element={<Competitive />} />
           <Route path="/creator" element={<Creator />} />
             <Route path="*" element={<NotFound />} />

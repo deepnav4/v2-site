@@ -137,17 +137,6 @@ export default function Footer() {
                         <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                       </Link>
                     </li>
-                    <li>
-                      <Link 
-                        to="/tags" 
-                        className={`text-sm font-sans transition-colors inline-flex items-center gap-1 group ${
-                          theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
-                        }`}
-                      >
-                        Tags
-                        <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </Link>
-                    </li>
                   </ul>
                 </div>
                 
