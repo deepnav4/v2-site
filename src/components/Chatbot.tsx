@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../store/themeStore';
-import { X, Send, MessageSquare, Minimize2 } from 'lucide-react';
+import { X, Send, MessageSquare } from 'lucide-react';
 
 interface Message {
   text: string;

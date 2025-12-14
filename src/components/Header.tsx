@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Home, Briefcase, FileText, BarChart3, User, Moon, Sun, Search, Clock, Edit3, ExternalLink } from 'lucide-react';
+import { Home, Briefcase, FileText, BarChart3, User, Moon, Sun, Search, Clock, Edit3 } from 'lucide-react';
 import { useTheme } from '../store/themeStore';
 import UniversalSearch from './UniversalSearch';
 
