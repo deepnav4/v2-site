@@ -1,9 +1,16 @@
 ---
-title: "Building Production-Ready Microservices with Docker and NGINX"
-date: "November 15, 2025"
-category: "devops"
-tags: ["docker", "nginx", "microservices", "devops"]
-excerpt: "From development to production: A complete guide to containerizing microservices with Docker, setting up NGINX as a reverse proxy, and implementing CI/CD pipelines."
+title: Building Production-Ready Microservices with Docker and NGINX
+date: November 15, 2025
+category: devops
+tags:
+  - docker
+  - nginx
+  - microservices
+  - devops
+excerpt: >-
+  From development to production: A complete guide to containerizing
+  microservices with Docker, setting up NGINX as a reverse proxy, and
+  implementing CI/CD pipelines.
 ---
 
 Microservices are everywhere. But building them is one thing—deploying them to production is another beast entirely. Let me walk you through how I built a production-ready microservice architecture using Docker, NGINX, and GitHub Actions.
@@ -453,4 +460,4 @@ Key takeaways:
 
 Your infrastructure should be boring and reliable. Docker and NGINX get you there.
 
-Now go build something production-ready.
+Now go build something production-ready. Update Done
