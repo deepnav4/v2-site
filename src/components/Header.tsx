@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Home, Briefcase, FileText, BarChart3, User, Moon, Sun, Search, Clock, Edit3 } from 'lucide-react';
+import { Home, Briefcase, FileText, BarChart3, User, Moon, Sun, Search, Clock, Edit3, ExternalLink } from 'lucide-react';
 import { useTheme } from '../store/themeStore';
 import UniversalSearch from './UniversalSearch';
 
@@ -103,6 +103,20 @@ export default function Header() {
         >
           <Edit3 className="w-5 h-5" strokeWidth={1.5} />
         </Link>
+
+        {/* <a 
+          href="https://v2.navdeep.site" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`relative p-3 rounded-xl transition-all duration-200 ${
+            theme === 'dark'
+              ? 'text-gray-500 hover:bg-[#151515] hover:text-emerald-500'
+              : 'text-gray-600 hover:bg-gray-100 hover:text-emerald-500'
+          }`}
+          title="Previous Site"
+        >
+          <ExternalLink className="w-5 h-5" strokeWidth={1.5} />
+        </a> */}
       </nav>
 
       {/* Bottom Utility Icons */}
@@ -139,7 +153,10 @@ export default function Header() {
           <Search className="w-5 h-5" strokeWidth={1.5} />
         </button>
 
-        <button 
+        <a 
+          href="https://v2.navdeep.site"
+          target="_blank"
+          rel="noopener noreferrer"
           className={`relative p-3 rounded-xl transition-all duration-200 ${
             theme === 'dark'
               ? 'text-gray-600 hover:bg-[#151515] hover:text-gray-400'
@@ -148,7 +165,7 @@ export default function Header() {
           title="History"
         >
           <Clock className="w-5 h-5" strokeWidth={1.5} />
-        </button>
+        </a>
       </div>
 
       {/* Universal Search Modal */}

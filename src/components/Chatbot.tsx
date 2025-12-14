@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../store/themeStore';
-import { X, Send } from 'lucide-react';
+import { X, Send, MessageSquare, Minimize2 } from 'lucide-react';
 
 interface Message {
   text: string;
@@ -101,12 +101,13 @@ export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "Hi! I'm Navdeep's assistant. Ask me anything about Navdeep, his projects, skills, or this website!",
+      text: "Hello, I'm here to answer your questions about Navdeep's work, projects, and experience. How can I assist you today?",
       isBot: true,
       timestamp: new Date(),
     },
   ]);
   const [input, setInput] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -120,44 +121,89 @@ export default function Chatbot() {
   const findBestMatch = (query: string): string => {
     const lowerQuery = query.toLowerCase();
     
-    // Check for exact or partial matches
+    // Score each knowledge base entry
+    let bestMatch = '';
+    let bestScore = 0;
+    
     for (const [key, value] of Object.entries(KNOWLEDGE_BASE)) {
-      if (lowerQuery.includes(key) || key.includes(lowerQuery)) {
-        return value;
+      let score = 0;
+      const keywords = key.split(' ');
+      
+      // Exact match gets highest score
+      if (lowerQuery === key) {
+        score = 100;
       }
+      // Check if query contains the key
+      else if (lowerQuery.includes(key)) {
+        score = 80;
+      }
+      // Check if key contains the query
+      else if (key.includes(lowerQuery)) {
+        score = 70;
+      }
+      // Check for keyword matches
+      else {
+        keywords.forEach(keyword => {
+          if (lowerQuery.includes(keyword) && keyword.length > 2) {
+            score += 20;
+          }
+        });
+      }
+      
+      if (score > bestScore) {
+        bestScore = score;
+        bestMatch = value;
+      }
+    }
+    
+    // If we found a good match, return it
+    if (bestScore >= 20) {
+      return bestMatch;
     }
 
     // Check for common greetings
-    if (/^(hi|hello|hey|greetings)/i.test(lowerQuery)) {
-      return "Hello! How can I help you learn more about Navdeep?";
+    if (/^(hi|hello|hey|greetings|yo|sup)/i.test(lowerQuery)) {
+      return "Hello. How can I help you learn more about Navdeep today?";
+    }
+    
+    // Check for thanks
+    if (/^(thanks|thank you|thx|ty)/i.test(lowerQuery)) {
+      return "You're welcome. Feel free to ask anything else about Navdeep's work, skills, or projects.";
     }
 
-    // Default response
-    return "I'm not sure about that. You can ask me about Navdeep's education, skills, projects (Gym Management, SnippetSync, Excelidraw), competitive programming, blog, or how to contact him!";
+    // Default response with suggestions
+    return "I don't have specific information on that topic. You can ask me about:\n\n• Education and background\n• Technical skills (React, TypeScript, Node.js)\n• Projects: Gym Management, SnippetSync, Excelidraw\n• Competitive programming achievements\n• Blog articles\n• Contact information\n\nPlease try rephrasing your question.";
   };
 
   const handleSend = () => {
-    if (!input.trim()) return;
+    if (!input.trim() || isTyping) return;
 
+    const userInput = input;
+    
     // Add user message
     const userMessage: Message = {
-      text: input,
+      text: userInput,
       isBot: false,
       timestamp: new Date(),
     };
 
     setMessages(prev => [...prev, userMessage]);
     setInput('');
+    setIsTyping(true);
 
-    // Simulate bot response delay
+    // Simulate realistic typing delay based on response length
+    const response = findBestMatch(userInput);
+    const typingDelay = Math.min(800 + response.length * 10, 2000);
+    
     setTimeout(() => {
       const botResponse: Message = {
-        text: findBestMatch(input),
+        text: response,
         isBot: true,
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, botResponse]);
-    }, 500);
+      setIsTyping(false);
+    }, typingDelay);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -171,74 +217,107 @@ export default function Chatbot() {
     <>
       {/* Chat Button */}
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className={`fixed bottom-8 right-8 px-6 py-3 rounded-lg shadow-lg transition-all hover:shadow-xl hover:scale-105 z-50 font-serif text-base font-medium tracking-wide ${
-            theme === 'dark'
-              ? 'bg-emerald-500 hover:bg-emerald-600 text-white'
-              : 'bg-emerald-600 hover:bg-emerald-700 text-white'
-          }`}
-          aria-label="Open chatbot"
-        >
-          Ask Chatbot
-        </button>
+        <div className="fixed bottom-6 right-6 z-50">
+          <button
+            onClick={() => setIsOpen(true)}
+            className={`group relative p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
+              theme === 'dark'
+                ? 'bg-[#0a0a0a] border border-gray-800 hover:border-gray-700'
+                : 'bg-white border border-gray-200 hover:border-gray-300'
+            }`}
+            aria-label="Open assistant"
+          >
+            <MessageSquare 
+              size={24} 
+              className={`transition-colors ${
+                theme === 'dark' 
+                  ? 'text-gray-400 group-hover:text-white' 
+                  : 'text-gray-600 group-hover:text-gray-900'
+              }`}
+            />
+            <span className="absolute top-0 right-0 h-2.5 w-2.5 bg-emerald-500 rounded-full" />
+          </button>
+        </div>
       )}
 
       {/* Chat Window */}
       {isOpen && (
         <div
-          className={`fixed bottom-8 right-8 w-[420px] h-[580px] rounded-xl shadow-2xl flex flex-col z-50 backdrop-blur-sm ${
-            theme === 'dark' ? 'bg-gray-900/95 border border-gray-800' : 'bg-white/95 border border-gray-200'
+          className={`fixed bottom-6 right-6 w-[400px] h-[600px] rounded-lg flex flex-col z-50 shadow-2xl border ${
+            theme === 'dark' 
+              ? 'bg-[#0a0a0a] border-gray-800' 
+              : 'bg-white border-gray-200'
           }`}
         >
           {/* Header */}
-          <div className={`flex items-center justify-between p-5 border-b ${
+          <div className={`flex items-center justify-between px-5 py-4 border-b ${
             theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
           }`}>
             <div className="flex items-center gap-3">
-              <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-lg shadow-emerald-500/50" />
-              <h3 className={`font-serif text-lg font-semibold tracking-wide ${
-                theme === 'dark' ? 'text-white' : 'text-gray-900'
-              }`}>
-                Ask me anything
-              </h3>
+              <div className="relative">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  theme === 'dark' ? 'bg-gray-900 border border-gray-800' : 'bg-gray-50 border border-gray-200'
+                }`}>
+                  <MessageSquare size={16} className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} />
+                </div>
+                <span className="absolute bottom-0 right-0 h-2 w-2 bg-emerald-500 rounded-full border-2 border-[#0a0a0a]" />
+              </div>
+              <div>
+                <h3 className={`font-sans text-sm font-medium ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>
+                  Assistant
+                </h3>
+                <p className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
+                  Online
+                </p>
+              </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className={`p-1.5 rounded-lg transition-colors ${
+              className={`p-2 rounded-md transition-colors ${
                 theme === 'dark' 
-                  ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  ? 'text-gray-500 hover:text-gray-300 hover:bg-gray-900' 
+                  : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
               }`}
+              aria-label="Close assistant"
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-5 space-y-4">
+          <div 
+            className={`chatbot-messages flex-1 overflow-y-auto p-5 space-y-3 ${
+              theme === 'dark' ? 'bg-black' : 'bg-gray-50'
+            }`}
+            style={{
+              scrollbarWidth: 'thin',
+              scrollbarColor: theme === 'dark' ? '#1f1f1f #000000' : '#d1d5db #f9fafb'
+            }}
+          >
             {messages.map((message, index) => (
               <div
                 key={index}
                 className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
               >
                 <div
-                  className={`max-w-[85%] px-4 py-3 rounded-2xl shadow-sm ${
+                  className={`max-w-[80%] px-4 py-2.5 rounded-lg ${
                     message.isBot
                       ? theme === 'dark'
-                        ? 'bg-gray-800 text-gray-100'
-                        : 'bg-gray-100 text-gray-900'
-                      : 'bg-emerald-500 text-white shadow-emerald-500/20'
+                        ? 'bg-[#0a0a0a] border border-gray-800 text-gray-200'
+                        : 'bg-white border border-gray-200 text-gray-900'
+                      : theme === 'dark'
+                      ? 'bg-gray-900 border border-gray-800 text-gray-200'
+                      : 'bg-gray-900 text-gray-100'
                   }`}
                 >
-                  <p className="text-sm font-sans leading-relaxed">{message.text}</p>
+                  <p className="text-sm font-sans leading-relaxed whitespace-pre-line">{message.text}</p>
                   <p
-                    className={`text-xs mt-1.5 font-mono ${
+                    className={`text-[10px] mt-1.5 font-mono ${
                       message.isBot
-                        ? theme === 'dark'
-                          ? 'text-gray-500'
-                          : 'text-gray-500'
-                        : 'text-emerald-100'
+                        ? theme === 'dark' ? 'text-gray-600' : 'text-gray-400'
+                        : theme === 'dark' ? 'text-gray-600' : 'text-gray-400'
                     }`}
                   >
                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -246,31 +325,63 @@ export default function Chatbot() {
                 </div>
               </div>
             ))}
+            {isTyping && (
+              <div className="flex justify-start">
+                <div className={`px-4 py-3 rounded-lg ${
+                  theme === 'dark' 
+                    ? 'bg-[#0a0a0a] border border-gray-800' 
+                    : 'bg-white border border-gray-200'
+                }`}>
+                  <div className="flex gap-1">
+                    <div className={`w-1.5 h-1.5 rounded-full animate-bounce ${
+                      theme === 'dark' ? 'bg-gray-600' : 'bg-gray-400'
+                    }`} style={{ animationDelay: '0ms' }}></div>
+                    <div className={`w-1.5 h-1.5 rounded-full animate-bounce ${
+                      theme === 'dark' ? 'bg-gray-600' : 'bg-gray-400'
+                    }`} style={{ animationDelay: '150ms' }}></div>
+                    <div className={`w-1.5 h-1.5 rounded-full animate-bounce ${
+                      theme === 'dark' ? 'bg-gray-600' : 'bg-gray-400'
+                    }`} style={{ animationDelay: '300ms' }}></div>
+                  </div>
+                </div>
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
 
           {/* Input */}
-          <div className={`p-5 border-t ${
+          <div className={`p-4 border-t ${
             theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
           }`}>
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Type your question..."
-                className={`flex-1 px-4 py-3 rounded-xl border font-sans text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ${
+                placeholder="Ask a question..."
+                disabled={isTyping}
+                className={`flex-1 px-4 py-2.5 rounded-md border font-sans text-sm focus:outline-none focus:ring-1 transition-all ${
                   theme === 'dark'
-                    ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-500'
-                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
-                }`}
+                    ? 'bg-black border-gray-800 text-white placeholder-gray-600 focus:ring-gray-700 focus:border-gray-700'
+                    : 'bg-white border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-gray-300 focus:border-gray-300'
+                } ${isTyping ? 'opacity-50 cursor-not-allowed' : ''}`}
               />
               <button
                 onClick={handleSend}
-                className="px-4 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl transition-all hover:shadow-lg hover:shadow-emerald-500/30 flex items-center justify-center"
+                disabled={!input.trim() || isTyping}
+                className={`px-4 py-2.5 rounded-md transition-all flex items-center justify-center ${
+                  !input.trim() || isTyping
+                    ? theme === 'dark'
+                      ? 'bg-gray-900 text-gray-600 cursor-not-allowed'
+                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : theme === 'dark'
+                    ? 'bg-gray-900 hover:bg-gray-800 text-gray-200 border border-gray-800'
+                    : 'bg-gray-900 hover:bg-gray-800 text-white'
+                }`}
+                aria-label="Send message"
               >
-                <Send size={18} />
+                <Send size={16} />
               </button>
             </div>
           </div>

@@ -10,6 +10,7 @@ import ProjectDetail from './pages/ProjectDetail';
 import NotFound from './pages/NotFound';
 import Competitive from './pages/Competitive';
 import Creator from './pages/Creator';
+import CreatorLogin from './pages/CreatorLogin';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/competitive" element={<Competitive />} />
+          <Route path="/creator/login" element={<CreatorLogin />} />
           <Route path="/creator" element={<Creator />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

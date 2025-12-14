@@ -33,7 +33,35 @@ export default function UniversalSearch({ isOpen, onClose }: UniversalSearchProp
   const [results, setResults] = useState<SearchResult[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  // Search function
+  // Enhanced search with relevance scoring
+  const calculateRelevance = (text: string, query: string): number => {
+    const lowerText = text.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    
+    // Exact match
+    if (lowerText === lowerQuery) return 100;
+    
+    // Starts with query
+    if (lowerText.startsWith(lowerQuery)) return 80;
+    
+    // Contains query as whole word
+    if (new RegExp(`\\b${lowerQuery}\\b`).test(lowerText)) return 60;
+    
+    // Contains query anywhere
+    if (lowerText.includes(lowerQuery)) return 40;
+    
+    // Fuzzy match (character by character)
+    let score = 0;
+    let queryIndex = 0;
+    for (let i = 0; i < lowerText.length && queryIndex < lowerQuery.length; i++) {
+      if (lowerText[i] === lowerQuery[queryIndex]) {
+        score += 1;
+        queryIndex++;
+      }
+    }
+    return queryIndex === lowerQuery.length ? 20 + score : 0;
+  };
+
   const performSearch = useCallback((searchQuery: string) => {
     if (!searchQuery.trim()) {
       setResults([]);
@@ -41,51 +69,69 @@ export default function UniversalSearch({ isOpen, onClose }: UniversalSearchProp
     }
 
     const lowerQuery = searchQuery.toLowerCase();
-    const searchResults: SearchResult[] = [];
+    const searchResults: Array<SearchResult & { relevance: number }> = [];
 
-    // Search pages
+    // Search pages with scoring
     pages.forEach(page => {
-      if (page.title.toLowerCase().includes(lowerQuery) || 
-          page.description.toLowerCase().includes(lowerQuery)) {
+      const titleRelevance = calculateRelevance(page.title, lowerQuery);
+      const descRelevance = calculateRelevance(page.description, lowerQuery);
+      const maxRelevance = Math.max(titleRelevance, descRelevance * 0.7);
+      
+      if (maxRelevance > 0) {
         searchResults.push({
           type: 'page',
           title: page.title,
           description: page.description,
-          url: page.url
+          url: page.url,
+          relevance: maxRelevance
         });
       }
     });
 
-    // Search blog posts
+    // Search blog posts with scoring
     blogPosts.forEach(post => {
-      if (post.title.toLowerCase().includes(lowerQuery) || 
-          post.excerpt.toLowerCase().includes(lowerQuery) ||
-          post.tags.some(tag => tag.toLowerCase().includes(lowerQuery))) {
+      const titleRelevance = calculateRelevance(post.title, lowerQuery);
+      const excerptRelevance = calculateRelevance(post.excerpt, lowerQuery);
+      const tagRelevance = Math.max(...post.tags.map(tag => calculateRelevance(tag, lowerQuery)), 0);
+      const maxRelevance = Math.max(titleRelevance, excerptRelevance * 0.7, tagRelevance * 0.5);
+      
+      if (maxRelevance > 0) {
         searchResults.push({
           type: 'blog',
           title: post.title,
           description: post.excerpt,
           url: `/blog/${post.slug}`,
-          date: post.date
+          date: post.date,
+          relevance: maxRelevance
         });
       }
     });
 
-    // Search projects
+    // Search projects with scoring
     projects.forEach(project => {
-      if (project.title.toLowerCase().includes(lowerQuery) || 
-          project.description.toLowerCase().includes(lowerQuery) ||
-          project.technologies.some((tech: string) => tech.toLowerCase().includes(lowerQuery))) {
+      const titleRelevance = calculateRelevance(project.title, lowerQuery);
+      const descRelevance = calculateRelevance(project.description, lowerQuery);
+      const techRelevance = Math.max(...project.technologies.map((tech: string) => calculateRelevance(tech, lowerQuery)), 0);
+      const maxRelevance = Math.max(titleRelevance, descRelevance * 0.7, techRelevance * 0.6);
+      
+      if (maxRelevance > 0) {
         searchResults.push({
           type: 'project',
           title: project.title,
           description: project.description,
-          url: `/projects/${project.slug}`
+          url: `/projects/${project.slug}`,
+          relevance: maxRelevance
         });
       }
     });
 
-    setResults(searchResults.slice(0, 10)); // Limit to 10 results
+    // Sort by relevance and limit results
+    const sortedResults = searchResults
+      .sort((a, b) => b.relevance - a.relevance)
+      .slice(0, 10)
+      .map(({ relevance, ...rest }) => rest);
+    
+    setResults(sortedResults);
     setSelectedIndex(0);
   }, []);
 
@@ -141,14 +187,14 @@ export default function UniversalSearch({ isOpen, onClose }: UniversalSearchProp
     <>
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 animate-fadeIn"
         onClick={onClose}
       />
 
       {/* Search Modal */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-[15vh] px-4">
+      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-[15vh] px-4 animate-slideDown">
         <div 
-          className={`w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden ${
+          className={`w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-emerald-500/10 ${
             theme === 'dark' 
               ? 'bg-[#1a1a1a] border border-gray-800' 
               : 'bg-white border border-gray-200'
@@ -196,7 +242,8 @@ export default function UniversalSearch({ isOpen, onClose }: UniversalSearchProp
                   <button
                     key={index}
                     onClick={() => handleResultClick(result.url)}
-                    className={`w-full px-4 py-3 flex items-start gap-3 transition-colors ${
+                    style={{ animationDelay: `${index * 30}ms` }}
+                    className={`w-full px-4 py-3 flex items-start gap-3 transition-all duration-200 animate-fadeInUp ${
                       index === selectedIndex
                         ? theme === 'dark'
                           ? 'bg-gray-800/50'

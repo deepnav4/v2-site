@@ -159,7 +159,7 @@ export default function Footer() {
                     </li>
                     <li>
                       <a 
-                        href="https://v2.screenager.dev" 
+                        href="https://v2.navdeep.site" 
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`text-sm font-sans transition-colors inline-flex items-center gap-1 group ${
