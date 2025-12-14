@@ -71,12 +71,12 @@ export default function Home() {
             Information Technology Student <br className="sm:hidden" /> <span className="hidden sm:inline">/ </span>Developer / Writer
           </p>
           
-          <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-8xl font-normal mb-6 sm:mb-8 leading-tight font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h1 className={`text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-8xl font-normal mb-6 sm:mb-8 leading-tight font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             I experiment with things<br className="hidden sm:block" />
             <span className="sm:hidden"> </span>that fascinate me.
           </h1>
           
-          <p className={`text-lg sm:text-base mb-12 sm:mb-12 max-w-2xl font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-sm sm:text-base mb-12 sm:mb-12 max-w-2xl font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
             I build full-stack applications with Docker, Redis, and real-time collaboration. Welcome to my lab notebook where I share experiments in software, design, and technology.
           </p>
           
