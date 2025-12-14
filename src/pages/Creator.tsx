@@ -178,7 +178,8 @@ export default function Creator() {
       downloadMarkdownFile(slug, result.content);
       setMessage(`${result.message} Now place ${slug}.md in src/content/blog/ folder.`);
     } else {
-      setMessage(result.message);
+      // Production mode - blog committed to GitHub
+      setMessage(`${result.message} Note: Go to Vercel/Netlify and trigger a manual redeploy for the blog to appear on the site.`);
     }
     
     if (result.success) {

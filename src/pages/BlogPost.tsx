@@ -39,9 +39,26 @@ export default function BlogPost() {
           content = content.replace(/^---[\s\S]*?---\s*/m, '');
           setMarkdownContent(content);
         })
-        .catch((error) => {
-          console.error('Error loading markdown:', error);
-          setMarkdownContent('# Blog post not found\n\nThe requested blog post could not be loaded.');
+        .catch(async (error) => {
+          console.error('Error loading markdown from build:', error);
+          
+          // Try fetching from GitHub in production if file not found in build
+          if (!import.meta.env.DEV) {
+            try {
+              const response = await fetch(`https://raw.githubusercontent.com/${import.meta.env.VITE_GITHUB_OWNER}/${import.meta.env.VITE_GITHUB_REPO}/main/src/content/blog/${slug}.md`);
+              if (response.ok) {
+                let content = await response.text();
+                // Remove frontmatter
+                content = content.replace(/^---[\s\S]*?---\s*/m, '');
+                setMarkdownContent(content);
+                return;
+              }
+            } catch (fetchError) {
+              console.error('Error fetching from GitHub:', fetchError);
+            }
+          }
+          
+          setMarkdownContent('# Blog post not found\n\nThe requested blog post could not be loaded. If this is a newly created post, please wait for the site to rebuild or trigger a manual deployment.');
         });
     }
   }, [slug]);
