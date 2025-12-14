@@ -15,10 +15,13 @@ export default function Layout({ children }: LayoutProps) {
     <div className={`min-h-screen flex transition-colors duration-300 ${theme === 'dark' ? 'bg-black' : 'bg-white'}`} data-theme={theme}>
       <Header />
       <div className="flex-1 ml-28">
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        {/* 90% width container for better aesthetics */}
+        <div className="w-[90%] mx-auto">
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </div>
         <Chatbot />
       </div>
     </div>
