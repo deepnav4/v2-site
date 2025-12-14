@@ -31,36 +31,45 @@ export default function BlogPost() {
 
   useEffect(() => {
     // Load markdown content
-    if (slug) {
-      import(`../content/blog/${slug}.md?raw`)
-        .then((module) => {
-          let content = module.default;
-          // Remove frontmatter (YAML between ---)
-          content = content.replace(/^---[\s\S]*?---\s*/m, '');
-          setMarkdownContent(content);
-        })
-        .catch(async (error) => {
-          console.error('Error loading markdown from build:', error);
-          
-          // Try fetching from GitHub in production if file not found in build
-          if (!import.meta.env.DEV) {
-            try {
-              const response = await fetch(`https://raw.githubusercontent.com/${import.meta.env.VITE_GITHUB_OWNER}/${import.meta.env.VITE_GITHUB_REPO}/main/src/content/blog/${slug}.md`);
-              if (response.ok) {
-                let content = await response.text();
-                // Remove frontmatter
-                content = content.replace(/^---[\s\S]*?---\s*/m, '');
-                setMarkdownContent(content);
-                return;
-              }
-            } catch (fetchError) {
-              console.error('Error fetching from GitHub:', fetchError);
+    const loadContent = async () => {
+      if (!slug) return;
+
+      try {
+        // Try loading from build first
+        const module = await import(`../content/blog/${slug}.md?raw`);
+        let content = module.default;
+        // Remove frontmatter (YAML between ---)
+        content = content.replace(/^---[\s\S]*?---\s*/m, '');
+        setMarkdownContent(content);
+      } catch (error) {
+        console.error('Error loading markdown from build:', error);
+        
+        // Fallback: Try fetching from GitHub in production if file not found in build
+        if (!import.meta.env.DEV && import.meta.env.VITE_GITHUB_OWNER && import.meta.env.VITE_GITHUB_REPO) {
+          try {
+            console.log('Attempting to fetch from GitHub...');
+            const response = await fetch(`https://raw.githubusercontent.com/${import.meta.env.VITE_GITHUB_OWNER}/${import.meta.env.VITE_GITHUB_REPO}/main/src/content/blog/${slug}.md`);
+            
+            if (response.ok) {
+              let content = await response.text();
+              console.log('Successfully fetched from GitHub');
+              // Remove frontmatter
+              content = content.replace(/^---[\s\S]*?---\s*/m, '');
+              setMarkdownContent(content);
+              return;
+            } else {
+              console.error('GitHub fetch failed with status:', response.status);
             }
+          } catch (fetchError) {
+            console.error('Error fetching from GitHub:', fetchError);
           }
-          
-          setMarkdownContent('# Blog post not found\n\nThe requested blog post could not be loaded. If this is a newly created post, please wait for the site to rebuild or trigger a manual deployment.');
-        });
-    }
+        }
+        
+        setMarkdownContent('# Blog post not found\n\nThe requested blog post could not be loaded. If this is a newly created post, please wait for the site to rebuild or trigger a manual deployment.');
+      }
+    };
+
+    loadContent();
   }, [slug]);
 
   useEffect(() => {
