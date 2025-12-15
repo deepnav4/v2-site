@@ -37,20 +37,20 @@ function Competitive() {
         url="https://navdeep.dev/competitive"
       />
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-        <div className="container py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           {/* Header */}
-          <div className="mb-16">
-            <p className={`text-xs uppercase tracking-[0.2em] mb-6 font-sans font-medium ${
+          <div className="mb-8 sm:mb-12 lg:mb-16">
+            <p className={`text-[10px] sm:text-xs uppercase tracking-[0.2em] mb-4 sm:mb-6 font-sans font-medium ${
               theme === 'dark' ? 'text-emerald-500' : 'text-emerald-600'
             }`}>
               Competitive Programming
             </p>
-            <h1 className={`text-5xl md:text-6xl font-normal mb-6 font-serif ${
+            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mb-4 sm:mb-6 font-serif leading-tight ${
               theme === 'dark' ? 'text-white' : 'text-black'
             }`}>
               The Journey of Problem Solving
             </h1>
-            <p className={`text-lg font-sans max-w-3xl leading-relaxed ${
+            <p className={`text-sm sm:text-base lg:text-lg font-sans max-w-3xl leading-relaxed ${
               theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
             }`}>
               Competitive programming isn't just about solving problems—it's about developing a problem-solving 
@@ -60,22 +60,22 @@ function Competitive() {
           </div>
 
           {/* Philosophy Section */}
-          <div className={`mb-16 p-8 rounded-lg border ${
+          <div className={`mb-8 sm:mb-12 lg:mb-16 p-4 sm:p-6 lg:p-8 rounded-lg border ${
             theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
           }`}>
-            <div className="flex items-start gap-4 mb-4">
-              <div className={`p-3 rounded-lg ${
+            <div className="flex flex-col sm:flex-row items-start gap-4 mb-4">
+              <div className={`flex-shrink-0 p-2.5 sm:p-3 rounded-lg ${
                 theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-100'
               }`}>
-                <Sparkles className="text-emerald-500" size={24} />
+                <Sparkles className="text-emerald-500" size={20} />
               </div>
               <div>
-                <h2 className={`text-2xl font-normal mb-3 font-serif ${
+                <h2 className={`text-xl sm:text-2xl lg:text-3xl font-normal mb-3 sm:mb-4 font-serif ${
                   theme === 'dark' ? 'text-white' : 'text-black'
                 }`}>
                   My Approach to Competitive Programming
                 </h2>
-                <div className={`space-y-4 text-base font-sans leading-relaxed ${
+                <div className={`space-y-3 sm:space-y-4 text-sm sm:text-base font-sans leading-relaxed ${
                   theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                 }`}>
                   <p>
@@ -99,9 +99,9 @@ function Competitive() {
           </div>
 
           {/* LeetCode Contest Stats */}
-          <div className="mb-16">
-            <div className="mb-8">
-              <h2 className={`text-3xl font-normal font-serif ${
+          <div className="mb-8 sm:mb-12 lg:mb-16">
+            <div className="mb-6 sm:mb-8">
+              <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-normal font-serif ${
                 theme === 'dark' ? 'text-white' : 'text-black'
               }`}>
                 LeetCode Contest Performance
@@ -119,13 +119,13 @@ function Competitive() {
             ) : (
               <>
                 {/* Two Column Layout: Graph (Left) and Stats (Right) */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
                   {/* Left: Rating Progress Graph */}
-                  <div className={`p-6 rounded-lg border ${
+                  <div className={`p-4 sm:p-5 lg:p-6 rounded-lg border ${
                     theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
                   }`}>
-                    <div className="flex items-center justify-between mb-6">
-                      <h3 className={`text-base font-normal font-serif ${
+                    <div className="flex items-center justify-between mb-4 sm:mb-6">
+                      <h3 className={`text-sm sm:text-base font-normal font-serif ${
                         theme === 'dark' ? 'text-white' : 'text-black'
                       }`}>
                         Rating Progression
@@ -170,7 +170,7 @@ function Competitive() {
                       </div>
                     </div>
                     
-                    <div style={{ width: '100%', height: '300px' }}>
+                    <div className="w-full h-[250px] sm:h-[280px] lg:h-[320px]">
                       <ResponsiveContainer width="100%" height="100%">
                         {chartType === 'area' ? (
                           <AreaChart
@@ -403,61 +403,61 @@ function Competitive() {
                   </div>
 
                   {/* Right: Stats Summary */}
-                  <div className="space-y-4">
-                    <div className={`p-5 rounded-lg border ${
+                  <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3 sm:gap-4">
+                    <div className={`p-4 sm:p-5 rounded-lg border ${
                       theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
                     }`}>
-                      <p className={`text-xs uppercase tracking-wider mb-2 font-sans ${
+                      <p className={`text-[10px] sm:text-xs uppercase tracking-wider mb-1.5 sm:mb-2 font-sans ${
                         theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
                       }`}>
                         Current Rating
                       </p>
-                      <p className={`text-3xl font-semibold font-sans mb-1 ${
+                      <p className={`text-2xl sm:text-3xl font-semibold font-sans mb-1 ${
                         theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'
                       }`}>
                         {Math.round(contestData.contestRating)}
                       </p>
-                      <p className={`text-xs font-sans ${
+                      <p className={`text-[10px] sm:text-xs font-sans ${
                         theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
                       }`}>
                         Rank {contestData.contestGlobalRanking?.toLocaleString()}
                       </p>
                     </div>
 
-                    <div className={`p-5 rounded-lg border ${
+                    <div className={`p-4 sm:p-5 rounded-lg border ${
                       theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
                     }`}>
-                      <p className={`text-xs uppercase tracking-wider mb-2 font-sans ${
+                      <p className={`text-[10px] sm:text-xs uppercase tracking-wider mb-1.5 sm:mb-2 font-sans ${
                         theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
                       }`}>
                         Contests Attended
                       </p>
-                      <p className={`text-3xl font-semibold font-sans mb-1 ${
+                      <p className={`text-2xl sm:text-3xl font-semibold font-sans mb-1 ${
                         theme === 'dark' ? 'text-white' : 'text-black'
                       }`}>
                         {contestData.contestAttend}
                       </p>
-                      <p className={`text-xs font-sans ${
+                      <p className={`text-[10px] sm:text-xs font-sans ${
                         theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
                       }`}>
                         Active participation
                       </p>
                     </div>
 
-                    <div className={`p-5 rounded-lg border ${
+                    <div className={`p-4 sm:p-5 rounded-lg border ${
                       theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
                     }`}>
-                      <p className={`text-xs uppercase tracking-wider mb-2 font-sans ${
+                      <p className={`text-[10px] sm:text-xs uppercase tracking-wider mb-1.5 sm:mb-2 font-sans ${
                         theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
                       }`}>
                         Top Percentage
                       </p>
-                      <p className={`text-3xl font-semibold font-sans mb-1 ${
+                      <p className={`text-2xl sm:text-3xl font-semibold font-sans mb-1 ${
                         theme === 'dark' ? 'text-white' : 'text-black'
                       }`}>
                         {contestData.contestTopPercentage.toFixed(1)}%
                       </p>
-                      <p className={`text-xs font-sans ${
+                      <p className={`text-[10px] sm:text-xs font-sans ${
                         theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
                       }`}>
                         of {(contestData.totalParticipants / 1000).toFixed(0)}k users
@@ -468,12 +468,12 @@ function Competitive() {
 
                 {/* Contest History - Latest First */}
                 <div>
-                  <h3 className={`text-xl font-normal mb-6 font-serif ${
+                  <h3 className={`text-lg sm:text-xl font-normal mb-4 sm:mb-6 font-serif ${
                     theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
                     Recent Contests
                   </h3>
-                  <div className="space-y-3">
+                  <div className="space-y-2.5 sm:space-y-3">
                     {contestData.contestParticipation.slice().reverse().map((contest, idx) => {
                       const TrendIcon = contest.trendDirection === 'UP' ? TrendingUp : 
                                        contest.trendDirection === 'DOWN' ? TrendingDown : Minus;
@@ -483,20 +483,21 @@ function Competitive() {
                       return (
                         <div
                           key={idx}
-                          className={`p-4 rounded-lg border hover:border-emerald-500/50 transition-colors ${
+                          className={`p-4 sm:p-4 rounded-lg border hover:border-emerald-500/50 transition-colors ${
                             theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
                           }`}
                         >
-                          <div className="flex items-center justify-between gap-4 mb-3">
-                            <div className="flex items-center gap-2 flex-1">
-                              <h4 className={`text-sm font-medium font-sans ${
+                          {/* Header with title and date */}
+                          <div className="flex items-start justify-between gap-3 mb-3">
+                            <div className="flex items-start gap-2 flex-1 min-w-0">
+                              <TrendIcon className={`${trendColor} flex-shrink-0 mt-0.5`} size={14} />
+                              <h4 className={`text-sm sm:text-sm font-medium font-sans leading-snug ${
                                 theme === 'dark' ? 'text-white' : 'text-black'
                               }`}>
                                 {contest.contest.title}
                               </h4>
-                              <TrendIcon className={`${trendColor} flex-shrink-0`} size={14} />
                             </div>
-                            <p className={`text-xs font-sans ${
+                            <p className={`text-xs sm:text-xs font-sans flex-shrink-0 ${
                               theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
                             }`}>
                               {new Date(contest.contest.startTime * 1000).toLocaleDateString('en-US', {
@@ -505,34 +506,49 @@ function Competitive() {
                               })}
                             </p>
                           </div>
-                          <div className="flex items-center gap-6 text-xs">
-                            <div>
-                              <span className={`font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Rating: </span>
+
+                          {/* Stats in a clean mobile-friendly layout */}
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-xs">
+                            <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded ${
+                              theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-50'
+                            }`}>
+                              <span className={`font-sans text-[10px] ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                                Rating
+                              </span>
                               <span className={`font-semibold font-mono ${
                                 theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'
                               }`}>
                                 {Math.round(contest.rating)}
                               </span>
                             </div>
-                            <div>
-                              <span className={`font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Rank: </span>
+                            
+                            <div className="inline-flex items-center gap-1.5">
+                              <span className={`font-sans text-[10px] ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+                                Rank
+                              </span>
                               <span className={`font-semibold font-mono ${
                                 theme === 'dark' ? 'text-white' : 'text-black'
                               }`}>
                                 {contest.ranking.toLocaleString()}
                               </span>
                             </div>
-                            <div>
-                              <span className={`font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Solved: </span>
+                            
+                            <div className="inline-flex items-center gap-1.5">
+                              <span className={`font-sans text-[10px] ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+                                Solved
+                              </span>
                               <span className={`font-semibold font-mono ${
                                 theme === 'dark' ? 'text-white' : 'text-black'
                               }`}>
                                 {contest.problemsSolved}/{contest.totalProblems}
                               </span>
                             </div>
+                            
                             {contest.finishTimeInSeconds > 0 && (
-                              <div>
-                                <span className={`font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>Time: </span>
+                              <div className="inline-flex items-center gap-1.5">
+                                <span className={`font-sans text-[10px] ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+                                  Time
+                                </span>
                                 <span className={`font-semibold font-mono ${
                                   theme === 'dark' ? 'text-white' : 'text-black'
                                 }`}>
@@ -551,27 +567,27 @@ function Competitive() {
           </div>
 
           {/* Learning Principles */}
-          <div className="mb-16">
-            <h2 className={`text-3xl font-normal mb-12 font-serif ${
+          <div className="mb-8 sm:mb-12 lg:mb-16">
+            <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-normal mb-8 sm:mb-10 lg:mb-12 font-serif ${
               theme === 'dark' ? 'text-white' : 'text-black'
             }`}>
               Key Learning Principles
             </h2>
-            <div className="space-y-6 max-w-3xl">
+            <div className="space-y-5 sm:space-y-6 max-w-3xl">
               {/* Daily Consistency */}
-              <div className="flex items-start gap-6">
-                <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+              <div className="flex items-start gap-3 sm:gap-4 lg:gap-6">
+                <div className={`flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-full flex items-center justify-center ${
                   theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-50'
                 }`}>
-                  <Target className="text-emerald-500" size={20} />
+                  <Target className="text-emerald-500" size={18} />
                 </div>
                 <div className="flex-1">
-                  <h3 className={`text-lg font-medium mb-2 font-sans ${
+                  <h3 className={`text-base sm:text-lg font-medium mb-1.5 sm:mb-2 font-sans ${
                     theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
                     Daily Consistency
                   </h3>
-                  <p className={`text-sm font-sans leading-relaxed ${
+                  <p className={`text-xs sm:text-sm font-sans leading-relaxed ${
                     theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                   }`}>
                     Solving at least one problem daily builds pattern recognition and muscle memory. Small consistent efforts compound over time.
@@ -580,19 +596,19 @@ function Competitive() {
               </div>
 
               {/* Deep Understanding */}
-              <div className="flex items-start gap-6">
-                <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+              <div className="flex items-start gap-3 sm:gap-4 lg:gap-6">
+                <div className={`flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-full flex items-center justify-center ${
                   theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-50'
                 }`}>
-                  <BookOpen className="text-emerald-500" size={20} />
+                  <BookOpen className="text-emerald-500" size={18} />
                 </div>
                 <div className="flex-1">
-                  <h3 className={`text-lg font-medium mb-2 font-sans ${
+                  <h3 className={`text-base sm:text-lg font-medium mb-1.5 sm:mb-2 font-sans ${
                     theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
                     Deep Understanding
                   </h3>
-                  <p className={`text-sm font-sans leading-relaxed ${
+                  <p className={`text-xs sm:text-sm font-sans leading-relaxed ${
                     theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                   }`}>
                     Don't just memorize solutions. Understand why an approach works, its time complexity, and when to apply it.
@@ -601,19 +617,19 @@ function Competitive() {
               </div>
 
               {/* Pattern Recognition */}
-              <div className="flex items-start gap-6">
-                <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+              <div className="flex items-start gap-3 sm:gap-4 lg:gap-6">
+                <div className={`flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-full flex items-center justify-center ${
                   theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-50'
                 }`}>
-                  <TrendingUp className="text-emerald-500" size={20} />
+                  <TrendingUp className="text-emerald-500" size={18} />
                 </div>
                 <div className="flex-1">
-                  <h3 className={`text-lg font-medium mb-2 font-sans ${
+                  <h3 className={`text-base sm:text-lg font-medium mb-1.5 sm:mb-2 font-sans ${
                     theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
                     Pattern Recognition
                   </h3>
-                  <p className={`text-sm font-sans leading-relaxed ${
+                  <p className={`text-xs sm:text-sm font-sans leading-relaxed ${
                     theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                   }`}>
                     Learn to recognize common patterns: sliding window, two pointers, DFS/BFS, dynamic programming states, and greedy choices.
@@ -622,19 +638,19 @@ function Competitive() {
               </div>
 
               {/* Review & Reflect */}
-              <div className="flex items-start gap-6">
-                <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+              <div className="flex items-start gap-3 sm:gap-4 lg:gap-6">
+                <div className={`flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-full flex items-center justify-center ${
                   theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-50'
                 }`}>
-                  <Sparkles className="text-emerald-500" size={20} />
+                  <Sparkles className="text-emerald-500" size={18} />
                 </div>
                 <div className="flex-1">
-                  <h3 className={`text-lg font-medium mb-2 font-sans ${
+                  <h3 className={`text-base sm:text-lg font-medium mb-1.5 sm:mb-2 font-sans ${
                     theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
                     Review & Reflect
                   </h3>
-                  <p className={`text-sm font-sans leading-relaxed ${
+                  <p className={`text-xs sm:text-sm font-sans leading-relaxed ${
                     theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                   }`}>
                     Revisit old problems. The same problem after a month reveals how much you've grown. Write explanations to solidify understanding.
@@ -645,15 +661,15 @@ function Competitive() {
           </div>
 
           {/* Resources & Philosophy */}
-          <div className={`p-8 rounded-lg border ${
+          <div className={`p-4 sm:p-6 lg:p-8 rounded-lg border ${
             theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
           }`}>
-            <h2 className={`text-2xl font-normal mb-4 font-serif ${
+            <h2 className={`text-xl sm:text-2xl lg:text-3xl font-normal mb-3 sm:mb-4 font-serif ${
               theme === 'dark' ? 'text-white' : 'text-black'
             }`}>
               Why Competitive Programming Matters
             </h2>
-            <div className={`space-y-4 text-base font-sans leading-relaxed ${
+            <div className={`space-y-3 sm:space-y-4 text-sm sm:text-base font-sans leading-relaxed ${
               theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
             }`}>
               <p>

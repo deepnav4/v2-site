@@ -10,6 +10,17 @@
     --foreground: 0 0% 100%;
   }
 
+  /* Custom text selection colors */
+  ::selection {
+    background-color: rgba(16, 185, 129, 0.3); /* emerald-500 with opacity */
+    color: inherit;
+  }
+
+  ::-moz-selection {
+    background-color: rgba(16, 185, 129, 0.3);
+    color: inherit;
+  }
+
   body {
     @apply bg-black text-gray-200 antialiased font-sans;
     overflow-x: hidden;

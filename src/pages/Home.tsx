@@ -65,7 +65,7 @@ export default function Home() {
       />
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
       {/* Hero Section */}
-      <section className="container py-12 sm:py-16 md:py-24">
+      <section className="container py-12 sm:py-8 md:py-12">
         <div className="max-w-5xl py-8 md:px-0">
           <p className="text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8 font-mono tracking-wide">
             Information Technology Student <br className="sm:hidden" /> <span className="hidden sm:inline">/ </span>Developer / Writer
@@ -160,7 +160,11 @@ export default function Home() {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {featuredProjects.map(project => (
-            <div key={project.id} className="card hover:border-emerald-500/30 transition-all">
+            <Link 
+              key={project.id} 
+              to={`/projects/${project.slug}`}
+              className="card hover:border-emerald-500/30 transition-all cursor-pointer"
+            >
               <div className="mb-3 sm:mb-4">
                 <span className={`text-xs uppercase tracking-wider font-medium font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
                   {project.category}
@@ -180,19 +184,12 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-              <div className="flex gap-3 text-xs sm:text-sm">
-                {project.github && (
-                  <a href={project.github} className="text-emerald-500 hover:text-emerald-400 flex items-center gap-1 font-sans">
-                    Source <ExternalLink size={12} className="sm:w-3.5 sm:h-3.5" />
-                  </a>
-                )}
-                {project.demo && (
-                  <a href={project.demo} className="text-emerald-500 hover:text-emerald-400 flex items-center gap-1 font-sans">
-                    Demo <ExternalLink size={12} className="sm:w-3.5 sm:h-3.5" />
-                  </a>
-                )}
+              <div className="text-xs sm:text-sm">
+                <span className="text-emerald-500 hover:text-emerald-400 font-sans font-medium">
+                  View details →
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         
@@ -329,39 +326,41 @@ export default function Home() {
 
       {/* Competitive Programming */}
       <section className="container py-12 sm:py-16">
-        <div className="mb-6 sm:mb-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">ALGORITHMIC TRAINING</p>
-          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-3 sm:mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Problem solving practice</h2>
-          <p className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Where I learn to think and optimize</p>
+        <div className="mb-8 sm:mb-12">
+          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">ALGORITHMIC THINKING</p>
+          <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal mb-4 sm:mb-6 leading-tight font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+            Problem solving from<br className="hidden sm:block" />
+            <span className="sm:hidden"> </span>first principles
+          </h2>
+          <p className={`text-base sm:text-lg max-w-3xl leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            Daily LeetCode practice challenges have sharpened my approach to breaking down complex problems into fundamental concepts. Over 500+ questions solved, each teaching me to think algorithmically and optimize from the ground up.
+          </p>
         </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-          <a href="https://leetcode.com/u/deepnav4" target="_blank" rel="noopener noreferrer" className="card hover:border-emerald-500/30 transition-all">
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center border border-emerald-500/30 flex-shrink-0">
-                <span className="font-bold text-sm sm:text-base text-emerald-500 font-mono">LC</span>
-              </div>
-              <div className="min-w-0">
-                <h3 className={`text-sm sm:text-base font-semibold font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>LeetCode</h3>
-                <p className={`text-xs sm:text-sm font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>500+ Problems Solved</p>
-              </div>
-            </div>
-          </a>
-          
-          <Link to="/ladder" className="card hover:border-emerald-500/30 transition-all">
-            <div className="flex items-center justify-between gap-3">
-              <div className="min-w-0">
-                <h3 className={`text-sm sm:text-base font-semibold font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>CF Ladder Tool</h3>
-                <p className={`text-xs sm:text-sm font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Personalized practice problems</p>
-              </div>
-              <ExternalLink size={18} className={`flex-shrink-0 sm:w-5 sm:h-5 ${theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}`} />
-            </div>
-          </Link>
+
+        {/* Simple Two Points */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 sm:mb-12 max-w-3xl">
+          <div className={`p-6 rounded-lg border ${theme === 'dark' ? 'bg-[#0a0a0a] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+            <h3 className={`text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+              500+ Problems Solved
+            </h3>
+            <p className={`text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+              Consistent practice across algorithms, data structures, and problem-solving patterns
+            </p>
+          </div>
+
+          <div className={`p-6 rounded-lg border ${theme === 'dark' ? 'bg-[#0a0a0a] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
+            <h3 className={`text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+              Daily Practice
+            </h3>
+            <p className={`text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+              Building strong fundamentals through continuous learning and optimization
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Achievements & Activities */}
-      <section className="container py-12 sm:py-16 pb-16 sm:pb-20">
+      <section className="container py-12 sm:py-16">
         <div className="mb-8 sm:mb-12">
           <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">ACHIEVEMENTS & LEADERSHIP</p>
           <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-3 sm:mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Making an impact</h2>
