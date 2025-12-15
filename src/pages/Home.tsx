@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { ExternalLink } from 'lucide-react';
 import { useTheme } from '../store/themeStore';
 import { blogPosts } from '../data/blogPosts';
 import { projects } from '../data/projects';
