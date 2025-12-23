@@ -6,42 +6,10 @@ category: 'tech '
 tags:
   - backends
   - kafka
-excerpt: >-
+excerpt: >
   Kafka often feels like a massive, complex system when you first encounter it.
   In reality, Kafka is built on a surprisingly simple idea: **an append-only
   log**.
-
-
-  At its core, Kafka stores data as an ordered sequence of events. Each event is
-  written once, never modified, and read using an offset. This design choice
-  gives Kafka its defining strengths—high throughput, durability, ordering, and
-  fault tolerance.
-
-
-  Unlike traditional message queues, Kafka does not delete messages when
-  consumers read them. Consumers simply move their offset forward. This allows
-  multiple consumers to read the same data independently, replay events, and
-  recover from failures without data loss.
-
-
-  Kafka scales by partitioning logs and replicating them across brokers.
-  Ordering is guaranteed within each partition, while replication ensures
-  reliability. Because writes are sequential, Kafka can efficiently handle
-  millions of events per second on standard hardware.
-
-
-  What makes Kafka powerful is not complexity, but discipline. It applies
-  classic computer science concepts—logs, queues, producer–consumer patterns—at
-  massive scale. The result is a system that powers real-time analytics,
-  event-driven architectures, and modern data pipelines.
-
-
-  Kafka isn’t magic.  
-
-  It’s just a log.
-
-
-  And that simple idea runs the world.
 ---
 
 Every CS student studies queues, stacks, logs, and the producer–consumer problem. They feel basic. Almost boring.  
@@ -388,5 +356,3 @@ the same way queues power systems —
 Kafka is just a log.
 
 And logs run the world.
-
-
