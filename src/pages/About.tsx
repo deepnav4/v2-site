@@ -17,13 +17,13 @@ export default function About() {
       <div className="container py-12 sm:py-16 md:py-24">
         {/* Header Section */}
         <div className="mb-12 sm:mb-16">
-          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-4 sm:mb-6 font-sans font-medium">
+          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">
             ABOUT ME
           </p>
-          <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal mb-4 sm:mb-6 leading-tight font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Navdeep Singh
           </h1>
-          <p className={`text-lg sm:text-xl mb-6 sm:mb-8 font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-base sm:text-lg mb-6 sm:mb-8 font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
             IT Student · Builder · Problem Solver
           </p>
           
@@ -62,13 +62,13 @@ export default function About() {
         <div className="space-y-10 sm:space-y-12 md:space-y-16">
           {/* Introduction */}
           <section>
-            <p className={`text-base sm:text-lg leading-relaxed mb-4 sm:mb-6 font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+            <p className={`text-sm sm:text-base leading-relaxed mb-4 font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
               I'm Navdeep Singh, an Information Technology student at NIT Jalandhar (CGPA: 8.33) who builds scalable web applications 
               and explores full-stack development. I believe in learning by building - from Dockerized microservices to real-time 
               collaborative tools.
             </p>
             
-            <p className={`text-base sm:text-lg leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+            <p className={`text-sm sm:text-base leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
               When I see an interesting technology, I don't just read about it - I build something with it. Whether it's implementing 
               real-time collaboration with WebSockets, containerizing applications with Docker, or creating collaborative whiteboards 
               from scratch using Canvas API. That's what this site is. My lab notebook.
@@ -76,10 +76,10 @@ export default function About() {
           </section>
 
           <section>
-            <h2 className={`text-2xl sm:text-3xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+            <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               What Drives Me
             </h2>
-            <div className={`space-y-4 sm:space-y-6 text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+            <div className={`space-y-4 text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
             <p className="leading-relaxed">
               I believe the best way to understand technology is to build it from scratch. When I wanted to understand real-time collaboration, 
               I built SnippetSync with Redis Pub/Sub and WebSockets. When I needed to grasp microservices architecture, I created a Dockerized 
@@ -101,10 +101,10 @@ export default function About() {
         </section>
 
         <section>
-          <h2 className={`text-2xl sm:text-3xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             What I Build
           </h2>
-          <div className={`space-y-4 sm:space-y-6 text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+          <div className={`space-y-4 text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
             <p className="leading-relaxed">
               I've built production-ready applications including a Gym Management System with Dockerized microservices and CI/CD pipelines, 
               SnippetSync - a real-time collaborative code editor with Redis Pub/Sub, and ExceliDraw - a collaborative whiteboard built 
@@ -125,10 +125,10 @@ export default function About() {
         </section>
 
         <section>
-          <h2 className={`text-2xl sm:text-3xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             What I Write About
           </h2>
-          <div className={`space-y-4 sm:space-y-6 text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+          <div className={`space-y-4 text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
             <p className="leading-relaxed">
               I document my journeys of discovery. When I encounter a piece of technology that feels 
               magical or broken, I fall down the rabbit hole of research and experimentation until I 
@@ -144,10 +144,10 @@ export default function About() {
         </section>
 
         <section>
-          <h2 className={`text-2xl sm:text-3xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Right Now
           </h2>
-          <div className={`space-y-4 sm:space-y-6 text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+          <div className={`space-y-4 text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
             <p className="leading-relaxed">
               Currently pursuing B.Tech in Information Technology at NIT Jalandhar (CGPA: 8.33). Serving as a Core Member of 
               CyberNauts & XCEED Technical Clubs, organizing workshops and mentoring 50+ juniors. Also volunteering with NSS on 
@@ -162,7 +162,7 @@ export default function About() {
         </section>
 
         <section>
-          <h2 className={`text-2xl sm:text-3xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             My Stack
           </h2>
           <div className={`space-y-2 sm:space-y-3 text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
@@ -180,10 +180,10 @@ export default function About() {
         </section>
 
         <section>
-          <h2 className={`text-2xl sm:text-3xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Connect
           </h2>
-          <div className={`space-y-4 sm:space-y-6 text-sm sm:text-base font-sans mb-6 sm:mb-8 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+          <div className={`space-y-4 text-sm sm:text-base font-sans mb-6 sm:mb-8 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
             <p className="leading-relaxed">
               Find me at <code className={`px-2 py-1 rounded font-mono text-sm ${theme === 'dark' ? 'bg-gray-900 text-emerald-400' : 'bg-gray-100 text-emerald-600'}`}>@deepnav4</code> on most platforms.
             </p>

@@ -40,17 +40,15 @@ function Competitive() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           {/* Header */}
           <div className="mb-8 sm:mb-12 lg:mb-16">
-            <p className={`text-[10px] sm:text-xs uppercase tracking-[0.2em] mb-4 sm:mb-6 font-sans font-medium ${
-              theme === 'dark' ? 'text-emerald-500' : 'text-emerald-600'
-            }`}>
-              Competitive Programming
+            <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">
+              COMPETITIVE PROGRAMMING
             </p>
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mb-4 sm:mb-6 font-serif leading-tight ${
+            <h1 className={`text-3xl sm:text-4xl md:text-5xl font-normal mb-4 sm:mb-6 font-serif leading-tight ${
               theme === 'dark' ? 'text-white' : 'text-black'
             }`}>
               The Journey of Problem Solving
             </h1>
-            <p className={`text-sm sm:text-base lg:text-lg font-sans max-w-3xl leading-relaxed ${
+            <p className={`text-sm sm:text-base font-sans max-w-3xl leading-relaxed ${
               theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
             }`}>
               Competitive programming isn't just about solving problems—it's about developing a problem-solving 
@@ -70,7 +68,7 @@ function Competitive() {
                 <Sparkles className="text-emerald-500" size={20} />
               </div>
               <div>
-                <h2 className={`text-xl sm:text-2xl lg:text-3xl font-normal mb-3 sm:mb-4 font-serif ${
+                <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-3 sm:mb-4 font-serif ${
                   theme === 'dark' ? 'text-white' : 'text-black'
                 }`}>
                   My Approach to Competitive Programming
@@ -101,7 +99,7 @@ function Competitive() {
           {/* LeetCode Contest Stats */}
           <div className="mb-8 sm:mb-12 lg:mb-16">
             <div className="mb-6 sm:mb-8">
-              <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-normal font-serif ${
+              <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal font-serif ${
                 theme === 'dark' ? 'text-white' : 'text-black'
               }`}>
                 LeetCode Contest Performance

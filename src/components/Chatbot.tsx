@@ -118,6 +118,24 @@ export default function Chatbot() {
     scrollToBottom();
   }, [messages]);
 
+  // Lock body scroll when chatbot is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100vh';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+      document.documentElement.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.height = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, [isOpen]);
+
   const findBestMatch = (query: string): string => {
     const lowerQuery = query.toLowerCase();
     
@@ -215,12 +233,21 @@ export default function Chatbot() {
 
   return (
     <>
+      {/* Backdrop with blur */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Chat Button */}
       {!isOpen && (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
           <button
             onClick={() => setIsOpen(true)}
-            className={`group relative p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
+            className={`group relative p-3 sm:p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
               theme === 'dark'
                 ? 'bg-[#0a0a0a] border border-gray-800 hover:border-gray-700'
                 : 'bg-white border border-gray-200 hover:border-gray-300'
@@ -228,8 +255,8 @@ export default function Chatbot() {
             aria-label="Open assistant"
           >
             <MessageSquare 
-              size={24} 
-              className={`transition-colors ${
+              size={20} 
+              className={`sm:w-6 sm:h-6 transition-colors ${
                 theme === 'dark' 
                   ? 'text-gray-400 group-hover:text-white' 
                   : 'text-gray-600 group-hover:text-gray-900'
@@ -243,14 +270,14 @@ export default function Chatbot() {
       {/* Chat Window */}
       {isOpen && (
         <div
-          className={`fixed bottom-6 right-6 w-[400px] h-[600px] rounded-lg flex flex-col z-50 shadow-2xl border ${
+          className={`fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-6 sm:right-6 w-auto sm:w-[400px] h-[500px] sm:h-[600px] rounded-lg flex flex-col z-50 shadow-2xl border ${
             theme === 'dark' 
               ? 'bg-[#0a0a0a] border-gray-800' 
               : 'bg-white border-gray-200'
           }`}
         >
           {/* Header */}
-          <div className={`flex items-center justify-between px-5 py-4 border-b ${
+          <div className={`flex items-center justify-between px-4 sm:px-5 py-3 sm:py-4 border-b ${
             theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
           }`}>
             <div className="flex items-center gap-3">
@@ -288,7 +315,7 @@ export default function Chatbot() {
 
           {/* Messages */}
           <div 
-            className={`chatbot-messages flex-1 overflow-y-auto p-5 space-y-3 ${
+            className={`chatbot-messages flex-1 overflow-y-auto p-3 sm:p-5 space-y-3 ${
               theme === 'dark' ? 'bg-black' : 'bg-gray-50'
             }`}
             style={{
@@ -302,7 +329,7 @@ export default function Chatbot() {
                 className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
               >
                 <div
-                  className={`max-w-[80%] px-4 py-2.5 rounded-lg ${
+                  className={`max-w-[85%] sm:max-w-[80%] px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg ${
                     message.isBot
                       ? theme === 'dark'
                         ? 'bg-[#0a0a0a] border border-gray-800 text-gray-200'
@@ -312,7 +339,7 @@ export default function Chatbot() {
                       : 'bg-gray-900 text-gray-100'
                   }`}
                 >
-                  <p className="text-sm font-sans leading-relaxed whitespace-pre-line">{message.text}</p>
+                  <p className="text-xs sm:text-sm font-sans leading-relaxed whitespace-pre-line">{message.text}</p>
                   <p
                     className={`text-[10px] mt-1.5 font-mono ${
                       message.isBot
@@ -350,7 +377,7 @@ export default function Chatbot() {
           </div>
 
           {/* Input */}
-          <div className={`p-4 border-t ${
+          <div className={`p-3 sm:p-4 border-t ${
             theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
           }`}>
             <div className="flex gap-2">
@@ -361,7 +388,7 @@ export default function Chatbot() {
                 onKeyPress={handleKeyPress}
                 placeholder="Ask a question..."
                 disabled={isTyping}
-                className={`flex-1 px-4 py-2.5 rounded-md border font-sans text-sm focus:outline-none focus:ring-1 transition-all ${
+                className={`flex-1 px-3 sm:px-4 py-2 sm:py-2.5 rounded-md border font-sans text-base sm:text-sm focus:outline-none focus:ring-1 transition-all ${
                   theme === 'dark'
                     ? 'bg-black border-gray-800 text-white placeholder-gray-600 focus:ring-gray-700 focus:border-gray-700'
                     : 'bg-white border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-gray-300 focus:border-gray-300'
@@ -370,7 +397,7 @@ export default function Chatbot() {
               <button
                 onClick={handleSend}
                 disabled={!input.trim() || isTyping}
-                className={`px-4 py-2.5 rounded-md transition-all flex items-center justify-center ${
+                className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-md transition-all flex items-center justify-center ${
                   !input.trim() || isTyping
                     ? theme === 'dark'
                       ? 'bg-gray-900 text-gray-600 cursor-not-allowed'
@@ -381,7 +408,7 @@ export default function Chatbot() {
                 }`}
                 aria-label="Send message"
               >
-                <Send size={16} />
+                <Send size={16} className="w-4 h-4 sm:w-4 sm:h-4" />
               </button>
             </div>
           </div>

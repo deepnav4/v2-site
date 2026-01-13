@@ -17,7 +17,7 @@ export default function Projects() {
       <SEO 
         title="Projects - Navdeep Singh"
         description="A collection of web applications, tools, and open-source projects built with modern technologies like React, Node.js, TypeScript, and more."
-        url="https://navdeep.dev/projects"
+        url="https://navdeep.site/projects"
       />
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
       <div className="container py-12 sm:py-16">

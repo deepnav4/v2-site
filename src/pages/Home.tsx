@@ -170,7 +170,7 @@ export default function Home() {
                 </span>
                 <span className={`text-xs ml-2 font-sans ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>{project.date}</span>
               </div>
-              <h3 className={`text-sm sm:text-base md:text-lg font-normal mb-2 sm:mb-3 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{project.title}</h3>
+              <h3 className={`text-base sm:text-lg md:text-xl font-normal mb-2 hover:text-emerald-500 transition-colors font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{project.title}</h3>
               <p className={`text-xs sm:text-sm md:text-base mb-3 sm:mb-4 font-sans line-clamp-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
               <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                 {project.technologies.slice(0, 3).map(tech => (
@@ -324,38 +324,22 @@ export default function Home() {
       </section>
 
       {/* Competitive Programming */}
-      <section className="container py-12 sm:py-16">
-        <div className="mb-8 sm:mb-12">
+      <section className="container  sm:py-12">
+        <div className="mb-6 sm:mb-8">
           <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">ALGORITHMIC THINKING</p>
-          <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal mb-4 sm:mb-6 leading-tight font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-            Problem solving from<br className="hidden sm:block" />
+          <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-3 sm:mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+            Problem from<br className="hidden sm:block" />
             <span className="sm:hidden"> </span>first principles
           </h2>
-          <p className={`text-base sm:text-lg max-w-3xl leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
             Daily LeetCode practice challenges have sharpened my approach to breaking down complex problems into fundamental concepts. Over 500+ questions solved, each teaching me to think algorithmically and optimize from the ground up.
           </p>
         </div>
 
-        {/* Simple Two Points */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8 sm:mb-12 max-w-3xl">
-          <div className={`p-6 rounded-lg border ${theme === 'dark' ? 'bg-[#0a0a0a] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
-            <h3 className={`text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-              500+ Problems Solved
-            </h3>
-            <p className={`text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-              Consistent practice across algorithms, data structures, and problem-solving patterns
-            </p>
-          </div>
-
-          <div className={`p-6 rounded-lg border ${theme === 'dark' ? 'bg-[#0a0a0a] border-gray-800' : 'bg-gray-50 border-gray-200'}`}>
-            <h3 className={`text-lg font-semibold mb-2 font-sans ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-              Daily Practice
-            </h3>
-            <p className={`text-sm leading-relaxed font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-              Building strong fundamentals through continuous learning and optimization
-            </p>
-          </div>
-        </div>
+        <Link to="/competitive" className="inline-block mt-6 sm:mt-8 text-sm sm:text-base text-emerald-500 hover:text-emerald-400 font-medium font-sans">
+          View competitive programming →
+        </Link>
+       
       </section>
 
       {/* Achievements & Activities */}

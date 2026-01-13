@@ -199,10 +199,10 @@ export default function Creator() {
           {/* Header */}
           <div className="flex items-center justify-between mb-12">
             <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-2 font-sans font-medium">
+              <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">
                 CONTENT MANAGEMENT
               </p>
-              <h1 className={`text-4xl font-normal font-serif ${
+              <h1 className={`text-3xl sm:text-4xl md:text-5xl font-normal font-serif ${
                 theme === 'dark' ? 'text-white' : 'text-black'
               }`}>
                 Creator Studio
@@ -263,12 +263,12 @@ export default function Creator() {
             <div>
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h2 className={`text-2xl font-normal font-serif mb-1 ${
+                  <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal font-serif mb-2 ${
                     theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
                     Published Content
                   </h2>
-                  <p className={`text-sm font-sans ${
+                  <p className={`text-sm sm:text-base font-sans ${
                     theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                   }`}>
                     {blogList.length} {blogList.length === 1 ? 'article' : 'articles'} in repository
@@ -287,12 +287,12 @@ export default function Creator() {
                 <div className={`text-center py-20 rounded-2xl border-2 border-dashed ${
                   theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
                 }`}>
-                  <p className={`text-lg font-serif mb-2 ${
+                  <p className={`text-base sm:text-lg font-serif mb-2 ${
                     theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                   }`}>
                     No articles yet
                   </p>
-                  <p className={`text-sm font-sans ${
+                  <p className={`text-sm sm:text-base font-sans ${
                     theme === 'dark' ? 'text-gray-500' : 'text-gray-500'
                   }`}>
                     Create your first blog post to get started
@@ -311,12 +311,12 @@ export default function Creator() {
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
-                          <h3 className={`font-medium font-sans text-lg mb-1 ${
+                          <h3 className={`font-medium font-sans text-base sm:text-lg mb-1 ${
                             theme === 'dark' ? 'text-white' : 'text-black'
                           }`}>
                             {blog.name}
                           </h3>
-                          <p className={`text-sm font-mono ${
+                          <p className={`text-xs sm:text-sm font-mono ${
                             theme === 'dark' ? 'text-gray-500' : 'text-gray-500'
                           }`}>
                             /blog/{blog.name}
@@ -359,12 +359,12 @@ export default function Creator() {
             <div>
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h2 className={`text-2xl font-normal font-serif mb-1 ${
+                  <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal font-serif mb-2 ${
                     theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
                     {mode === 'create' ? 'New Article' : 'Edit Article'}
                   </h2>
-                  <p className={`text-sm font-sans ${
+                  <p className={`text-sm sm:text-base font-sans ${
                     theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                   }`}>
                     {mode === 'create' ? 'Write and see your content come to life in real-time' : `Editing: ${editingSlug}`}
@@ -418,13 +418,13 @@ export default function Creator() {
                         </span>
                       )}
                     </div>
-                    <h3 className={`text-3xl font-serif font-normal ${
+                    <h3 className={`text-2xl sm:text-3xl md:text-4xl font-serif font-normal ${
                       theme === 'dark' ? 'text-white' : 'text-black'
                     }`}>
                       {title || 'Untitled Article'}
                     </h3>
                     {date && (
-                      <p className={`text-sm mt-2 font-sans ${
+                      <p className={`text-xs sm:text-sm mt-2 font-sans ${
                         theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                       }`}>
                         {date} {readTime && `· ${readTime}`}
@@ -465,7 +465,7 @@ export default function Creator() {
                           }`}>
                             1
                           </div>
-                          <h3 className={`text-lg font-semibold font-sans ${
+                          <h3 className={`text-base sm:text-lg font-semibold font-sans ${
                             theme === 'dark' ? 'text-white' : 'text-black'
                           }`}>
                             Article Information

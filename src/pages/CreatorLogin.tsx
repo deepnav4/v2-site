@@ -38,15 +38,15 @@ export default function CreatorLogin() {
             {/* Left Side - Information */}
             <div>
               <div className="mb-12">
-                <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-6 font-sans font-medium">
+                <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">
                   SERVERLESS CONTENT PLATFORM
                 </p>
-                <h1 className={`text-5xl md:text-6xl font-normal mb-6 font-serif leading-tight ${
+                <h1 className={`text-3xl sm:text-4xl md:text-5xl font-normal mb-4 sm:mb-6 font-serif leading-tight ${
                   theme === 'dark' ? 'text-white' : 'text-black'
                 }`}>
                   Git-Powered<br />Creator Studio
                 </h1>
-                <p className={`text-lg font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                <p className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                   A serverless CMS built on GitHub's infrastructure. Write, publish, and manage content 
                   with zero server costs and infinite scalability.
                 </p>
@@ -55,7 +55,7 @@ export default function CreatorLogin() {
               {/* Architecture Highlights */}
               <div className="space-y-6 mb-12">
                 <div>
-                  <h2 className={`text-2xl font-normal mb-6 font-serif ${
+                  <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-6 font-serif ${
                     theme === 'dark' ? 'text-white' : 'text-black'
                   }`}>
                     How It Works
@@ -73,12 +73,12 @@ export default function CreatorLogin() {
                         <span className="text-lg font-bold font-mono">1</span>
                       </div>
                       <div>
-                        <h3 className={`font-semibold mb-1 font-sans ${
+                        <h3 className={`text-sm sm:text-base font-semibold mb-1 font-sans ${
                           theme === 'dark' ? 'text-white' : 'text-black'
                         }`}>
                           Git-Based Storage
                         </h3>
-                        <p className={`text-sm font-sans ${
+                        <p className={`text-xs sm:text-sm font-sans ${
                           theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                         }`}>
                           Content stored as markdown files in GitHub repository. Version control included automatically.
@@ -97,12 +97,12 @@ export default function CreatorLogin() {
                         <span className="text-lg font-bold font-mono">2</span>
                       </div>
                       <div>
-                        <h3 className={`font-semibold mb-1 font-sans ${
+                        <h3 className={`text-sm sm:text-base font-semibold mb-1 font-sans ${
                           theme === 'dark' ? 'text-white' : 'text-black'
                         }`}>
                           Automatic Deployment
                         </h3>
-                        <p className={`text-sm font-sans ${
+                        <p className={`text-xs sm:text-sm font-sans ${
                           theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                         }`}>
                           Push to main branch triggers Vercel rebuild. Content goes live in under 60 seconds.
@@ -121,12 +121,12 @@ export default function CreatorLogin() {
                         <span className="text-lg font-bold font-mono">3</span>
                       </div>
                       <div>
-                        <h3 className={`font-semibold mb-1 font-sans ${
+                        <h3 className={`text-sm sm:text-base font-semibold mb-1 font-sans ${
                           theme === 'dark' ? 'text-white' : 'text-black'
                         }`}>
                           Zero Infrastructure
                         </h3>
-                        <p className={`text-sm font-sans ${
+                        <p className={`text-xs sm:text-sm font-sans ${
                           theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                         }`}>
                           No databases, no servers, no maintenance. Static files served from edge network globally.
@@ -139,12 +139,12 @@ export default function CreatorLogin() {
 
               {/* What You Can Do */}
               <div>
-                <h2 className={`text-xl font-normal mb-4 font-serif ${
+                <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 font-serif ${
                   theme === 'dark' ? 'text-white' : 'text-black'
                 }`}>
                   Creator Capabilities
                 </h2>
-                <ul className={`space-y-3 font-sans text-sm ${
+                <ul className={`space-y-3 font-sans text-xs sm:text-sm ${
                   theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                 }`}>
                   <li className="flex items-center gap-3">
@@ -186,12 +186,12 @@ export default function CreatorLogin() {
                   </div>
                 </div>
                 
-                <h2 className={`text-2xl font-serif font-normal text-center mb-2 ${
+                <h2 className={`text-xl sm:text-2xl md:text-3xl font-serif font-normal text-center mb-2 ${
                   theme === 'dark' ? 'text-white' : 'text-black'
                 }`}>
                   Creator Access
                 </h2>
-                <p className={`text-center text-sm mb-8 font-sans ${
+                <p className={`text-center text-xs sm:text-sm mb-8 font-sans ${
                   theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                 }`}>
                   Authenticate to access content management
