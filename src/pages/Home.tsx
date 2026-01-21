@@ -88,7 +88,7 @@ export default function Home() {
           
           <div className="flex flex-row gap-2 sm:gap-4 max-w-[260px] sm:max-w-none">
             <a 
-              href="https://drive.google.com/file/d/1eHJiTlWrVIQ0Bp_LMxIZODbDuqINp9F3/view" 
+              href="https://drive.google.com/file/d/1sxmW7jDX1WN7VbJOK3_y95XuHb59iooh/view?usp=sharing" 
               target="_blank"
               rel="noopener noreferrer"
               className={`flex-1 sm:flex-none sm:px-6 px-2 py-2.5 sm:py-3 rounded-lg transition-all duration-200 font-sans font-medium inline-flex items-center justify-center gap-1 text-xs sm:text-base ${
