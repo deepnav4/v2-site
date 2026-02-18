@@ -1,6 +1,6 @@
-# Portfolio Website Clone
+# Portfolio Website 
 
-A modern developer portfolio and blog built with React, TypeScript, and Tailwind CSS, inspired by screenager.dev.
+A modern developer portfolio and blog built with React, TypeScript, and Tailwind CSS.
 
 Currently, two official plugins are available:
 
