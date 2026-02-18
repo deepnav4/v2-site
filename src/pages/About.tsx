@@ -63,7 +63,7 @@ export default function About() {
           {/* Introduction */}
           <section>
             <p className={`text-sm sm:text-base leading-relaxed mb-4 font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-              I'm Navdeep Singh, an Information Technology student at NIT Jalandhar (CGPA: 8.33) who builds scalable web applications 
+              I'm Navdeep Singh, an Information Technology student at NIT Jalandhar (CGPA: 8.35) who builds scalable web applications 
               and explores full-stack development. I believe in learning by building - from Dockerized microservices to real-time 
               collaborative tools.
             </p>
