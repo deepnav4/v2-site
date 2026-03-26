@@ -172,7 +172,7 @@ function Competitive() {
                       <ResponsiveContainer width="100%" height="100%">
                         {chartType === 'area' ? (
                           <AreaChart
-                            data={contestData.contestParticipation.map((contest, idx) => ({
+                            data={(contestData?.contestParticipation || []).map((contest, idx) => ({
                               name: `#${idx + 1}`,
                               rating: Math.round(contest.rating),
                               rank: contest.ranking,
@@ -254,7 +254,7 @@ function Competitive() {
                           </AreaChart>
                         ) : chartType === 'line' ? (
                           <RechartsLine
-                            data={contestData.contestParticipation.map((contest, idx) => ({
+                            data={(contestData?.contestParticipation || []).map((contest, idx) => ({
                               name: `#${idx + 1}`,
                               rating: Math.round(contest.rating),
                               rank: contest.ranking,
@@ -326,7 +326,7 @@ function Competitive() {
                           </RechartsLine>
                         ) : (
                           <RechartsBar
-                            data={contestData.contestParticipation.map((contest, idx) => ({
+                            data={(contestData?.contestParticipation || []).map((contest, idx) => ({
                               name: `#${idx + 1}`,
                               rating: Math.round(contest.rating),
                               rank: contest.ranking,
@@ -453,12 +453,12 @@ function Competitive() {
                       <p className={`text-2xl sm:text-3xl font-semibold font-sans mb-1 ${
                         theme === 'dark' ? 'text-white' : 'text-black'
                       }`}>
-                        {contestData.contestTopPercentage.toFixed(1)}%
+                        {(contestData?.contestTopPercentage || 0).toFixed(1)}%
                       </p>
                       <p className={`text-[10px] sm:text-xs font-sans ${
                         theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
                       }`}>
-                        of {(contestData.totalParticipants / 1000).toFixed(0)}k users
+                        of {((contestData?.totalParticipants || 0) / 1000).toFixed(0)}k users
                       </p>
                     </div>
                   </div>
@@ -472,7 +472,7 @@ function Competitive() {
                     Recent Contests
                   </h3>
                   <div className="space-y-2.5 sm:space-y-3">
-                    {contestData.contestParticipation.slice().reverse().map((contest, idx) => {
+                    {(contestData?.contestParticipation || []).slice().reverse().map((contest, idx) => {
                       const TrendIcon = contest.trendDirection === 'UP' ? TrendingUp : 
                                        contest.trendDirection === 'DOWN' ? TrendingDown : Minus;
                       const trendColor = contest.trendDirection === 'UP' ? 'text-emerald-500' : 

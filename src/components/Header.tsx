@@ -3,6 +3,14 @@ import { useState } from 'react';
 import { Home, Briefcase, FileText, BarChart3, User, Moon, Sun, Search, Clock, Edit3, Menu, X } from 'lucide-react';
 import { useTheme } from '../store/themeStore';
 import UniversalSearch from './UniversalSearch';
+import AnimatedIcon from './AnimatedIcon';
+import homeIcon from '../assets/lottie/home.json';
+import assignmentIcon from '../assets/lottie/assignment.json';
+import workIcon from '../assets/lottie/work.json';
+import graphIcon from '../assets/lottie/graph.json';
+import profileIcon from '../assets/lottie/profile.json';
+import searchIcon from '../assets/lottie/search.json';
+import clockIcon from '../assets/lottie/clock.json';
 
 export default function Header() {
   const location = useLocation();
@@ -212,170 +220,159 @@ export default function Header() {
       </header>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex fixed left-4 top-0 h-screen w-20 flex-col items-center py-8 z-50 group">
-      <div className={`absolute inset-0 border-r opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-r-2xl ${
-        theme === 'dark' 
-          ? 'bg-[#0a0a0a] border-[#1a1a1a]' 
-          : 'bg-gray-50 border-gray-200'
-      }`}></div>
-      {/* Main Navigation Icons */}
-      <nav className="relative flex-1 flex flex-col items-center gap-2 mt-8">
-        <Link 
-          to="/" 
-          className={`relative p-3 rounded-xl transition-all duration-200 ${
-            isActive('/') 
-              ? 'bg-emerald-500/10 text-emerald-500' 
-              : theme === 'dark'
-                ? 'text-gray-500 hover:bg-[#151515] hover:text-emerald-500'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-emerald-500'
-          }`}
-          title="Home"
-        >
-          <Home className="w-5 h-5" strokeWidth={1.5} />
-        </Link>
-
-        <Link 
-          to="/projects" 
-          className={`relative p-3 rounded-xl transition-all duration-200 ${
-            isActive('/projects') 
-              ? 'bg-emerald-500/10 text-emerald-500' 
-              : theme === 'dark'
-                ? 'text-gray-500 hover:bg-[#151515] hover:text-emerald-500'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-emerald-500'
-          }`}
-          title="Projects"
-        >
-          <Briefcase className="w-5 h-5" strokeWidth={1.5} />
-        </Link>
-
-        <Link 
-          to="/blog" 
-          className={`relative p-3 rounded-xl transition-all duration-200 ${
-            isActive('/blog') 
-              ? 'bg-emerald-500/10 text-emerald-500' 
-              : theme === 'dark'
-                ? 'text-gray-500 hover:bg-[#151515] hover:text-emerald-500'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-emerald-500'
-          }`}
-          title="Blog"
-        >
-          <FileText className="w-5 h-5" strokeWidth={1.5} />
-        </Link>
-
-        <Link 
-          to="/competitive" 
-          className={`relative p-3 rounded-xl transition-all duration-200 ${
-            isActive('/competitive') 
-              ? 'bg-emerald-500/10 text-emerald-500' 
-              : theme === 'dark'
-                ? 'text-gray-500 hover:bg-[#151515] hover:text-emerald-500'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-emerald-500'
-          }`}
-          title="Competitive Programming"
-        >
-          <BarChart3 className="w-5 h-5" strokeWidth={1.5} />
-        </Link>
-
-        <Link 
-          to="/about" 
-          className={`relative p-3 rounded-xl transition-all duration-200 ${
-            isActive('/about') 
-              ? 'bg-emerald-500/10 text-emerald-500' 
-              : theme === 'dark'
-                ? 'text-gray-500 hover:bg-[#151515] hover:text-emerald-500'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-emerald-500'
-          }`}
-          title="About"
-        >
-          <User className="w-5 h-5" strokeWidth={1.5} />
-        </Link>
-
-        <Link 
-          to="/creator" 
-          className={`relative p-3 rounded-xl transition-all duration-200 ${
-            isActive('/creator') 
-              ? 'bg-emerald-500/10 text-emerald-500' 
-              : theme === 'dark'
-                ? 'text-gray-500 hover:bg-[#151515] hover:text-emerald-500'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-emerald-500'
-          }`}
-          title="Creator"
-        >
-          <Edit3 className="w-5 h-5" strokeWidth={1.5} />
-        </Link>
-
-        {/* <a 
-          href="https://v2.navdeep.site" 
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`relative p-3 rounded-xl transition-all duration-200 ${
-            theme === 'dark'
-              ? 'text-gray-500 hover:bg-[#151515] hover:text-emerald-500'
-              : 'text-gray-600 hover:bg-gray-100 hover:text-emerald-500'
-          }`}
-          title="Previous Site"
-        >
-          <ExternalLink className="w-5 h-5" strokeWidth={1.5} />
-        </a> */}
-      </nav>
-
-      {/* Bottom Utility Icons */}
-      <div className="relative flex flex-col items-center gap-2 mb-4">
-        <div className={`w-10 h-px mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${
-          theme === 'dark' ? 'bg-[#1a1a1a]' : 'bg-gray-200'
+      <aside className="hidden lg:flex fixed left-8 top-1/2 -translate-y-1/2 flex-col items-center z-50 group">
+        {/* Background container - only visible on hover */}
+        <div className={`absolute -inset-3 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 ${
+          theme === 'dark'
+            ? 'bg-[#0a0a0a]/90 border border-[#1a1a1a] backdrop-blur-sm'
+            : 'bg-white/90 border border-gray-200 backdrop-blur-sm'
         }`}></div>
-        
-        <button 
-          onClick={(e) => toggleTheme(e)}
-          className={`relative p-3 rounded-xl transition-all duration-200 overflow-hidden ${
-            theme === 'dark'
-              ? 'text-gray-600 hover:bg-[#151515] hover:text-gray-400'
-              : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'
-          }`}
-          title="Toggle theme"
-        >
-          {theme === 'dark' ? (
-            <Moon className="w-5 h-5" strokeWidth={1.5} />
-          ) : (
-            <Sun className="w-5 h-5" strokeWidth={1.5} />
-          )}
-        </button>
 
-        <button 
-          onClick={() => setIsSearchOpen(true)}
-          className={`relative p-3 rounded-xl transition-all duration-200 ${
-            theme === 'dark'
-              ? 'text-gray-600 hover:bg-[#151515] hover:text-gray-400'
-              : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'
-          }`}
-          title="Search (⌘K)"
-        >
-          <Search className="w-5 h-5" strokeWidth={1.5} />
-        </button>
+        {/* Main Navigation Icons */}
+        <nav className="relative flex flex-col items-center gap-1">
+          <Link
+            to="/"
+            className={`relative p-3 rounded-xl transition-all duration-200 group ${
+              isActive('/')
+                ? 'text-emerald-500'
+                : theme === 'dark'
+                  ? 'text-gray-500 hover:text-emerald-500'
+                  : 'text-gray-600 hover:text-emerald-500'
+            }`}
+            title="Home"
+          >
+            <AnimatedIcon src={homeIcon} size={24} className="w-6 h-6" trigger="hover" isActive={isActive('/')} theme={theme} />
+          </Link>
 
-        <a 
-          href="https://v2.navdeep.site"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`relative p-3 rounded-xl transition-all duration-200 ${
-            theme === 'dark'
-              ? 'text-gray-600 hover:bg-[#151515] hover:text-gray-400'
-              : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700'
-          }`}
-          title="History"
-        >
-          <Clock className="w-5 h-5" strokeWidth={1.5} />
-        </a>
-      </div>
+          <Link
+            to="/projects"
+            className={`relative p-3 rounded-xl transition-all duration-200 ${
+              isActive('/projects')
+                ? 'text-emerald-500'
+                : theme === 'dark'
+                  ? 'text-gray-500 hover:text-emerald-500'
+                  : 'text-gray-600 hover:text-emerald-500'
+            }`}
+            title="Projects"
+          >
+            <AnimatedIcon src={workIcon} size={24} className="w-6 h-6" trigger="hover" isActive={isActive('/projects')} theme={theme} />
+          </Link>
 
-      {/* Universal Search Modal */}
-      {isSearchOpen && (
-        <UniversalSearch 
-          isOpen={isSearchOpen} 
-          onClose={() => setIsSearchOpen(false)} 
-        />
-      )}
-    </aside>
+          <Link
+            to="/blog"
+            className={`relative p-3 rounded-xl transition-all duration-200 ${
+              isActive('/blog')
+                ? 'text-emerald-500'
+                : theme === 'dark'
+                  ? 'text-gray-500 hover:text-emerald-500'
+                  : 'text-gray-600 hover:text-emerald-500'
+            }`}
+            title="Blog"
+          >
+            <AnimatedIcon src={assignmentIcon} size={24} className="w-6 h-6" trigger="hover" isActive={isActive('/blog')} theme={theme} />
+          </Link>
+
+          <Link
+            to="/competitive"
+            className={`relative p-3 rounded-xl transition-all duration-200 ${
+              isActive('/competitive')
+                ? 'text-emerald-500'
+                : theme === 'dark'
+                  ? 'text-gray-500 hover:text-emerald-500'
+                  : 'text-gray-600 hover:text-emerald-500'
+            }`}
+            title="Competitive Programming"
+          >
+            <AnimatedIcon src={graphIcon} size={24} className="w-6 h-6" trigger="hover" isActive={isActive('/competitive')} theme={theme} />
+          </Link>
+
+          <Link
+            to="/about"
+            className={`relative p-3 rounded-xl transition-all duration-200 ${
+              isActive('/about')
+                ? 'text-emerald-500'
+                : theme === 'dark'
+                  ? 'text-gray-500 hover:text-emerald-500'
+                  : 'text-gray-600 hover:text-emerald-500'
+            }`}
+            title="About"
+          >
+            <AnimatedIcon src={profileIcon} size={24} className="w-6 h-6" trigger="hover" isActive={isActive('/about')} theme={theme} />
+          </Link>
+
+          <Link
+            to="/creator"
+            className={`relative p-3 rounded-xl transition-all duration-200 ${
+              isActive('/creator')
+                ? 'text-emerald-500'
+                : theme === 'dark'
+                  ? 'text-gray-500 hover:text-emerald-500'
+                  : 'text-gray-600 hover:text-emerald-500'
+            }`}
+            title="Creator"
+          >
+            <div style={{ filter: isActive('/creator') ? 'brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(500%) hue-rotate(125deg)' : (theme === 'dark' ? 'brightness(0) saturate(100%) invert(1)' : 'brightness(0)') }}>
+              <Edit3 className="w-6 h-6" strokeWidth={1.5} />
+            </div>
+          </Link>
+
+          {/* Divider */}
+          <div className={`w-6 h-px my-2 transition-opacity duration-300 ${
+            theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
+          }`}></div>
+
+          <button
+            onClick={(e) => toggleTheme(e)}
+            className={`relative p-3 rounded-xl transition-all duration-200 ${
+              theme === 'dark'
+                ? 'text-gray-600 hover:text-gray-400'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
+            style={{ filter: theme === 'dark' ? 'brightness(0) saturate(100%) invert(1)' : 'brightness(0)' }}
+            title="Toggle theme"
+          >
+            {theme === 'dark' ? (
+              <Moon className="w-6 h-6" strokeWidth={1.5} />
+            ) : (
+              <Sun className="w-6 h-6" strokeWidth={1.5} />
+            )}
+          </button>
+
+          <button
+            onClick={() => setIsSearchOpen(true)}
+            className={`relative p-3 rounded-xl transition-all duration-200 ${
+              theme === 'dark'
+                ? 'text-gray-600 hover:text-gray-400'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
+            title="Search (⌘K)"
+          >
+            <AnimatedIcon src={searchIcon} size={24} className="w-6 h-6" trigger="click" theme={theme} />
+          </button>
+
+          <a
+            href="https://v2.navdeep.site"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`relative p-3 rounded-xl transition-all duration-200 ${
+              theme === 'dark'
+                ? 'text-gray-600 hover:text-gray-400'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
+            title="History"
+          >
+            <AnimatedIcon src={clockIcon} size={24} className="w-6 h-6" trigger="hover" theme={theme} />
+          </a>
+        </nav>
+
+        {/* Universal Search Modal */}
+        {isSearchOpen && (
+          <UniversalSearch
+            isOpen={isSearchOpen}
+            onClose={() => setIsSearchOpen(false)}
+          />
+        )}
+      </aside>
 
     {/* Universal Search Modal */}
     {isSearchOpen && (

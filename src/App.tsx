@@ -24,9 +24,9 @@ function App() {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
-          <Route path="/competitive" element={<Competitive />} />
-          <Route path="/creator/login" element={<CreatorLogin />} />
-          <Route path="/creator" element={<Creator />} />
+            <Route path="/competitive" element={<Competitive />} />
+            <Route path="/creator/login" element={<CreatorLogin />} />
+            <Route path="/creator" element={<Creator />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
