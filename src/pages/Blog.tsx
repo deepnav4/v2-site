@@ -3,18 +3,24 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '../store/themeStore';
 import { blogPosts, allTags } from '../data/blogPosts';
 import SEO from '../components/SEO';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function Blog() {
   const { theme } = useTheme();
   const [selectedTag, setSelectedTag] = useState<string>('All');
-  
-  const filteredPosts = selectedTag === 'All' 
-    ? blogPosts 
+
+  // Scroll reveal refs
+  const headerRef = useScrollReveal();
+  const tagsRef = useScrollReveal();
+  const postsRef = useScrollReveal();
+
+  const filteredPosts = selectedTag === 'All'
+    ? blogPosts
     : blogPosts.filter(post => post.tags.includes(selectedTag));
 
   return (
     <>
-      <SEO 
+      <SEO
         title={selectedTag !== 'All' ? `${selectedTag} - Blog` : 'Blog - Navdeep Singh'}
         description={selectedTag !== 'All' ? `Articles tagged with ${selectedTag}` : 'Thoughts on web development, algorithms, system design, and software engineering.'}
         url={`https://navdeep.dev/blog${selectedTag !== 'All' ? `/tags/${selectedTag}` : ''}`}
@@ -22,20 +28,26 @@ export default function Blog() {
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
       <div className="container py-12 sm:py-16">
         {/* Header Section */}
-        <div className="mb-10 sm:mb-12 md:mb-16">
-          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-4 sm:mb-6 font-sans font-medium">
+        <div
+          ref={headerRef.ref}
+          className={`mb-10 sm:mb-12 md:mb-16 reveal ${headerRef.isVisible ? 'visible' : ''}`}
+        >
+          <p className={`text-xs uppercase tracking-[0.2em] text-emerald-500 mb-4 sm:mb-6 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
             LATE NIGHT THINKING
           </p>
-          <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Things I've figured out
           </h1>
-          <p className={`text-base sm:text-lg font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-base sm:text-lg font-sans reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
             Notes on systems, algorithms, and patterns worth remembering
           </p>
         </div>
 
         {/* Tags Filter */}
-        <div className="mb-8 sm:mb-10 md:mb-12">
+        <div
+          ref={tagsRef.ref}
+          className={`mb-8 sm:mb-10 md:mb-12 reveal stagger-4 ${tagsRef.isVisible ? 'visible' : ''}`}
+        >
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setSelectedTag('All')}
@@ -68,16 +80,20 @@ export default function Blog() {
         </div>
 
         {/* Blog Posts List */}
-        <div className="space-y-0">
-          {filteredPosts.map(post => (
-            <Link 
+        <div
+          ref={postsRef.ref}
+          className={`space-y-0 reveal ${postsRef.isVisible ? 'visible' : ''}`}
+        >
+          {filteredPosts.map((post, index) => (
+            <Link
               key={post.id}
               to={`/blog/${post.slug}`}
-              className={`block py-6 sm:py-8 border-b transition-colors duration-200 group ${
-                theme === 'dark' 
-                  ? 'border-gray-800 hover:border-gray-700' 
+              className={`block py-6 sm:py-8 border-b transition-colors duration-200 group reveal ${postsRef.isVisible ? 'visible' : ''} ${
+                theme === 'dark'
+                  ? 'border-gray-800 hover:border-gray-700'
                   : 'border-gray-200 hover:border-gray-300'
               }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
               <article>
                 <div className="flex flex-wrap items-baseline gap-2 sm:gap-3 mb-2 sm:mb-3">

@@ -1,9 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useTheme } from '../store/themeStore';
-import { TrendingUp, Target, Sparkles, BookOpen, TrendingDown, Minus, LineChart, BarChart3, Activity } from 'lucide-react';
+import { TrendingUp, Target, Sparkles, BookOpen, TrendingDown, Minus, LineChart, BarChart3, Activity, Gauge, Zap, Clock, ChevronRight, Info } from 'lucide-react';
 import SEO from '../components/SEO';
 import { getLeetCodeContestData, type LeetCodeContestData } from '../services/leetcodeService';
 import { LineChart as RechartsLine, BarChart as RechartsBar, AreaChart, Area, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useScrollReveal } from '../hooks/useScrollReveal';
+import {
+  calculateLadderMetrics,
+  convertLeetCodeContests,
+  getVolatilityLabel,
+  getSuccessRateLabel,
+  formatSuccessRate,
+  getDifficultyLabel,
+  getDifficultyColor,
+  formatDifficultyRange,
+  formatTime,
+  type LadderMetrics,
+} from '../utils/cfladder';
 
 function Competitive() {
   const { theme } = useTheme();
@@ -11,6 +24,22 @@ function Competitive() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [chartType, setChartType] = useState<'line' | 'bar' | 'area'>('area');
+
+  // Scroll reveal refs
+  const headerRef = useScrollReveal();
+  const philosophyRef = useScrollReveal();
+  const contestRef = useScrollReveal();
+  const ladderRef = useScrollReveal();
+
+  // Calculate ladder metrics from contest data
+  const ladderMetrics = useMemo<LadderMetrics | null>(() => {
+    if (!contestData?.contestParticipation?.length) return null;
+
+    const contests = convertLeetCodeContests(contestData.contestParticipation);
+    const currentRating = contestData.contestRating || 1500;
+
+    return calculateLadderMetrics(contests, currentRating, ['dynamic programming', 'graphs', 'trees']);
+  }, [contestData]);
 
   useEffect(() => {
     async function fetchData() {
@@ -31,7 +60,7 @@ function Competitive() {
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Competitive Programming - Navdeep Singh"
         description="My journey in competitive programming and data structures & algorithms. Daily practice, problem-solving insights, and continuous learning."
         url="https://navdeep.dev/competitive"
@@ -39,26 +68,31 @@ function Competitive() {
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           {/* Header */}
-          <div className="mb-8 sm:mb-12 lg:mb-16">
-            <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">
+          <div
+            ref={headerRef.ref}
+            className={`mb-8 sm:mb-12 lg:mb-16 reveal ${headerRef.isVisible ? 'visible' : ''}`}
+          >
+            <p className={`text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
               COMPETITIVE PROGRAMMING
             </p>
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl font-normal mb-4 sm:mb-6 font-serif leading-tight ${
+            <h1 className={`text-3xl sm:text-4xl md:text-5xl font-normal mb-4 sm:mb-6 font-serif leading-tight reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${
               theme === 'dark' ? 'text-white' : 'text-black'
             }`}>
               The Journey of Problem Solving
             </h1>
-            <p className={`text-sm sm:text-base font-sans max-w-3xl leading-relaxed ${
+            <p className={`text-sm sm:text-base font-sans max-w-3xl leading-relaxed reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${
               theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
             }`}>
-              Competitive programming isn't just about solving problems—it's about developing a problem-solving 
-              mindset, learning to think algorithmically, and continuously pushing your boundaries. Every bug is a 
+              Competitive programming isn't just about solving problems—it's about developing a problem-solving
+              mindset, learning to think algorithmically, and continuously pushing your boundaries. Every bug is a
               lesson, every accepted solution is a victory, and every new concept is a tool in your arsenal.
             </p>
           </div>
 
           {/* Philosophy Section */}
-          <div className={`mb-8 sm:mb-12 lg:mb-16 p-4 sm:p-6 lg:p-8 rounded-lg border ${
+          <div
+            ref={philosophyRef.ref}
+            className={`mb-8 sm:mb-12 lg:mb-16 p-4 sm:p-6 lg:p-8 rounded-lg border reveal ${philosophyRef.isVisible ? 'visible' : ''} ${
             theme === 'dark' ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50 border-gray-200'
           }`}>
             <div className="flex flex-col sm:flex-row items-start gap-4 mb-4">
@@ -97,7 +131,10 @@ function Competitive() {
           </div>
 
           {/* LeetCode Contest Stats */}
-          <div className="mb-8 sm:mb-12 lg:mb-16">
+          <div
+            ref={contestRef.ref}
+            className={`mb-8 sm:mb-12 lg:mb-16 reveal ${contestRef.isVisible ? 'visible' : ''}`}
+          >
             <div className="mb-6 sm:mb-8">
               <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal font-serif ${
                 theme === 'dark' ? 'text-white' : 'text-black'

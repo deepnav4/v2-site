@@ -3,18 +3,24 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '../store/themeStore';
 import { projects } from '../data/projects';
 import SEO from '../components/SEO';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function Projects() {
   const { theme } = useTheme();
   const [filter, setFilter] = useState<'all' | 'featured' | 'personal' | 'hackathon'>('all');
-  
-  const filteredProjects = filter === 'all' 
-    ? projects 
+
+  // Scroll reveal refs
+  const headerRef = useScrollReveal();
+  const filtersRef = useScrollReveal();
+  const projectsRef = useScrollReveal();
+
+  const filteredProjects = filter === 'all'
+    ? projects
     : projects.filter(p => p.category === filter);
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Projects - Navdeep Singh"
         description="A collection of web applications, tools, and open-source projects built with modern technologies like React, Node.js, TypeScript, and more."
         url="https://navdeep.site/projects"
@@ -22,20 +28,26 @@ export default function Projects() {
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
       <div className="container py-12 sm:py-16">
         <div className="mb-10 sm:mb-12 md:mb-16">
-          <div className="mb-6">
-            <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <div
+            ref={headerRef.ref}
+            className={`mb-6 reveal ${headerRef.isVisible ? 'visible' : ''}`}
+          >
+            <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               Projects
             </h1>
-            <p className={`text-sm sm:text-base font-sans mb-3 sm:mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-sm sm:text-base font-sans mb-3 sm:mb-4 reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
               Complete collection spanning different domains and technologies
             </p>
-            <p className={`text-xs sm:text-sm font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
+            <p className={`text-xs sm:text-sm font-sans reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
               {filteredProjects.length} projects
             </p>
           </div>
 
           {/* Filter Buttons */}
-          <div className="flex flex-wrap gap-2 sm:gap-3">
+          <div
+            ref={filtersRef.ref}
+            className={`flex flex-wrap gap-2 sm:gap-3 reveal stagger-4 ${filtersRef.isVisible ? 'visible' : ''}`}
+          >
             <button
               onClick={() => setFilter('all')}
               className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 font-sans ${
@@ -88,9 +100,16 @@ export default function Projects() {
         </div>
 
         {/* Projects List */}
-        <div className="space-y-6 sm:space-y-8">
+        <div
+          ref={projectsRef.ref}
+          className={`space-y-6 sm:space-y-8 reveal ${projectsRef.isVisible ? 'visible' : ''}`}
+        >
           {filteredProjects.map((project, index) => (
-            <div key={project.id} className={`pb-6 sm:pb-8 ${index !== filteredProjects.length - 1 ? 'border-b' : ''} ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
+            <div
+              key={project.id}
+              className={`pb-6 sm:pb-8 reveal ${projectsRef.isVisible ? 'visible' : ''} ${index !== filteredProjects.length - 1 ? 'border-b' : ''} ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
               <div className="mb-3 sm:mb-4 flex items-start gap-3 sm:gap-4">
                 <span className={`text-xs sm:text-sm font-mono flex-shrink-0 ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>
                   0{index + 1}

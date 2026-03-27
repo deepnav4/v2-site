@@ -6,6 +6,7 @@ import { ArrowLeft, Copy, Check } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import SEO from '../components/SEO';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function BlogPost() {
   const { theme } = useTheme();
@@ -15,6 +16,9 @@ export default function BlogPost() {
   const [showTOC, setShowTOC] = useState(false);
   const [headings, setHeadings] = useState<{ id: string; text: string; level: number }[]>([]);
   const [markdownContent, setMarkdownContent] = useState('');
+
+  // Scroll reveal refs
+  const headerRef = useScrollReveal();
 
   useEffect(() => {
     const updateScrollProgress = () => {
@@ -290,16 +294,19 @@ export default function BlogPost() {
         </div>
 
         <article className="max-w-4xl">
-            <header className="mb-10 sm:mb-12 md:mb-16">
-              <div className={`flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+            <header
+              ref={headerRef.ref}
+              className={`mb-10 sm:mb-12 md:mb-16 reveal ${headerRef.isVisible ? 'visible' : ''}`}
+            >
+              <div className={`flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6 text-xs sm:text-sm font-sans reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
                 <time>{post.date}</time>
                 <span className={theme === 'dark' ? 'text-gray-700' : 'text-gray-400'}>•</span>
                 <span>{post.readTime}</span>
                 <span className={theme === 'dark' ? 'text-gray-700' : 'text-gray-400'}>•</span>
                 <span className="font-mono">{post.category}</span>
               </div>
-            
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mb-6 sm:mb-8 leading-tight font-serif ${
+
+            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mb-6 sm:mb-8 leading-tight font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${
               theme === 'dark' ? 'text-white' : 'text-black'
             }`}>
               {post.title}

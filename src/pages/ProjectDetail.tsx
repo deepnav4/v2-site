@@ -5,12 +5,16 @@ import { projects } from '../data/projects';
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function ProjectDetail() {
   const { theme } = useTheme();
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find(p => p.slug === slug);
   const [markdownContent, setMarkdownContent] = useState('');
+
+  // Scroll reveal refs
+  const headerRef = useScrollReveal();
 
   useEffect(() => {
     // Load markdown content for project
@@ -59,9 +63,12 @@ export default function ProjectDetail() {
         </div>
 
         <article className="max-w-4xl">
-          <header className="mb-10 sm:mb-12 md:mb-16">
+          <header
+            ref={headerRef.ref}
+            className={`mb-10 sm:mb-12 md:mb-16 reveal ${headerRef.isVisible ? 'visible' : ''}`}
+          >
             {/* Category Badge */}
-            <div className="mb-4 sm:mb-6">
+            <div className={`mb-4 sm:mb-6 reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
               <span className={`inline-block px-2.5 sm:px-3 py-1 text-[10px] sm:text-xs rounded-lg font-mono ${
                 theme === 'dark'
                   ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
@@ -72,7 +79,7 @@ export default function ProjectDetail() {
             </div>
 
             {/* Project Title */}
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mb-6 sm:mb-8 leading-tight font-serif ${
+            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal mb-6 sm:mb-8 leading-tight font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${
               theme === 'dark' ? 'text-white' : 'text-black'
             }`}>
               {project.title}

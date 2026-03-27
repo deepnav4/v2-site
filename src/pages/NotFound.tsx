@@ -1,16 +1,24 @@
 import { Link } from 'react-router-dom';
 import { useTheme } from '../store/themeStore';
 import { Home, ArrowLeft } from 'lucide-react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function NotFound() {
   const { theme } = useTheme();
 
+  // Scroll reveal refs
+  const contentRef = useScrollReveal();
+  const linksRef = useScrollReveal();
+
   return (
     <div className={`min-h-screen flex items-center justify-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
       <div className="container">
-        <div className="max-w-2xl mx-auto text-center">
+        <div
+          ref={contentRef.ref}
+          className={`max-w-2xl mx-auto text-center reveal ${contentRef.isVisible ? 'visible' : ''}`}
+        >
           {/* 404 Display */}
-          <div className="mb-8">
+          <div className={`mb-8 reveal stagger-1 ${contentRef.isVisible ? 'visible' : ''}`}>
             <h1 className={`text-9xl font-normal mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               404
             </h1>
@@ -24,15 +32,15 @@ export default function NotFound() {
           </div>
 
           {/* Message */}
-          <h2 className={`text-2xl font-normal mb-4 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h2 className={`text-2xl font-normal mb-4 font-serif reveal stagger-2 ${contentRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Looks like you've wandered off the path
           </h2>
-          <p className={`text-base mb-12 font-sans max-w-md mx-auto ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-base mb-12 font-sans max-w-md mx-auto reveal stagger-3 ${contentRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
             The page you're looking for doesn't exist or has been moved. Let's get you back on track.
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center reveal stagger-4 ${contentRef.isVisible ? 'visible' : ''}`}>
             <Link
               to="/"
               className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-sans text-sm font-medium transition-all ${
@@ -59,13 +67,17 @@ export default function NotFound() {
           </div>
 
           {/* Quick Links */}
-          <div className="mt-16 pt-12 border-t" style={{ borderColor: theme === 'dark' ? '#1f2937' : '#e5e7eb' }}>
-            <p className={`text-xs uppercase tracking-wider mb-6 font-sans font-semibold ${
+          <div
+            ref={linksRef.ref}
+            className={`mt-16 pt-12 border-t reveal ${linksRef.isVisible ? 'visible' : ''}`}
+            style={{ borderColor: theme === 'dark' ? '#1f2937' : '#e5e7eb' }}
+          >
+            <p className={`text-xs uppercase tracking-wider mb-6 font-sans font-semibold reveal stagger-1 ${linksRef.isVisible ? 'visible' : ''} ${
               theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
             }`}>
               Quick Links
             </p>
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className={`flex flex-wrap justify-center gap-6 reveal stagger-2 ${linksRef.isVisible ? 'visible' : ''}`}>
               <Link
                 to="/about"
                 className={`text-sm font-sans transition-colors ${

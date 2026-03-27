@@ -2,13 +2,25 @@ import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../store/themeStore';
 import SEO from '../components/SEO';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function About() {
   const { theme } = useTheme();
-  
+
+  // Scroll reveal refs
+  const headerRef = useScrollReveal();
+  const introRef = useScrollReveal();
+  const drivesRef = useScrollReveal();
+  const buildRef = useScrollReveal();
+  const writeRef = useScrollReveal();
+  const nowRef = useScrollReveal();
+  const stackRef = useScrollReveal();
+  const connectRef = useScrollReveal();
+  const exploreRef = useScrollReveal();
+
   return (
     <>
-      <SEO 
+      <SEO
         title="About - Navdeep Singh"
         description="Information Technology student at NIT Jalandhar. Passionate about web development, algorithms, and building impactful software solutions."
         url="https://navdeep.dev/about"
@@ -16,14 +28,17 @@ export default function About() {
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
       <div className="container py-12 sm:py-16 md:py-24">
         {/* Header Section */}
-        <div className="mb-12 sm:mb-16">
-          <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">
+        <div
+          ref={headerRef.ref}
+          className={`mb-12 sm:mb-16 reveal ${headerRef.isVisible ? 'visible' : ''}`}
+        >
+          <p className={`text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
             ABOUT ME
           </p>
-          <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal mb-4 sm:mb-6 leading-tight font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal mb-4 sm:mb-6 leading-tight font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Navdeep Singh
           </h1>
-          <p className={`text-base sm:text-lg mb-6 sm:mb-8 font-sans ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-base sm:text-lg mb-6 sm:mb-8 font-sans reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
             IT Student · Builder · Problem Solver
           </p>
           
@@ -61,7 +76,10 @@ export default function About() {
         {/* Main Content */}
         <div className="space-y-10 sm:space-y-12 md:space-y-16">
           {/* Introduction */}
-          <section>
+          <section
+            ref={introRef.ref}
+            className={`reveal ${introRef.isVisible ? 'visible' : ''}`}
+          >
             <p className={`text-sm sm:text-base leading-relaxed mb-4 font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
               I'm Navdeep Singh, an Information Technology student at NIT Jalandhar (CGPA: 8.35) who builds scalable web applications 
               and explores full-stack development. I believe in learning by building - from Dockerized microservices to real-time 
@@ -75,7 +93,10 @@ export default function About() {
             </p>
           </section>
 
-          <section>
+          <section
+            ref={drivesRef.ref}
+            className={`reveal ${drivesRef.isVisible ? 'visible' : ''}`}
+          >
             <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               What Drives Me
             </h2>
@@ -100,7 +121,10 @@ export default function About() {
           </div>
         </section>
 
-        <section>
+        <section
+            ref={buildRef.ref}
+            className={`reveal ${buildRef.isVisible ? 'visible' : ''}`}
+          >
           <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             What I Build
           </h2>
@@ -124,7 +148,10 @@ export default function About() {
           </div>
         </section>
 
-        <section>
+        <section
+            ref={writeRef.ref}
+            className={`reveal ${writeRef.isVisible ? 'visible' : ''}`}
+          >
           <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             What I Write About
           </h2>
@@ -143,7 +170,10 @@ export default function About() {
           </div>
         </section>
 
-        <section>
+        <section
+            ref={nowRef.ref}
+            className={`reveal ${nowRef.isVisible ? 'visible' : ''}`}
+          >
           <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Right Now
           </h2>
@@ -161,7 +191,10 @@ export default function About() {
           </div>
         </section>
 
-        <section>
+        <section
+            ref={stackRef.ref}
+            className={`reveal ${stackRef.isVisible ? 'visible' : ''}`}
+          >
           <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             My Stack
           </h2>
@@ -179,7 +212,10 @@ export default function About() {
           </div>
         </section>
 
-        <section>
+        <section
+            ref={connectRef.ref}
+            className={`reveal ${connectRef.isVisible ? 'visible' : ''}`}
+          >
           <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-4 sm:mb-6 font-serif ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Connect
           </h2>
@@ -258,7 +294,10 @@ export default function About() {
           </div>
         </section>
 
-          <section className={`border-t pt-12 sm:pt-16 ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}>
+          <section
+            ref={exploreRef.ref}
+            className={`border-t pt-12 sm:pt-16 reveal ${exploreRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}
+          >
             <h3 className={`text-xs uppercase tracking-[0.2em] mb-4 sm:mb-6 font-sans font-semibold ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
               MORE TO EXPLORE
             </h3>
