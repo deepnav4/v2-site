@@ -70,8 +70,17 @@ export {
   isHighVolatilityTag,
 } from './timer';
 
+// Export problem selection functions
+export type { ScoredProblem, LadderProblem } from './problemSelection';
+export {
+  selectProblems,
+  getProblemId,
+  formatTimerDisplay,
+} from './problemSelection';
+
 // Import for combined analysis
 import type { ContestEntry, LadderMetrics } from './types';
+import type { CFContest } from '../../services/codeforcesService';
 import { calculateVolatility, getConsistencyLevel } from './volatility';
 import { calculateSuccessRateFromChanges, determineTrend } from './successRate';
 import { calibrateDifficulty } from './difficulty';
@@ -174,4 +183,17 @@ export function convertLeetCodeContests(
   }
 
   return entries;
+}
+
+/**
+ * Convert Codeforces contest history to ContestEntry array
+ */
+export function convertCFContests(contests: CFContest[]): ContestEntry[] {
+  return contests.map(c => ({
+    oldRating: c.oldRating,
+    newRating: c.newRating,
+    timestamp: c.ratingUpdateTimeSeconds,
+    contestName: c.contestName,
+    ranking: c.rank,
+  }));
 }

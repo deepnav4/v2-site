@@ -15,7 +15,7 @@
  * - n = number of tags
  */
 
-import type { TimerConfig, ProblemTag } from './types';
+import type { TimerConfig } from './types';
 import { TAG_WEIGHTS, HIGH_VOLATILITY_TAGS } from './types';
 
 /**
