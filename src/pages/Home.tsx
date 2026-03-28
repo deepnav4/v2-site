@@ -4,7 +4,7 @@ import { blogPosts } from '../data/blogPosts';
 import { projects } from '../data/projects';
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { getContributionData } from '../services/githubService';
-import { ArrowRight, Sparkles, Code2, Trophy, Users } from 'lucide-react';
+import { ArrowRight, Code2 } from 'lucide-react';
 import SEO from '../components/SEO';
 
 // Custom hook for scroll reveal animations
@@ -72,8 +72,6 @@ export default function Home() {
   const blogRef = useScrollReveal(0.1);
   const projectsRef = useScrollReveal(0.1);
   const githubRef = useScrollReveal(0.1);
-  const cpRef = useScrollReveal(0.1);
-  const achievementsRef = useScrollReveal(0.1);
 
   useEffect(() => {
     async function fetchData() {
@@ -535,197 +533,35 @@ export default function Home() {
           )}
         </section>
 
-        {/* Competitive Programming */}
-        <section
-          ref={cpRef.ref}
-          className={`container py-12 sm:py-16 reveal ${cpRef.isVisible ? 'visible' : ''}`}
-        >
-          <div className={`p-6 sm:p-8 md:p-10 rounded-2xl border reveal stagger-1 ${cpRef.isVisible ? 'visible' : ''} ${
-            theme === 'dark'
-              ? 'bg-[#0a0a0a] border-gray-800'
-              : 'bg-gray-50 border-gray-200'
+        {/* Competitive Programming - Simple */}
+        <section className="container py-16 sm:py-20">
+          <p className={`text-lg sm:text-xl max-w-2xl font-serif leading-relaxed mb-6 ${
+            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
           }`}>
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Trophy size={14} className="text-emerald-500" />
-                <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 font-sans font-medium">
-                  ALGORITHMIC THINKING
-                </p>
-              </div>
-              <h2 className={`text-2xl sm:text-3xl md:text-4xl font-normal mb-4 font-serif tracking-tight ${
-                theme === 'dark' ? 'text-white' : 'text-black'
-              }`}>
-                Problem solving from
-                <span className="gradient-text-subtle"> first principles</span>
-              </h2>
-              <p className={`text-sm sm:text-base font-sans mb-6 max-w-2xl leading-relaxed ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                Daily LeetCode practice challenges have sharpened my approach to breaking down complex problems
-                into fundamental concepts. Over{' '}
-                <span className={`font-semibold ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>
-                  <AnimatedCounter end={500} suffix="+" />
-                </span>{' '}
-                questions solved, each teaching me to think algorithmically.
-              </p>
-
-              <Link
-                to="/competitive"
-                className={`group inline-flex items-center gap-2 text-sm sm:text-base font-medium font-sans transition-all duration-300 ${
-                  theme === 'dark' ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-600 hover:text-emerald-500'
-                }`}
-              >
-                View competitive programming
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-2" />
-              </Link>
-            </div>
-          </div>
+            Generate your personalized{' '}
+            <a
+              href="https://codeforces.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-500 hover:underline"
+            >
+              Codeforces
+            </a>
+            {' '}
+            ladder. Track your progress, identify weak areas, and climb the ranks with a customized practice plan based on your performance and goals.
+          </p>
+          <Link
+            to="/competitive"
+            className={`group inline-flex items-center gap-2 text-sm font-sans transition-colors ${
+              theme === 'dark' ? 'text-gray-500 hover:text-white' : 'text-gray-600 hover:text-black'
+            }`}
+          >
+            Climb Your Ladder
+            <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+          </Link>
         </section>
 
-        {/* Achievements & Activities - Bento Grid Style */}
-        <section
-          ref={achievementsRef.ref}
-          className={`container py-16 sm:py-20 reveal ${achievementsRef.isVisible ? 'visible' : ''}`}
-        >
-          <div className="mb-8 sm:mb-10">
-            <div className={`inline-flex items-center gap-2 mb-4 reveal stagger-1 ${achievementsRef.isVisible ? 'visible' : ''}`}>
-              <Users size={14} className="text-emerald-500" />
-              <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 font-sans font-medium">
-                ACHIEVEMENTS & LEADERSHIP
-              </p>
-            </div>
-            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal mb-4 font-serif tracking-tight reveal stagger-2 ${achievementsRef.isVisible ? 'visible' : ''} ${
-              theme === 'dark' ? 'text-white' : 'text-black'
-            }`}>
-              Making an impact
-            </h2>
-            <p className={`text-sm sm:text-base font-sans reveal stagger-3 ${achievementsRef.isVisible ? 'visible' : ''} ${
-              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-            }`}>
-              Contributions, competitions, and community work
-            </p>
-          </div>
-
-          {/* Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {/* Large Card - Core Member */}
-            <div
-              className={`md:col-span-2 lg:col-span-2 card-premium rounded-2xl p-6 sm:p-8 reveal ${achievementsRef.isVisible ? 'visible' : ''}`}
-              style={{ transitionDelay: '300ms' }}
-            >
-              <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5 ${
-                theme === 'dark' ? 'bg-emerald-500/10' : 'bg-emerald-500/10'
-              }`}>
-                <Users size={24} className="text-emerald-500" />
-              </div>
-              <h3 className={`text-xl sm:text-2xl font-semibold mb-3 font-sans ${
-                theme === 'dark' ? 'text-white' : 'text-black'
-              }`}>
-                Core Member - CyberNauts & XCEED
-              </h3>
-              <p className={`text-sm sm:text-base leading-relaxed font-sans ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                Organized technical workshops, mentored{' '}
-                <span className={`font-semibold ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>50+</span>{' '}
-                juniors in web development, and contributed to NIT Jalandhar's web infrastructure projects.
-              </p>
-            </div>
-
-            {/* Stats Card - LeetCode */}
-            <div
-              className={`card-premium rounded-2xl p-6 sm:p-8 flex flex-col justify-between reveal ${achievementsRef.isVisible ? 'visible' : ''}`}
-              style={{ transitionDelay: '400ms' }}
-            >
-              <div className={`text-4xl sm:text-5xl font-bold font-mono mb-2 ${
-                theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'
-              }`}>
-                <AnimatedCounter end={500} suffix="+" />
-              </div>
-              <div>
-                <h3 className={`text-lg font-semibold mb-1 font-sans ${
-                  theme === 'dark' ? 'text-white' : 'text-black'
-                }`}>
-                  LeetCode Problems
-                </h3>
-                <p className={`text-sm font-sans ${
-                  theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
-                }`}>
-                  Solving daily
-                </p>
-              </div>
-            </div>
-
-            {/* Open Source Card */}
-            <div
-              className={`card-premium rounded-2xl p-6 sm:p-8 reveal ${achievementsRef.isVisible ? 'visible' : ''}`}
-              style={{ transitionDelay: '500ms' }}
-            >
-              <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg mb-4 ${
-                theme === 'dark' ? 'bg-cyan-500/10' : 'bg-cyan-500/10'
-              }`}>
-                <Code2 size={20} className="text-cyan-500" />
-              </div>
-              <h3 className={`text-lg font-semibold mb-2 font-sans ${
-                theme === 'dark' ? 'text-white' : 'text-black'
-              }`}>
-                Open Source
-              </h3>
-              <p className={`text-sm leading-relaxed font-sans ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                Contributed to NIT Jalandhar T&P website and 2 conference websites.
-              </p>
-            </div>
-
-            {/* NSS Card */}
-            <div
-              className={`card-premium rounded-2xl p-6 sm:p-8 reveal ${achievementsRef.isVisible ? 'visible' : ''}`}
-              style={{ transitionDelay: '600ms' }}
-            >
-              <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg mb-4 ${
-                theme === 'dark' ? 'bg-purple-500/10' : 'bg-purple-500/10'
-              }`}>
-                <Sparkles size={20} className="text-purple-500" />
-              </div>
-              <h3 className={`text-lg font-semibold mb-2 font-sans ${
-                theme === 'dark' ? 'text-white' : 'text-black'
-              }`}>
-                NSS Volunteer
-              </h3>
-              <p className={`text-sm leading-relaxed font-sans ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                Campus social impact projects and community service initiatives.
-              </p>
-            </div>
-
-            {/* Stats Card - Mentored */}
-            <div
-              className={`card-premium rounded-2xl p-6 sm:p-8 flex flex-col justify-between reveal ${achievementsRef.isVisible ? 'visible' : ''}`}
-              style={{ transitionDelay: '700ms' }}
-            >
-              <div className={`text-4xl sm:text-5xl font-bold font-mono mb-2 ${
-                theme === 'dark' ? 'text-white' : 'text-black'
-              }`}>
-                <AnimatedCounter end={50} suffix="+" />
-              </div>
-              <div>
-                <h3 className={`text-lg font-semibold mb-1 font-sans ${
-                  theme === 'dark' ? 'text-white' : 'text-black'
-                }`}>
-                  Students Mentored
-                </h3>
-                <p className={`text-sm font-sans ${
-                  theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
-                }`}>
-                  Web Development
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
+      
       </div>
     </>
   );
