@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import { Home, Briefcase, FileText, BarChart3, User, Moon, Sun, Search, Clock, Edit3, Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Home, Briefcase, FileText, BarChart3, User, Moon, Sun, Search, ExternalLink, Edit3, Menu, X } from 'lucide-react';
 import { useTheme } from '../store/themeStore';
 import UniversalSearch from './UniversalSearch';
 import AnimatedIcon from './AnimatedIcon';
@@ -20,8 +20,30 @@ export default function Header() {
 
   const isActive = (path: string) => location.pathname === path;
 
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <>
+      {/* Backdrop overlay */}
+      <div
+        className={`lg:hidden fixed inset-0 z-40 transition-all duration-300 ${
+          isMobileMenuOpen
+            ? 'opacity-100 pointer-events-auto backdrop-blur-sm bg-black/20'
+            : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
+
       {/* Mobile Header */}
       <header className={`lg:hidden fixed top-0 left-0 right-0 z-50 border-b ${
         theme === 'dark' ? 'bg-black/95 border-gray-800' : 'bg-white/95 border-gray-200'
@@ -32,13 +54,13 @@ export default function Header() {
           }`}>
             navdeep.site
           </Link>
-          
+
           <div className="flex items-center gap-2">
             <button
               onClick={toggleTheme}
               className={`p-2 rounded-lg transition-all duration-300 ${
-                theme === 'dark' 
-                  ? 'text-gray-400 hover:text-white' 
+                theme === 'dark'
+                  ? 'text-gray-400 hover:text-white'
                   : 'text-gray-600 hover:text-black'
               }`}
               aria-label="Toggle theme"
@@ -49,12 +71,12 @@ export default function Header() {
                 <Sun className="w-5 h-5" strokeWidth={1.5} />
               )}
             </button>
-            
+
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`p-2 rounded-lg transition-all duration-300 ${
-                theme === 'dark' 
-                  ? 'text-gray-400 hover:text-white' 
+                theme === 'dark'
+                  ? 'text-gray-400 hover:text-white'
                   : 'text-gray-600 hover:text-black'
               }`}
               aria-label="Toggle menu"
@@ -73,149 +95,89 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu Dropdown */}
-        <div className={`overflow-hidden transition-all duration-500 ease-in-out ${
-          isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+        <div className={`overflow-hidden transition-all duration-300 ease-out ${
+          isMobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}>
-          <div className={`${
-            theme === 'dark' ? 'bg-black/98' : 'bg-white/98'
+          <nav className={`px-4 py-4 ${
+            theme === 'dark' ? 'bg-black' : 'bg-white'
           }`}>
-            <nav className="px-6 py-6 space-y-2">
-              {/* Navigation Links */}
-              <div className="space-y-1 mb-6">
+            {/* Navigation Links with staggered animation */}
+            <div className="space-y-1">
+              {[
+                { to: '/', icon: Home, label: 'Home' },
+                { to: '/projects', icon: Briefcase, label: 'Projects' },
+                { to: '/blog', icon: FileText, label: 'Blog' },
+                { to: '/competitive', icon: BarChart3, label: 'Competitive' },
+                { to: '/about', icon: User, label: 'About' },
+                { to: '/creator', icon: Edit3, label: 'Creator' },
+              ].map((item, index) => (
                 <Link
-                  to="/"
+                  key={item.to}
+                  to={item.to}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-200 ${
-                    isActive('/')
-                      ? theme === 'dark'
-                        ? 'bg-white/5 text-white'
-                        : 'bg-black/5 text-black'
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 ${
+                    isActive(item.to)
+                      ? 'text-emerald-500'
                       : theme === 'dark'
-                        ? 'text-gray-400 hover:text-white active:scale-95'
-                        : 'text-gray-600 hover:text-black active:scale-95'
+                        ? 'text-gray-400 active:text-white'
+                        : 'text-gray-600 active:text-black'
                   }`}
-                >
-                  <Home className={`w-5 h-5 transition-transform duration-200 ${isActive('/') ? '' : 'group-hover:scale-110'}`} strokeWidth={1.5} />
-                  <span className="font-sans text-base tracking-tight">{isActive('/') ? '→ ' : ''}Home</span>
-                </Link>
-
-                <Link
-                  to="/projects"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-200 ${
-                    isActive('/projects')
-                      ? theme === 'dark'
-                        ? 'bg-white/5 text-white'
-                        : 'bg-black/5 text-black'
-                      : theme === 'dark'
-                        ? 'text-gray-400 hover:text-white active:scale-95'
-                        : 'text-gray-600 hover:text-black active:scale-95'
-                  }`}
-                >
-                  <Briefcase className={`w-5 h-5 transition-transform duration-200 ${isActive('/projects') ? '' : 'group-hover:scale-110'}`} strokeWidth={1.5} />
-                  <span className="font-sans text-base tracking-tight">{isActive('/projects') ? '→ ' : ''}Projects</span>
-                </Link>
-
-                <Link
-                  to="/blog"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-200 ${
-                    isActive('/blog')
-                      ? theme === 'dark'
-                        ? 'bg-white/5 text-white'
-                        : 'bg-black/5 text-black'
-                      : theme === 'dark'
-                        ? 'text-gray-400 hover:text-white active:scale-95'
-                        : 'text-gray-600 hover:text-black active:scale-95'
-                  }`}
-                >
-                  <FileText className={`w-5 h-5 transition-transform duration-200 ${isActive('/blog') ? '' : 'group-hover:scale-110'}`} strokeWidth={1.5} />
-                  <span className="font-sans text-base tracking-tight">{isActive('/blog') ? '→ ' : ''}Blog</span>
-                </Link>
-
-                <Link
-                  to="/competitive"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-200 ${
-                    isActive('/competitive')
-                      ? theme === 'dark'
-                        ? 'bg-white/5 text-white'
-                        : 'bg-black/5 text-black'
-                      : theme === 'dark'
-                        ? 'text-gray-400 hover:text-white active:scale-95'
-                        : 'text-gray-600 hover:text-black active:scale-95'
-                  }`}
-                >
-                  <BarChart3 className={`w-5 h-5 transition-transform duration-200 ${isActive('/competitive') ? '' : 'group-hover:scale-110'}`} strokeWidth={1.5} />
-                  <span className="font-sans text-base tracking-tight">{isActive('/competitive') ? '→ ' : ''}Competitive</span>
-                </Link>
-
-                <Link
-                  to="/about"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-200 ${
-                    isActive('/about')
-                      ? theme === 'dark'
-                        ? 'bg-white/5 text-white'
-                        : 'bg-black/5 text-black'
-                      : theme === 'dark'
-                        ? 'text-gray-400 hover:text-white active:scale-95'
-                        : 'text-gray-600 hover:text-black active:scale-95'
-                  }`}
-                >
-                  <User className={`w-5 h-5 transition-transform duration-200 ${isActive('/about') ? '' : 'group-hover:scale-110'}`} strokeWidth={1.5} />
-                  <span className="font-sans text-base tracking-tight">{isActive('/about') ? '→ ' : ''}About</span>
-                </Link>
-
-                <Link
-                  to="/creator"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-200 ${
-                    isActive('/creator')
-                      ? theme === 'dark'
-                        ? 'bg-white/5 text-white'
-                        : 'bg-black/5 text-black'
-                      : theme === 'dark'
-                        ? 'text-gray-400 hover:text-white active:scale-95'
-                        : 'text-gray-600 hover:text-black active:scale-95'
-                  }`}
-                >
-                  <Edit3 className={`w-5 h-5 transition-transform duration-200 ${isActive('/creator') ? '' : 'group-hover:scale-110'}`} strokeWidth={1.5} />
-                  <span className="font-sans text-base tracking-tight">{isActive('/creator') ? '→ ' : ''}Creator</span>
-                </Link>
-              </div>
-
-              {/* Utility Buttons */}
-              <div className={`pt-4 border-t space-y-1 ${theme === 'dark' ? 'border-white/10' : 'border-black/10'}`}>
-                <button
-                  onClick={() => {
-                    setIsSearchOpen(true);
-                    setIsMobileMenuOpen(false);
+                  style={{
+                    transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(-20px)',
+                    opacity: isMobileMenuOpen ? 1 : 0,
+                    transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : '0ms',
                   }}
-                  className={`group flex items-center justify-center px-4 py-3.5 rounded-xl transition-all duration-200 active:scale-95 ${
-                    theme === 'dark'
-                      ? 'text-gray-400 hover:text-white'
-                      : 'text-gray-600 hover:text-black'
-                  }`}
                 >
-                  <Search className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" strokeWidth={1.5} />
-                </button>
+                  <item.icon className="w-5 h-5" strokeWidth={1.5} />
+                  <span className="font-poppins text-sm font-normal">{item.label}</span>
+                </Link>
+              ))}
+            </div>
 
-                <a
-                  href="https://v2.navdeep.site"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group flex items-center justify-center px-4 py-3.5 rounded-xl transition-all duration-200 active:scale-95 ${
-                    theme === 'dark'
-                      ? 'text-gray-400 hover:text-white'
-                      : 'text-gray-600 hover:text-black'
-                  }`}
-                >
-                  <Clock className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" strokeWidth={1.5} />
-                </a>
-              </div>
-            </nav>
-          </div>
+            {/* Divider + Utility Row */}
+            <div
+              className={`mt-4 pt-4 border-t flex items-center gap-2 ${
+                theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
+              }`}
+              style={{
+                transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(10px)',
+                opacity: isMobileMenuOpen ? 1 : 0,
+                transitionDelay: isMobileMenuOpen ? '300ms' : '0ms',
+                transitionDuration: '300ms',
+                transitionProperty: 'transform, opacity',
+              }}
+            >
+              <button
+                onClick={() => {
+                  setIsSearchOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+                  theme === 'dark'
+                    ? 'text-gray-400 active:text-white'
+                    : 'text-gray-600 active:text-black'
+                }`}
+              >
+                <Search className="w-4 h-4" strokeWidth={1.5} />
+                <span className="text-sm font-poppins font-normal">Search</span>
+              </button>
+
+              <a
+                href="https://v2.navdeep.site"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+                  theme === 'dark'
+                    ? 'text-gray-400 active:text-white'
+                    : 'text-gray-600 active:text-black'
+                }`}
+              >
+                <ExternalLink className="w-4 h-4" strokeWidth={1.5} />
+                <span className="text-sm font-poppins font-normal">Previous Site</span>
+              </a>
+            </div>
+          </nav>
         </div>
       </header>
 

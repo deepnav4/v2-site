@@ -493,20 +493,20 @@ function Competitive() {
 
               {/* Performance Analysis Details */}
               {(showDetails || isHidingDetails) && (
-                <div className={`mb-8 p-6 rounded-lg ${isHidingDetails ? 'flow-up' : 'flow-down'} ${theme === 'dark' ? 'bg-gray-900/50' : 'bg-gray-50'}`}>
-                  <h3 className={`text-lg font-serif font-normal mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                <div className={`mb-8 p-4 sm:p-6 rounded-lg ${isHidingDetails ? 'flow-up' : 'flow-down'} ${theme === 'dark' ? 'bg-gray-900/50' : 'bg-gray-50'}`}>
+                  <h3 className={`text-base sm:text-lg font-serif font-normal mb-4 sm:mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                     Performance Analysis
                   </h3>
 
-                  <div className="space-y-6">
+                  <div className="space-y-4 sm:space-y-6">
                     {/* Recent Trend */}
                     <div>
-                      <p className={`text-sm font-sans mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                      <p className={`text-xs sm:text-sm font-sans mb-1.5 sm:mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                         Recent Trend
                       </p>
                       <div className="flex items-center gap-2">
                         <span className="text-red-500">↓</span>
-                        <span className={`font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                        <span className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                           Average change: {ladderMetrics.volatility.mean.toFixed(0)}
                         </span>
                       </div>
@@ -514,10 +514,10 @@ function Competitive() {
 
                     {/* Volatility */}
                     <div>
-                      <p className={`text-sm font-sans mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                      <p className={`text-xs sm:text-sm font-sans mb-1.5 sm:mb-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                         Volatility
                       </p>
-                      <span className={`font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <span className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                         {ladderMetrics.volatility.volatility.toFixed(1)} —{' '}
                         <span className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}>
                           Moderately consistent
@@ -527,10 +527,10 @@ function Competitive() {
 
                     {/* Strengths & Weaknesses */}
                     <div>
-                      <p className={`text-sm font-sans mb-3 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                      <p className={`text-xs sm:text-sm font-sans mb-2 sm:mb-3 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                         Strengths & Weaknesses
                       </p>
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-2 gap-3 sm:gap-4">
                         {/* Strengths */}
                         <div>
                           <p className={`text-xs uppercase tracking-wider mb-2 font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
@@ -579,91 +579,91 @@ function Competitive() {
 
               {/* Ladder Section */}
               <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                  <h2 className={`text-xl font-serif font-normal ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                  <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500" />
+                  <h2 className={`text-lg sm:text-xl font-serif font-normal ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                     {userData.user.handle}'s Ladder
                   </h2>
                 </div>
 
                 {/* Metrics Row */}
-                <div className="flex flex-wrap gap-x-12 gap-y-6 mb-8">
+                <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-x-12 sm:gap-y-6 mb-6 sm:mb-8">
                   {/* Baseline Rating */}
                   <div className="relative group">
-                    <div className="flex items-center gap-2 mb-2">
-                      <p className={`text-xs uppercase tracking-wider font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
-                        Baseline Rating
+                    <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                      <p className={`text-[10px] sm:text-xs uppercase tracking-wider font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
+                        Baseline
                       </p>
                       <div className="relative">
-                        <HelpCircle size={14} className={`cursor-help ${theme === 'dark' ? 'text-gray-600 group-hover:text-gray-400' : 'text-gray-400 group-hover:text-gray-600'}`} />
-                        <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 rounded text-xs w-48 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none ${
+                        <HelpCircle size={12} className={`cursor-help ${theme === 'dark' ? 'text-gray-600 group-hover:text-gray-400' : 'text-gray-400 group-hover:text-gray-600'}`} />
+                        <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 rounded text-xs w-48 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 ${
                           theme === 'dark' ? 'bg-gray-800 text-gray-200' : 'bg-gray-900 text-white'
                         }`}>
                           This is not your actual Codeforces rating. It's a calculated difficulty level optimized for your practice needs. Computed from your current rating, adjusted for volatility and success rate.
                         </div>
                       </div>
                     </div>
-                    <p className={`text-2xl font-mono font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                    <p className={`text-xl sm:text-2xl font-poppins font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                       {ladderMetrics.difficulty.baselineRating}
                     </p>
                   </div>
 
                   {/* Volatility */}
                   <div className="relative group">
-                    <div className="flex items-center gap-2 mb-2">
-                      <p className={`text-xs uppercase tracking-wider font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
+                    <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                      <p className={`text-[10px] sm:text-xs uppercase tracking-wider font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
                         Volatility
                       </p>
                       <div className="relative">
-                        <HelpCircle size={14} className={`cursor-help ${theme === 'dark' ? 'text-gray-600 group-hover:text-gray-400' : 'text-gray-400 group-hover:text-gray-600'}`} />
-                        <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 rounded text-xs w-48 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none ${
+                        <HelpCircle size={12} className={`cursor-help ${theme === 'dark' ? 'text-gray-600 group-hover:text-gray-400' : 'text-gray-400 group-hover:text-gray-600'}`} />
+                        <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 rounded text-xs w-48 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 ${
                           theme === 'dark' ? 'bg-gray-800 text-gray-200' : 'bg-gray-900 text-white'
                         }`}>
                           Measures the consistency of your contest performance. Low volatility indicates stable performance, while high volatility suggests inconsistent results.
                         </div>
                       </div>
                     </div>
-                    <p className={`text-2xl font-mono font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                    <p className={`text-xl sm:text-2xl font-poppins font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                       {ladderMetrics.volatility.volatility.toFixed(0)}
                     </p>
                   </div>
 
                   {/* Success Rate */}
                   <div className="relative group">
-                    <div className="flex items-center gap-2 mb-2">
-                      <p className={`text-xs uppercase tracking-wider font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
-                        Success Rate
+                    <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                      <p className={`text-[10px] sm:text-xs uppercase tracking-wider font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
+                        Success
                       </p>
                       <div className="relative">
-                        <HelpCircle size={14} className={`cursor-help ${theme === 'dark' ? 'text-gray-600 group-hover:text-gray-400' : 'text-gray-400 group-hover:text-gray-600'}`} />
-                        <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 rounded text-xs w-48 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none ${
+                        <HelpCircle size={12} className={`cursor-help ${theme === 'dark' ? 'text-gray-600 group-hover:text-gray-400' : 'text-gray-400 group-hover:text-gray-600'}`} />
+                        <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 rounded text-xs w-48 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 ${
                           theme === 'dark' ? 'bg-gray-800 text-gray-200' : 'bg-gray-900 text-white'
                         }`}>
                           The percentage of recent contests where you gained rating points. A higher success rate leads to more challenging problems in your ladder.
                         </div>
                       </div>
                     </div>
-                    <p className={`text-2xl font-mono font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                    <p className={`text-xl sm:text-2xl font-poppins font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                       {Math.round(ladderMetrics.successRate.successRate * 100)}%
                     </p>
                   </div>
 
                   {/* Range */}
                   <div className="relative group">
-                    <div className="flex items-center gap-2 mb-2">
-                      <p className={`text-xs uppercase tracking-wider font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
+                    <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                      <p className={`text-[10px] sm:text-xs uppercase tracking-wider font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
                         Range
                       </p>
                       <div className="relative">
-                        <HelpCircle size={14} className={`cursor-help ${theme === 'dark' ? 'text-gray-600 group-hover:text-gray-400' : 'text-gray-400 group-hover:text-gray-600'}`} />
-                        <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 rounded text-xs w-48 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none ${
+                        <HelpCircle size={12} className={`cursor-help ${theme === 'dark' ? 'text-gray-600 group-hover:text-gray-400' : 'text-gray-400 group-hover:text-gray-600'}`} />
+                        <div className={`absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 rounded text-xs w-48 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 ${
                           theme === 'dark' ? 'bg-gray-800 text-gray-200' : 'bg-gray-900 text-white'
                         }`}>
                           The difficulty range for your practice problems, calibrated based on your learning curve and recent performance trends.
                         </div>
                       </div>
                     </div>
-                    <p className={`text-2xl font-mono font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                    <p className={`text-xl sm:text-2xl font-poppins font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                       {ladderMetrics.difficulty.lowerBound}–{ladderMetrics.difficulty.upperBound}
                     </p>
                   </div>
@@ -677,17 +677,17 @@ function Competitive() {
             <div>
 
               {/* Header */}
-              <div className="flex items-center justify-between mb-6 pb-4 border-b" style={{ borderColor: theme === 'dark' ? 'rgba(107,114,128,0.3)' : 'rgba(229,231,235,0.6)' }}>
-                <h3 className={`text-lg font-serif font-normal ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+              <div className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b" style={{ borderColor: theme === 'dark' ? 'rgba(107,114,128,0.3)' : 'rgba(229,231,235,0.6)' }}>
+                <h3 className={`text-base sm:text-lg font-serif font-normal ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                   Your Ladder
                 </h3>
-                <span className={`text-sm font-mono font-semibold ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
+                <span className={`text-xs sm:text-sm font-poppins font-normal ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
                   {completedProblems.size} / {ladderProblems.length}
                 </span>
               </div>
 
               {/* Progress Bar */}
-              <div className={`h-1.5 rounded-full mb-8 overflow-hidden transition-colors duration-300 ${theme === 'dark' ? 'bg-gray-800/60' : 'bg-gray-200/60'}`}>
+              <div className={`h-1 sm:h-1.5 rounded-full mb-6 sm:mb-8 overflow-hidden transition-colors duration-300 ${theme === 'dark' ? 'bg-gray-800/60' : 'bg-gray-200/60'}`}>
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-500"
                   style={{ width: `${(completedProblems.size / ladderProblems.length) * 100}%` }}
@@ -701,7 +701,7 @@ function Competitive() {
                 }`}>
                   <div className="flex items-center gap-2 sm:gap-3">
                     <Clock className="text-amber-500 flex-shrink-0" size={18} />
-                    <span className={`text-xl sm:text-2xl font-mono font-bold ${
+                    <span className={`text-xl sm:text-2xl font-poppins font-medium ${
                       theme === 'dark' ? 'text-amber-400' : 'text-amber-600'
                     }`}>
                       {formatTimer(timerSeconds)}
@@ -792,10 +792,10 @@ function Competitive() {
                               ))}
                             </div>
                             <div className="flex items-center gap-3">
-                              <span className={`text-xs font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>
+                              <span className={`text-xs font-poppins font-normal ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>
                                 {problem.suggestedTime}m
                               </span>
-                              <span className="text-xs font-mono" style={{ color: getRatingColor(problem.rating) }}>
+                              <span className="text-xs font-poppins font-normal" style={{ color: getRatingColor(problem.rating) }}>
                                 {problem.rating}
                               </span>
                               <button
@@ -814,7 +814,7 @@ function Competitive() {
 
                       {/* Desktop Layout */}
                       <div className="hidden sm:flex items-center gap-4">
-                        <span className={`text-xs font-mono tabular-nums w-5 ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>
+                        <span className={`text-xs font-poppins font-normal tabular-nums w-5 ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>
                           {String(idx + 1).padStart(2, '0')}
                         </span>
 
@@ -859,13 +859,13 @@ function Competitive() {
                           </div>
                         </div>
 
-                        <span className={`text-xs font-mono tabular-nums ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>
+                        <span className={`text-xs font-poppins font-normal tabular-nums ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>
                           {problem.suggestedTime}m
                         </span>
 
                         <span className="flex items-center gap-1.5 text-sm">
                           <span className={`font-serif ${theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}`}>Rating:</span>
-                          <span className="font-mono font-semibold tabular-nums" style={{ color: getRatingColor(problem.rating) }}>
+                          <span className="font-poppins font-normal tabular-nums" style={{ color: getRatingColor(problem.rating) }}>
                             {problem.rating}
                           </span>
                         </span>

@@ -16,6 +16,7 @@ export default {
         sans: ['DM Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
         mono: ['IBM Plex Mono', 'Monaco', 'Courier New', 'monospace'],
         serif: ['Instrument Serif', 'Georgia', 'serif'],
+        poppins: ['Poppins', 'system-ui', 'sans-serif'],
       },
       typography: {
         DEFAULT: {
