@@ -11,6 +11,9 @@ import {
   Info,
   HelpCircle,
   RefreshCw,
+  Swords,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -26,9 +29,12 @@ import {
   calculateLadderMetrics,
   convertCFContests,
   selectProblems,
+  generateVirtualContest,
   type LadderMetrics,
   type LadderProblem,
+  type VirtualContest,
 } from '../utils/cfladder';
+import VirtualContestComponent from '../components/competitive/VirtualContest';
 
 function Competitive() {
   const { theme } = useTheme();
@@ -46,6 +52,11 @@ function Competitive() {
   const [showDetails, setShowDetails] = useState(false);
   const [isHidingDetails, setIsHidingDetails] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // New features state
+  const [activeTab, setActiveTab] = useState<'ladder' | 'contest'>('ladder');
+  const [virtualContest, setVirtualContest] = useState<VirtualContest | null>(null);
+  const [showLadderProblems, setShowLadderProblems] = useState(true);
 
   // Scroll reveal refs
   const headerRef = useScrollReveal();
@@ -242,6 +253,17 @@ function Competitive() {
       setProblemStats(problemsResult.problemStats);
       setLadderGenerated(true);
       setCompletedProblems(new Set());
+
+      // Generate virtual contest
+      const contest = generateVirtualContest(
+        problemsResult.problems,
+        problemsResult.problemStats,
+        userDataResult.solvedProblems,
+        userDataResult.user.rating || 1500
+      );
+      setVirtualContest(contest);
+      console.log('Virtual contest:', contest);
+
     } catch (err) {
       setError('Failed to fetch data. Please try again.');
       console.error(err);
@@ -328,6 +350,20 @@ function Competitive() {
       setIsRefreshing(false);
     }
   }, [userData]);
+
+  // Regenerate virtual contest
+  const handleRegenerateContest = useCallback(() => {
+    if (!userData || problems.length === 0) return;
+
+    const contest = generateVirtualContest(
+      problems,
+      problemStats,
+      userData.solvedProblems,
+      userData.user.rating || 1500
+    );
+    setVirtualContest(contest);
+    console.log('Regenerated contest:', contest);
+  }, [userData, problems, problemStats]);
 
   return (
     <>
@@ -463,7 +499,7 @@ function Competitive() {
                       </span>
                     </div>
                     <p className={`text-xs sm:text-sm font-sans mt-1.5 sm:mt-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                      <span className="font-semibold" style={{ color: getRatingColor(userData.user.rating) }}>
+                      <span className="font-light" style={{ color: getRatingColor(userData.user.rating) }}>
                         Rating: {userData.user.rating}
                       </span>
                       <span className={`ml-3 sm:ml-4 ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
@@ -672,67 +708,123 @@ function Competitive() {
             </div>
           )}
 
-          {/* Problem Ladder */}
-          {ladderGenerated && ladderProblems.length > 0 && (
-            <div>
+          {/* Feature Tabs */}
+          {ladderGenerated && userData && (
+            <div className="mb-8">
+              <div className={`flex gap-1 p-1 rounded-lg ${theme === 'dark' ? 'bg-gray-900/50' : 'bg-gray-100'}`}>
+                <button
+                  onClick={() => setActiveTab('ladder')}
+                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                    activeTab === 'ladder'
+                      ? 'bg-emerald-500 text-white'
+                      : theme === 'dark'
+                      ? 'text-gray-400 hover:text-white hover:bg-gray-800'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-white'
+                  }`}
+                >
+                  <Gauge size={16} />
+                  <span className="hidden sm:inline">Problem Ladder</span>
+                  <span className="sm:hidden">Ladder</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('contest')}
+                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                    activeTab === 'contest'
+                      ? 'bg-emerald-500 text-white'
+                      : theme === 'dark'
+                      ? 'text-gray-400 hover:text-white hover:bg-gray-800'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-white'
+                  }`}
+                >
+                  <Swords size={16} />
+                  <span className="hidden sm:inline">Virtual Contest</span>
+                  <span className="sm:hidden">Contest</span>
+                </button>
+              </div>
+            </div>
+          )}
 
+          {/* Virtual Contest Tab */}
+          {ladderGenerated && activeTab === 'contest' && virtualContest && (
+            <VirtualContestComponent
+              contest={virtualContest}
+              onRegenerate={handleRegenerateContest}
+            />
+          )}
+
+          {/* Problem Ladder Tab */}
+          {ladderGenerated && activeTab === 'ladder' && ladderProblems.length > 0 && (
+            <div>
               {/* Header */}
-              <div className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b" style={{ borderColor: theme === 'dark' ? 'rgba(107,114,128,0.3)' : 'rgba(229,231,235,0.6)' }}>
-                <h3 className={`text-base sm:text-lg font-serif font-normal ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-                  Your Ladder
-                </h3>
+              <div
+                className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b cursor-pointer"
+                style={{ borderColor: theme === 'dark' ? 'rgba(107,114,128,0.3)' : 'rgba(229,231,235,0.6)' }}
+                onClick={() => setShowLadderProblems(!showLadderProblems)}
+              >
+                <div className="flex items-center gap-2">
+                  <h3 className={`text-base sm:text-lg font-serif font-normal ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+                    Your Ladder
+                  </h3>
+                  {showLadderProblems ? (
+                    <ChevronUp size={18} className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'} />
+                  ) : (
+                    <ChevronDown size={18} className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'} />
+                  )}
+                </div>
                 <span className={`text-xs sm:text-sm font-poppins font-normal ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
                   {completedProblems.size} / {ladderProblems.length}
                 </span>
               </div>
 
-              {/* Progress Bar */}
-              <div className={`h-1 sm:h-1.5 rounded-full mb-6 sm:mb-8 overflow-hidden transition-colors duration-300 ${theme === 'dark' ? 'bg-gray-800/60' : 'bg-gray-200/60'}`}>
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-500"
-                  style={{ width: `${(completedProblems.size / ladderProblems.length) * 100}%` }}
-                />
-              </div>
+              {showLadderProblems && (
+                <>
+                  {/* Progress Bar */}
+                  <div className={`h-1 sm:h-1.5 rounded-full mb-6 sm:mb-8 overflow-hidden transition-colors duration-300 ${theme === 'dark' ? 'bg-gray-800/60' : 'bg-gray-200/60'}`}>
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-500"
+                      style={{ width: `${(completedProblems.size / ladderProblems.length) * 100}%` }}
+                    />
+                  </div>
 
-              {/* Active Timer */}
-              {activeTimer && (
-                <div className={`p-3 sm:p-4 rounded-lg border mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 ${
-                  theme === 'dark' ? 'bg-amber-500/10 border-amber-500/30' : 'bg-amber-50 border-amber-200'
-                }`}>
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <Clock className="text-amber-500 flex-shrink-0" size={18} />
-                    <span className={`text-xl sm:text-2xl font-poppins font-medium ${
-                      theme === 'dark' ? 'text-amber-400' : 'text-amber-600'
+                  {/* Active Timer */}
+                  {activeTimer && (
+                    <div className={`p-3 sm:p-4 rounded-lg border mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 ${
+                      theme === 'dark' ? 'bg-amber-500/10 border-amber-500/30' : 'bg-amber-50 border-amber-200'
                     }`}>
-                      {formatTimer(timerSeconds)}
-                    </span>
-                    <span className={`text-xs sm:text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-                      Problem {activeTimer}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 ml-auto sm:ml-0">
-                    <button
-                      onClick={toggleTimer}
-                      className={`p-2 rounded-lg transition-colors ${
-                        theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-100'
-                      }`}
-                    >
-                      {isTimerRunning ? <Pause size={18} /> : <Play size={18} />}
-                    </button>
-                    <button
-                      onClick={resetTimer}
-                      className={`p-2 rounded-lg transition-colors ${
-                        theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-100'
-                      }`}
-                    >
-                      <RotateCcw size={18} />
-                    </button>
-                  </div>
-                </div>
-              )}
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <Clock className="text-amber-500 flex-shrink-0" size={18} />
+                        <span className={`text-xl sm:text-2xl font-poppins font-medium ${
+                          theme === 'dark' ? 'text-amber-400' : 'text-amber-600'
+                        }`}>
+                          {formatTimer(timerSeconds)}
+                        </span>
+                        <span className={`text-xs sm:text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                          Problem {activeTimer}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 ml-auto sm:ml-0">
+                        <button
+                          onClick={toggleTimer}
+                          className={`p-2 rounded-lg transition-colors ${
+                            theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-100'
+                          }`}
+                        >
+                          {isTimerRunning ? <Pause size={18} /> : <Play size={18} />}
+                        </button>
+                        <button
+                          onClick={resetTimer}
+                          className={`p-2 rounded-lg transition-colors ${
+                            theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-100'
+                          }`}
+                        >
+                          <RotateCcw size={18} />
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
-              {/* Problem List */}
-              <div className="divide-y divide-gray-200/50 dark:divide-gray-800/50">
+                  {/* Problem List */}
+                  <div className="divide-y divide-gray-200/50 dark:divide-gray-800/50">
                 {ladderProblems.map((problem, idx) => {
                   const isCompleted = completedProblems.has(problem.id);
                   const isActive = activeTimer === problem.id;
@@ -884,7 +976,9 @@ function Competitive() {
                   );
                 })}
               </div>
-            </div>
+            </>
+          )}
+          </div>
           )}
 
           {/* Empty State */}
@@ -905,7 +999,7 @@ function Competitive() {
           )}
 
           {/* No Problems Found */}
-          {ladderGenerated && ladderProblems.length === 0 && !loading && (
+          {ladderGenerated && activeTab === 'ladder' && ladderProblems.length === 0 && !loading && (
             <div className={`text-center py-16 ${theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}`}>
               <Info size={48} className="mx-auto mb-4 opacity-50" />
               <p className="font-sans mb-2">No suitable problems found</p>

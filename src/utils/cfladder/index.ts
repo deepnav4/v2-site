@@ -78,6 +78,22 @@ export {
   formatTimerDisplay,
 } from './problemSelection';
 
+// Export virtual contest functions
+export type {
+  ContestProblem,
+  ContestResult,
+  VirtualContest,
+  ContestScore,
+} from './virtualContest';
+export {
+  generateVirtualContest,
+  calculateProblemScore,
+  calculateContestScore,
+  formatContestTime,
+  getDifficultyColor as getContestDifficultyColor,
+  estimateSolveTime,
+} from './virtualContest';
+
 // Import for combined analysis
 import type { ContestEntry, LadderMetrics } from './types';
 import type { CFContest } from '../../services/codeforcesService';

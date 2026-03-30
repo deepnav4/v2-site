@@ -188,7 +188,7 @@ export default function BlogPost() {
                 pointerEvents: showTOC ? 'none' : 'auto'
               }}
             >
-              <span className={`text-sm font-medium ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`} style={{ fontFamily: 'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace' }}>
+              <span className={`text-lg font-inter font-semibold ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>
                 {Math.round(scrollProgress)}%
               </span>
             </div>
@@ -204,7 +204,7 @@ export default function BlogPost() {
               }}
             >
               <div className="flex-shrink-0">
-                <span className={`text-sm font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`} style={{ fontFamily: 'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace' }}>
+                <span className={`text-lg font-inter font-semibold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                   {Math.round(scrollProgress)}%
                 </span>
               </div>
