@@ -13,13 +13,13 @@ export default {
         border: '#1f1f1f',
       },
       fontFamily: {
-        inter: ['"Inter Tight"', 'sans-serif'],
-        sans: ['"Instrument Sans"', 'sans-serif'],
+        // inter: ['"Inter Tight"', 'sans-serif'],
+        // sans: ['Avgard', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
         // sans: ['DM Sans', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
         mono: ['IBM Plex Mono', 'Monaco', 'Courier New', 'monospace'],
         serif: ['Instrument Serif', 'Georgia', 'serif'],
         // poppins: ['Poppins', 'system-ui', 'sans-serif'],
-        poppins : ['"Instrument Sans"', 'sans-serif']
+        // poppins : ['"Instrument Sans"', 'sans-serif']
       },
       typography: {
         DEFAULT: {
