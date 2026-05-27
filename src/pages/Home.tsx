@@ -157,7 +157,7 @@ export default function Home() {
             </h1>
 
             <p className={`text-sm sm:text-base mb-12 max-w-2xl font-sans leading-relaxed reveal stagger-4 ${heroRef.isVisible ? 'visible' : ''} ${
-              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
               I build full-stack applications with Docker, Redis, and real-time collaboration.
               Welcome to my lab notebook where I share experiments in software, design, and technology.
