@@ -1,6 +1,7 @@
 ---
 title: Building Production-Ready Microservices with Docker and NGINX
 date: November 15, 2025
+readTime: 12 min read
 category: devops
 tags:
   - docker
@@ -460,4 +461,4 @@ Key takeaways:
 
 Your infrastructure should be boring and reliable. Docker and NGINX get you there.
 
-Now go build something production-ready. Update Done
+Now go build something production-ready.

@@ -26,32 +26,35 @@ export default function Blog() {
         url={`https://navdeep.dev/blog${selectedTag !== 'All' ? `/tags/${selectedTag}` : ''}`}
       />
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-      <div className="container py-12 sm:py-16">
+      <div className="container py-10 sm:py-14">
         {/* Header Section */}
         <div
           ref={headerRef.ref}
-          className={`mb-10 sm:mb-12 md:mb-16 reveal ${headerRef.isVisible ? 'visible' : ''}`}
+          className={`mb-8 sm:mb-10 reveal ${headerRef.isVisible ? 'visible' : ''}`}
         >
-          <p className={`text-xs uppercase tracking-[0.2em] text-emerald-500 mb-4 sm:mb-6 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
+          <p className={`text-[10px] sm:text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
             LATE NIGHT THINKING
           </p>
-          <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h1 className={`text-3xl sm:text-4xl md:text-5xl font-normal mb-3 sm:mb-4 font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Things I've figured out
           </h1>
-          <p className={`text-base sm:text-lg font-sans reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-sm sm:text-base font-sans reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
             Notes on systems, algorithms, and patterns worth remembering
+            <span className={`ml-2 text-xs font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>
+              — {filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'}
+            </span>
           </p>
         </div>
 
         {/* Tags Filter */}
         <div
           ref={tagsRef.ref}
-          className={`mb-8 sm:mb-10 md:mb-12 reveal stagger-4 ${tagsRef.isVisible ? 'visible' : ''}`}
+          className={`mb-6 sm:mb-8 reveal stagger-4 ${tagsRef.isVisible ? 'visible' : ''}`}
         >
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
             <button
               onClick={() => setSelectedTag('All')}
-              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 font-sans ${
+              className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-medium transition-all duration-200 font-sans ${
                 selectedTag === 'All'
                   ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/30'
                   : theme === 'dark'
@@ -65,7 +68,7 @@ export default function Blog() {
               <button
                 key={tag}
                 onClick={() => setSelectedTag(tag)}
-                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 font-sans ${
+                className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-medium transition-all duration-200 font-sans ${
                   selectedTag === tag
                     ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/30'
                     : theme === 'dark'
@@ -82,39 +85,45 @@ export default function Blog() {
         {/* Blog Posts List */}
         <div
           ref={postsRef.ref}
-          className={`space-y-0 reveal ${postsRef.isVisible ? 'visible' : ''}`}
+          className={`reveal ${postsRef.isVisible ? 'visible' : ''}`}
         >
           {filteredPosts.map((post, index) => (
             <Link
               key={post.id}
               to={`/blog/${post.slug}`}
-              className={`block py-6 sm:py-8 border-b transition-colors duration-200 group reveal ${postsRef.isVisible ? 'visible' : ''} ${
-                theme === 'dark'
-                  ? 'border-gray-800 hover:border-gray-700'
-                  : 'border-gray-200 hover:border-gray-300'
+              className={`block py-4 sm:py-5 transition-colors duration-200 group reveal ${postsRef.isVisible ? 'visible' : ''} ${
+                index === 0
+                  ? theme === 'dark'
+                    ? 'border-y border-gray-800/60 hover:border-gray-700'
+                    : 'border-y border-gray-200 hover:border-gray-300'
+                  : theme === 'dark'
+                    ? 'border-b border-gray-800/60 hover:border-gray-700'
+                    : 'border-b border-gray-200 hover:border-gray-300'
               }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              style={{ transitionDelay: `${index * 80}ms` }}
             >
               <article>
-                <div className="flex flex-wrap items-baseline gap-2 sm:gap-3 mb-2 sm:mb-3">
-                  <time className={`text-xs sm:text-sm font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+                <div className="flex flex-wrap items-baseline gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                  <time className={`text-[11px] sm:text-xs font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
                     {post.date}
                   </time>
-                  <span className={`text-xs sm:text-sm font-sans ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>
-                    •
+                  <span className={`text-[11px] sm:text-xs ${theme === 'dark' ? 'text-gray-700' : 'text-gray-300'}`}>·</span>
+                  <span className={`text-[11px] sm:text-xs font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>
+                    {post.readTime}
                   </span>
-                  <span className={`text-xs sm:text-sm font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'}`}>
+                  <span className={`text-[11px] sm:text-xs ${theme === 'dark' ? 'text-gray-700' : 'text-gray-300'}`}>·</span>
+                  <span className={`text-[11px] sm:text-xs font-mono text-emerald-500/70`}>
                     {post.category}
                   </span>
                 </div>
                 
-                <h2 className={`text-xl sm:text-2xl font-normal mb-2 sm:mb-3 transition-colors duration-200 font-serif group-hover:text-emerald-500 ${
+                <h2 className={`text-base sm:text-lg font-normal mb-1 sm:mb-1.5 transition-colors duration-200 font-serif group-hover:text-emerald-500 ${
                   theme === 'dark' ? 'text-white' : 'text-black'
                 }`}>
                   {post.title}
                 </h2>
                 
-                <p className={`text-sm sm:text-base leading-relaxed font-sans line-clamp-2 sm:line-clamp-3 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                <p className={`text-xs sm:text-sm leading-relaxed font-sans line-clamp-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                   {post.excerpt}
                 </p>
               </article>
@@ -124,8 +133,8 @@ export default function Blog() {
 
         {/* View More */}
         {filteredPosts.length > 10 && (
-          <div className="mt-12 sm:mt-16 text-center">
-            <button className={`px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-medium transition-all duration-200 font-sans ${
+          <div className="mt-10 sm:mt-12 text-center">
+            <button className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 font-sans ${
               theme === 'dark'
                 ? 'bg-[#0a0a0a] text-gray-300 border border-gray-800 hover:border-gray-700'
                 : 'bg-gray-50 text-gray-700 border border-gray-200 hover:border-gray-300'

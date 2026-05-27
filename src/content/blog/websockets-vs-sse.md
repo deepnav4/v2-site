@@ -1,6 +1,7 @@
 ---
 title: "WebSockets vs Server-Sent Events: Building Real-Time Features"
 date: "October 28, 2025"
+readTime: "12 min read"
 category: "web-development"
 tags: ["websockets", "sse", "real-time", "nodejs"]
 excerpt: "A deep dive into real-time communication patterns on the web. When to use WebSockets, when Server-Sent Events are better, and how to implement both in production applications."

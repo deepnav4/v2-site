@@ -5,6 +5,9 @@ import { blogPosts } from '../data/blogPosts';
 import { ArrowLeft, Copy, Check } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 import SEO from '../components/SEO';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
@@ -339,7 +342,8 @@ export default function BlogPost() {
               : 'prose-headings:font-serif prose-headings:text-black prose-p:text-gray-900 prose-strong:text-black prose-code:text-gray-900 prose-code:font-mono prose-a:text-emerald-600 hover:prose-a:text-emerald-700 prose-li:text-gray-900'
           }`}>
             <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
+              remarkPlugins={[remarkGfm, remarkMath]}
+              rehypePlugins={[rehypeKatex]}
               components={{
                 h1: ({node, children, ...props}) => {
                   const text = String(children);
