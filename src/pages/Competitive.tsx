@@ -382,7 +382,7 @@ function Competitive() {
             <p className={`text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
               CODEFORCES LADDER
             </p>
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl font-normal mb-4 sm:mb-6 font-serif leading-tight reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${
+            <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif leading-tight reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${
               theme === 'dark' ? 'text-white' : 'text-black'
             }`}>
               Adaptive Problem Practice

@@ -35,7 +35,7 @@ export default function About() {
           <p className={`text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
             ABOUT ME
           </p>
-          <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal mb-4 sm:mb-6 leading-tight font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 leading-tight font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Navdeep Singh
           </h1>
           <p className={`text-base sm:text-lg mb-6 sm:mb-8 font-sans reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>

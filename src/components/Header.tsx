@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Home, Briefcase, FileText, BarChart3, User, Moon, Sun, Search, ExternalLink, Edit3, Menu, X } from 'lucide-react';
+import { Home, Briefcase, FileText, BarChart3, User, Moon, Sun, Search, ExternalLink, GitPullRequest, Menu, X } from 'lucide-react';
 import { useTheme } from '../store/themeStore';
 import UniversalSearch from './UniversalSearch';
 import AnimatedIcon from './AnimatedIcon';
@@ -109,7 +109,7 @@ export default function Header() {
                 { to: '/blog', icon: FileText, label: 'Blog' },
                 { to: '/competitive', icon: BarChart3, label: 'Competitive' },
                 { to: '/about', icon: User, label: 'About' },
-                { to: '/creator', icon: Edit3, label: 'Creator' },
+                { to: '/contributions', icon: GitPullRequest, label: 'Contributions' },
               ].map((item, index) => (
                 <Link
                   key={item.to}
@@ -263,18 +263,18 @@ export default function Header() {
           </Link>
 
           <Link
-            to="/creator"
+            to="/contributions"
             className={`relative p-3 rounded-xl transition-all duration-200 ${
-              isActive('/creator')
+              isActive('/contributions')
                 ? 'text-emerald-500'
                 : theme === 'dark'
                   ? 'text-gray-500 hover:text-emerald-500'
                   : 'text-gray-600 hover:text-emerald-500'
             }`}
-            title="Creator"
+            title="Contributions"
           >
-            <div style={{ filter: isActive('/creator') ? 'brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(500%) hue-rotate(125deg)' : (theme === 'dark' ? 'brightness(0) saturate(100%) invert(1)' : 'brightness(0)') }}>
-              <Edit3 className="w-6 h-6" strokeWidth={1.5} />
+            <div style={{ filter: isActive('/contributions') ? 'brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(500%) hue-rotate(125deg)' : (theme === 'dark' ? 'brightness(0) saturate(100%) invert(1)' : 'brightness(0)') }}>
+              <GitPullRequest className="w-6 h-6" strokeWidth={1.5} />
             </div>
           </Link>
 

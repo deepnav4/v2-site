@@ -15,26 +15,10 @@ export default function BlogPost() {
   const { theme } = useTheme();
   const { slug } = useParams<{ slug: string }>();
   const post = blogPosts.find(p => p.slug === slug);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [showTOC, setShowTOC] = useState(false);
-  const [headings, setHeadings] = useState<{ id: string; text: string; level: number }[]>([]);
   const [markdownContent, setMarkdownContent] = useState('');
 
   // Scroll reveal refs
   const headerRef = useScrollReveal();
-
-  useEffect(() => {
-    const updateScrollProgress = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (window.scrollY / scrollHeight) * 100;
-      setScrollProgress(Math.min(100, Math.max(0, progress)));
-    };
-
-    window.addEventListener('scroll', updateScrollProgress);
-    updateScrollProgress();
-
-    return () => window.removeEventListener('scroll', updateScrollProgress);
-  }, []);
 
   useEffect(() => {
     // Load markdown content
@@ -47,6 +31,10 @@ export default function BlogPost() {
         let content = module.default;
         // Remove frontmatter (YAML between ---)
         content = content.replace(/^---[\s\S]*?---\s*/m, '');
+        // Remove manual Table of Contents section if it exists
+        content = content.replace(/^## Table of Contents\s*[\s\S]*?---\s*/mi, '');
+        // Remove {#id} patterns from headings
+        content = content.replace(/(#+ .*?)\s*\{#[\w-]+\}\s*$/gm, '$1');
         setMarkdownContent(content);
       } catch (error) {
         console.error('Error loading markdown from build:', error);
@@ -62,6 +50,10 @@ export default function BlogPost() {
               console.log('Successfully fetched from GitHub');
               // Remove frontmatter
               content = content.replace(/^---[\s\S]*?---\s*/m, '');
+              // Remove manual Table of Contents section if it exists
+              content = content.replace(/^## Table of Contents\s*[\s\S]*?---\s*/mi, '');
+              // Remove {#id} patterns from headings
+              content = content.replace(/(#+ .*?)\s*\{#[\w-]+\}\s*$/gm, '$1');
               setMarkdownContent(content);
               return;
             } else {
@@ -78,38 +70,6 @@ export default function BlogPost() {
 
     loadContent();
   }, [slug]);
-
-  useEffect(() => {
-    // Extract headings from the article after markdown is rendered
-    const timer = setTimeout(() => {
-      const articleHeadings = Array.from(document.querySelectorAll('article h2, article h3'))
-        .map((heading) => ({
-          id: heading.id || heading.textContent?.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || '',
-          text: heading.textContent || '',
-          level: parseInt(heading.tagName[1])
-        }));
-      
-      // Add IDs to headings if they don't have them
-      document.querySelectorAll('article h2, article h3').forEach((heading) => {
-        if (!heading.id) {
-          heading.id = heading.textContent?.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || '';
-        }
-      });
-      
-      setHeadings(articleHeadings);
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [markdownContent]);
-
-
-
-  const scrollToHeading = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
 
   if (!post) {
     return (
@@ -140,151 +100,6 @@ export default function BlogPost() {
         }}
       />
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-      {/* Reading Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 h-1 z-50">
-        {/* <div className={`h-full ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'}`}>
-          <div 
-            className="h-full bg-emerald-500 transition-all duration-150"
-            style={{ width: `${scrollProgress}%` }}
-          />
-        </div> */}
-      </div>
-
-      {/* Progress Percentage Display with TOC - Hidden on mobile */}
-      <div 
-        className="hidden lg:block fixed top-1/2 -translate-y-1/2 right-4 lg:right-8 z-50"
-        onMouseEnter={() => setShowTOC(true)}
-        onMouseLeave={() => setShowTOC(false)}
-      >
-        {/* Expandable Container */}
-        <div 
-          className={`shadow-lg backdrop-blur-sm ${
-            theme === 'dark' ? 'bg-black/80 border border-gray-800' : 'bg-white/80 border border-gray-200'
-          }`}
-          style={{
-            width: showTOC ? '280px' : '64px',
-            height: showTOC ? 'auto' : '64px',
-            maxHeight: showTOC ? '480px' : '64px',
-            borderRadius: showTOC ? '12px' : '16px',
-            transition: showTOC 
-              ? 'border-radius 0.15s ease-out, width 0.25s ease-out 0.15s, max-height 0.25s ease-out 0.4s'
-              : 'max-height 0.2s ease-in, width 0.2s ease-in 0.2s, border-radius 0.15s ease-in 0.4s',
-            overflow: 'hidden',
-          }}
-        >
-          
-          {/* Percentage Display - Always Visible */}
-          <div 
-            className="flex items-center justify-center"
-            style={{
-              minHeight: '64px',
-              width: '100%',
-              position: 'relative',
-            }}
-          >
-            {/* Circle percentage - always rendered, hidden on expand */}
-            <div 
-              className="absolute inset-0 flex items-center justify-center"
-              style={{
-                opacity: showTOC ? 0 : 1,
-                transition: showTOC ? 'opacity 0.1s ease-out' : 'opacity 0.15s ease-in 0.3s',
-                pointerEvents: showTOC ? 'none' : 'auto'
-              }}
-            >
-              <span className={`text-lg font-inter font-semibold ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>
-                {Math.round(scrollProgress)}%
-              </span>
-            </div>
-
-            {/* Expanded header - always rendered, hidden when collapsed */}
-            <div 
-              className="w-full px-4 py-3 flex items-center gap-3 border-b" 
-              style={{ 
-                borderColor: theme === 'dark' ? '#1f2937' : '#e5e7eb',
-                opacity: showTOC ? 1 : 0,
-                transition: showTOC ? 'opacity 0.2s ease-out 0.3s' : 'opacity 0.1s ease-in',
-                pointerEvents: showTOC ? 'auto' : 'none'
-              }}
-            >
-              <div className="flex-shrink-0">
-                <span className={`text-lg font-inter font-semibold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-                  {Math.round(scrollProgress)}%
-                </span>
-              </div>
-              <div>
-                <h3 className={`text-sm font-semibold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-                  Contents
-                </h3>
-                <p className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
-                  Jump to section
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Table of Contents - Only visible when expanded */}
-          <div 
-            className="overflow-y-auto px-3 py-3 toc-scrollbar" 
-            style={{ 
-              maxHeight: '400px',
-              opacity: showTOC ? 1 : 0,
-              transition: showTOC ? 'opacity 0.2s ease-out 0.5s' : 'opacity 0.15s ease-in',
-              pointerEvents: showTOC ? 'auto' : 'none'
-            }}
-          >
-            {headings.map((heading, index) => (
-              <button
-                key={index}
-                onClick={() => scrollToHeading(heading.id)}
-                className={`w-full text-left py-2 px-3 rounded-md mb-1 transition-all text-sm ${
-                  heading.level === 3 ? 'pl-6 text-xs' : ''
-                } ${
-                  theme === 'dark' 
-                    ? 'text-gray-400 hover:text-emerald-400 hover:bg-gray-900/50' 
-                    : 'text-gray-600 hover:text-emerald-600 hover:bg-gray-50'
-                }`}
-              >
-                <span className={`${heading.level === 2 ? 'font-medium' : ''}`}>
-                  {heading.text}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <style>{`
-          @keyframes fade-in {
-            from {
-              opacity: 0;
-            }
-            to {
-              opacity: 1;
-            }
-          }
-          .animate-fade-in {
-            animation: fade-in 0.4s ease-in-out 0.3s both;
-          }
-          
-          .toc-scrollbar::-webkit-scrollbar {
-            width: 6px;
-          }
-          
-          .toc-scrollbar::-webkit-scrollbar-track {
-            background: ${theme === 'dark' ? '#0a0a0a' : '#f5f5f5'};
-            border-radius: 3px;
-          }
-          
-          .toc-scrollbar::-webkit-scrollbar-thumb {
-            background: #10b981;
-            border-radius: 3px;
-          }
-          
-          .toc-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #059669;
-          }
-        `}</style>
-      </div>
-
       <div className="container py-12 sm:py-16 md:py-24">
         <div className={`mb-8 sm:mb-10 md:mb-12 text-sm sm:text-base font-sans ${
           theme === 'dark' ? 'text-gray-400' : 'text-gray-600'

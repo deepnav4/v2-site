@@ -202,7 +202,7 @@ export default function Creator() {
               <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium">
                 CONTENT MANAGEMENT
               </p>
-              <h1 className={`text-3xl sm:text-4xl md:text-5xl font-normal font-serif ${
+              <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal font-serif ${
                 theme === 'dark' ? 'text-white' : 'text-black'
               }`}>
                 Creator Studio

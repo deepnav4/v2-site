@@ -32,13 +32,16 @@ export default function Projects() {
             ref={headerRef.ref}
             className={`mb-6 reveal ${headerRef.isVisible ? 'visible' : ''}`}
           >
-            <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+            <p className={`text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
+              SELECTED PROJECTS
+            </p>
+            <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               Projects
             </h1>
-            <p className={`text-sm sm:text-base font-sans mb-3 sm:mb-4 reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-sm sm:text-base font-sans mb-3 sm:mb-4 reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
               Complete collection spanning different domains and technologies
             </p>
-            <p className={`text-xs sm:text-sm font-sans reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
+            <p className={`text-xs sm:text-sm font-sans reveal stagger-4 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-500' : 'text-gray-500'}`}>
               {filteredProjects.length} projects
             </p>
           </div>

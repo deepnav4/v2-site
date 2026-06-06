@@ -4,6 +4,7 @@ import { useTheme } from '../store/themeStore';
 import { blogPosts, allTags } from '../data/blogPosts';
 import SEO from '../components/SEO';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { Edit3 } from 'lucide-react';
 
 export default function Blog() {
   const { theme } = useTheme();
@@ -32,18 +33,31 @@ export default function Blog() {
           ref={headerRef.ref}
           className={`mb-8 sm:mb-10 reveal ${headerRef.isVisible ? 'visible' : ''}`}
         >
-          <p className={`text-[10px] sm:text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
+          <p className={`text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
             LATE NIGHT THINKING
           </p>
-          <h1 className={`text-3xl sm:text-4xl md:text-5xl font-normal mb-3 sm:mb-4 font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-3 sm:mb-4 font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Things I've figured out
           </h1>
-          <p className={`text-sm sm:text-base font-sans reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
-            Notes on systems, algorithms, and patterns worth remembering
-            <span className={`ml-2 text-xs font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>
-              — {filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'}
-            </span>
-          </p>
+          <div className={`flex flex-wrap items-baseline gap-x-4 gap-y-1 reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''}`}>
+            <p className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+              Notes on systems, algorithms, and patterns worth remembering
+              <span className={`ml-2 text-xs font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>
+                — {filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'}
+              </span>
+            </p>
+            <Link
+              to="/creator"
+              className={`inline-flex items-center gap-1 text-[11px] sm:text-xs font-sans transition-colors duration-200 ${
+                theme === 'dark'
+                  ? 'text-gray-600 hover:text-emerald-500'
+                  : 'text-gray-400 hover:text-emerald-600'
+              }`}
+            >
+              <Edit3 size={11} />
+              Write a new post
+            </Link>
+          </div>
         </div>
 
         {/* Tags Filter */}
