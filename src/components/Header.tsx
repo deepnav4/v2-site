@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Home, Briefcase, FileText, BarChart3, User, Moon, Sun, Search, ExternalLink, GitPullRequest, Menu, X } from 'lucide-react';
+import { Home, Briefcase, FileText, BarChart3, User, Moon, Sun, Search, ExternalLink, GitPullRequest, Menu, X, Maximize2, Minimize2 } from 'lucide-react';
 import { useTheme } from '../store/themeStore';
 import UniversalSearch from './UniversalSearch';
 import AnimatedIcon from './AnimatedIcon';
@@ -19,6 +19,26 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isActive = (path: string) => location.pathname === path;
+
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -162,6 +182,27 @@ export default function Header() {
                 <span className="text-sm font-poppins font-normal">Search</span>
               </button>
 
+              <button
+                onClick={toggleFullscreen}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
+                  theme === 'dark'
+                    ? 'text-gray-400 active:text-white'
+                    : 'text-gray-600 active:text-black'
+                }`}
+              >
+                {isFullscreen ? (
+                  <>
+                    <Minimize2 className="w-4 h-4" strokeWidth={1.5} />
+                    <span className="text-sm font-poppins font-normal">Exit Fullscreen</span>
+                  </>
+                ) : (
+                  <>
+                    <Maximize2 className="w-4 h-4" strokeWidth={1.5} />
+                    <span className="text-sm font-poppins font-normal">Fullscreen</span>
+                  </>
+                )}
+              </button>
+
               <a
                 href="https://v2.navdeep.site"
                 target="_blank"
@@ -198,8 +239,8 @@ export default function Header() {
               isActive('/')
                 ? 'text-emerald-500'
                 : theme === 'dark'
-                  ? 'text-gray-500 hover:text-emerald-500'
-                  : 'text-gray-600 hover:text-emerald-500'
+                  ? 'text-white hover:text-emerald-500'
+                  : 'text-black hover:text-emerald-500'
             }`}
             title="Home"
           >
@@ -212,8 +253,8 @@ export default function Header() {
               isActive('/projects')
                 ? 'text-emerald-500'
                 : theme === 'dark'
-                  ? 'text-gray-500 hover:text-emerald-500'
-                  : 'text-gray-600 hover:text-emerald-500'
+                  ? 'text-white hover:text-emerald-500'
+                  : 'text-black hover:text-emerald-500'
             }`}
             title="Projects"
           >
@@ -226,8 +267,8 @@ export default function Header() {
               isActive('/blog')
                 ? 'text-emerald-500'
                 : theme === 'dark'
-                  ? 'text-gray-500 hover:text-emerald-500'
-                  : 'text-gray-600 hover:text-emerald-500'
+                  ? 'text-white hover:text-emerald-500'
+                  : 'text-black hover:text-emerald-500'
             }`}
             title="Blog"
           >
@@ -240,8 +281,8 @@ export default function Header() {
               isActive('/competitive')
                 ? 'text-emerald-500'
                 : theme === 'dark'
-                  ? 'text-gray-500 hover:text-emerald-500'
-                  : 'text-gray-600 hover:text-emerald-500'
+                  ? 'text-white hover:text-emerald-500'
+                  : 'text-black hover:text-emerald-500'
             }`}
             title="Competitive Programming"
           >
@@ -254,8 +295,8 @@ export default function Header() {
               isActive('/about')
                 ? 'text-emerald-500'
                 : theme === 'dark'
-                  ? 'text-gray-500 hover:text-emerald-500'
-                  : 'text-gray-600 hover:text-emerald-500'
+                  ? 'text-white hover:text-emerald-500'
+                  : 'text-black hover:text-emerald-500'
             }`}
             title="About"
           >
@@ -268,14 +309,12 @@ export default function Header() {
               isActive('/contributions')
                 ? 'text-emerald-500'
                 : theme === 'dark'
-                  ? 'text-gray-500 hover:text-emerald-500'
-                  : 'text-gray-600 hover:text-emerald-500'
+                  ? 'text-white hover:text-emerald-500'
+                  : 'text-black hover:text-emerald-500'
             }`}
             title="Contributions"
           >
-            <div style={{ filter: isActive('/contributions') ? 'brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(500%) hue-rotate(125deg)' : (theme === 'dark' ? 'brightness(0) saturate(100%) invert(1)' : 'brightness(0)') }}>
-              <GitPullRequest className="w-6 h-6" strokeWidth={1.5} />
-            </div>
+            <GitPullRequest className="w-6 h-6" strokeWidth={1.5} />
           </Link>
 
           {/* Divider */}
@@ -287,10 +326,9 @@ export default function Header() {
             onClick={(e) => toggleTheme(e)}
             className={`relative p-3 rounded-xl transition-all duration-200 ${
               theme === 'dark'
-                ? 'text-gray-600 hover:text-gray-400'
-                : 'text-gray-500 hover:text-gray-700'
+                ? 'text-white hover:text-emerald-500'
+                : 'text-black hover:text-emerald-500'
             }`}
-            style={{ filter: theme === 'dark' ? 'brightness(0) saturate(100%) invert(1)' : 'brightness(0)' }}
             title="Toggle theme"
           >
             {theme === 'dark' ? (
@@ -301,11 +339,27 @@ export default function Header() {
           </button>
 
           <button
+            onClick={toggleFullscreen}
+            className={`relative p-3 rounded-xl transition-all duration-200 ${
+              theme === 'dark'
+                ? 'text-white hover:text-emerald-500'
+                : 'text-black hover:text-emerald-500'
+            }`}
+            title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+          >
+            {isFullscreen ? (
+              <Minimize2 className="w-6 h-6" strokeWidth={1.5} />
+            ) : (
+              <Maximize2 className="w-6 h-6" strokeWidth={1.5} />
+            )}
+          </button>
+
+          <button
             onClick={() => setIsSearchOpen(true)}
             className={`relative p-3 rounded-xl transition-all duration-200 ${
               theme === 'dark'
-                ? 'text-gray-600 hover:text-gray-400'
-                : 'text-gray-500 hover:text-gray-700'
+                ? 'text-white hover:text-emerald-500'
+                : 'text-black hover:text-emerald-500'
             }`}
             title="Search (⌘K)"
           >
@@ -318,8 +372,8 @@ export default function Header() {
             rel="noopener noreferrer"
             className={`relative p-3 rounded-xl transition-all duration-200 ${
               theme === 'dark'
-                ? 'text-gray-600 hover:text-gray-400'
-                : 'text-gray-500 hover:text-gray-700'
+                ? 'text-white hover:text-emerald-500'
+                : 'text-black hover:text-emerald-500'
             }`}
             title="History"
           >

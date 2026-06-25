@@ -72,6 +72,7 @@ export default function Home() {
   const blogRef = useScrollReveal(0.1);
   const projectsRef = useScrollReveal(0.1);
   const githubRef = useScrollReveal(0.1);
+  const competitiveRef = useScrollReveal(0.1);
 
   useEffect(() => {
     async function fetchData() {
@@ -120,10 +121,9 @@ export default function Home() {
       />
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
 
-        {/* Hero Section */}
         <section
           ref={heroRef.ref}
-          className={`container pt-20 pb-12 sm:py-12 md:py-20 relative reveal ${heroRef.isVisible ? 'visible' : ''}`}
+          className={`container min-h-[calc(100vh-4rem)] lg:min-h-screen flex flex-col justify-center py-12 relative reveal ${heroRef.isVisible ? 'visible' : ''}`}
         >
           <div className="max-w-5xl">
             {/* Subtle label */}
@@ -143,9 +143,8 @@ export default function Home() {
               </span>
             </div> */}
 
-            <p className={`text-[10px] sm:text-sm mb-6 sm:mb-8 font-mono tracking-wide whitespace-nowrap reveal stagger-2 ${heroRef.isVisible ? 'visible' : ''} ${
-              theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
-            }`}>
+            <p className={`text-xs sm:text-base mb-6 sm:mb-8 font-mono tracking-wide whitespace-nowrap reveal stagger-2 ${heroRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
+              }`}>
               Information Technology Student <span className="mx-1 sm:mx-2 text-emerald-500">/</span> Developer <span className="mx-1 sm:mx-2 text-emerald-500">/</span> Writer
             </p>
 
@@ -156,9 +155,8 @@ export default function Home() {
               that fascinate me.
             </h1>
 
-            <p className={`text-sm sm:text-base mb-12 max-w-2xl font-sans leading-relaxed reveal stagger-4 ${heroRef.isVisible ? 'visible' : ''} ${
-              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-            }`}>
+            <p className={`text-base sm:text-lg mb-12 max-w-none font-sans leading-relaxed reveal stagger-4 ${heroRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+              }`}>
               I build full-stack applications with Docker, Redis, and real-time collaboration.
               Welcome to my lab notebook where I share experiments in software, design, and technology.
             </p>
@@ -188,22 +186,20 @@ export default function Home() {
                 href="https://drive.google.com/file/d/1sxmW7jDX1WN7VbJOK3_y95XuHb59iooh/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative px-6 py-3 rounded-xl font-sans font-medium inline-flex items-center justify-center gap-2 text-sm overflow-hidden transition-all duration-300 ${
-                  theme === 'dark'
-                    ? 'bg-white text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]'
-                    : 'bg-black text-white hover:shadow-[0_0_30px_rgba(0,0,0,0.3)]'
-                }`}
+                className={`group relative px-6 py-3 rounded-xl font-sans font-medium inline-flex items-center justify-center gap-2 text-base overflow-hidden transition-all duration-300 ${theme === 'dark'
+                  ? 'bg-white text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]'
+                  : 'bg-black text-white hover:shadow-[0_0_30px_rgba(0,0,0,0.3)]'
+                  }`}
               >
                 <span className="relative z-10">View Resume</span>
                 <ArrowRight size={16} className="relative z-10 transition-transform group-hover:translate-x-1" />
               </a>
               <Link
                 to="/about"
-                className={`group px-6 py-3 border rounded-xl font-sans font-medium text-center text-sm transition-all duration-300 inline-flex items-center gap-2 ${
-                  theme === 'dark'
-                    ? 'border-gray-800 text-gray-300 hover:border-emerald-500/50 hover:text-white hover:bg-emerald-500/5'
-                    : 'border-gray-300 text-gray-700 hover:border-emerald-500/50 hover:text-black hover:bg-emerald-500/5'
-                }`}
+                className={`group px-6 py-3 border rounded-xl font-sans font-medium text-center text-base transition-all duration-300 inline-flex items-center gap-2 ${theme === 'dark'
+                  ? 'border-gray-800 text-gray-300 hover:border-emerald-500/50 hover:text-white hover:bg-emerald-500/5'
+                  : 'border-gray-300 text-gray-700 hover:border-emerald-500/50 hover:text-black hover:bg-emerald-500/5'
+                  }`}
               >
                 About me
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -224,14 +220,12 @@ export default function Home() {
                 LATE NIGHT THINKING
               </p>
             </div>
-            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal mb-4 font-serif tracking-tight reveal stagger-2 ${blogRef.isVisible ? 'visible' : ''} ${
-              theme === 'dark' ? 'text-white' : 'text-black'
-            }`}>
+            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal mb-4 font-serif tracking-tight reveal stagger-2 ${blogRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'
+              }`}>
               Things I've figured out
             </h2>
-            <p className={`text-sm sm:text-base font-sans reveal stagger-3 ${blogRef.isVisible ? 'visible' : ''} ${
-              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-            }`}>
+            <p className={`text-sm sm:text-base font-sans reveal stagger-3 ${blogRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+              }`}>
               Notes on systems, algorithms, and patterns worth remembering
             </p>
           </div>
@@ -246,27 +240,23 @@ export default function Home() {
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
-                    <div className={`flex items-center gap-3 text-xs sm:text-sm mb-3 font-sans ${
-                      theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
-                    }`}>
+                    <div className={`flex items-center gap-3 text-xs sm:text-sm mb-3 font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
+                      }`}>
                       <span>{post.date}</span>
                       <span className={`w-1 h-1 rounded-full ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300'}`} />
                       <span className="font-mono text-emerald-500">{post.category}</span>
                     </div>
-                    <h3 className={`text-lg sm:text-xl font-normal mb-2 transition-colors duration-300 font-serif group-hover:text-emerald-500 ${
-                      theme === 'dark' ? 'text-white' : 'text-black'
-                    }`}>
+                    <h3 className={`text-lg sm:text-xl font-normal mb-2 transition-colors duration-300 font-serif group-hover:text-emerald-500 ${theme === 'dark' ? 'text-white' : 'text-black'
+                      }`}>
                       {post.title}
                     </h3>
-                    <p className={`text-sm sm:text-base font-sans line-clamp-2 ${
-                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                    }`}>
+                    <p className={`text-sm sm:text-base font-sans line-clamp-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                      }`}>
                       {post.excerpt}
                     </p>
                   </div>
-                  <ArrowRight size={20} className={`flex-shrink-0 mt-1 transition-all duration-300 group-hover:translate-x-1 ${
-                    theme === 'dark' ? 'text-gray-600 group-hover:text-emerald-500' : 'text-gray-400 group-hover:text-emerald-500'
-                  }`} />
+                  <ArrowRight size={20} className={`flex-shrink-0 mt-1 transition-all duration-300 group-hover:translate-x-1 ${theme === 'dark' ? 'text-gray-600 group-hover:text-emerald-500' : 'text-gray-400 group-hover:text-emerald-500'
+                    }`} />
                 </div>
               </Link>
             ))}
@@ -274,9 +264,8 @@ export default function Home() {
 
           <Link
             to="/blog"
-            className={`group inline-flex items-center gap-2 mt-8 text-sm sm:text-base font-medium font-sans transition-all duration-300 ${
-              theme === 'dark' ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-600 hover:text-emerald-500'
-            }`}
+            className={`group inline-flex items-center gap-2 mt-8 text-sm sm:text-base font-medium font-sans transition-all duration-300 ${theme === 'dark' ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-600 hover:text-emerald-500'
+              }`}
           >
             View all posts
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-2" />
@@ -295,76 +284,92 @@ export default function Home() {
                 2AM QUESTIONS
               </p>
             </div>
-            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal mb-4 font-serif tracking-tight reveal stagger-2 ${projectsRef.isVisible ? 'visible' : ''} ${
-              theme === 'dark' ? 'text-white' : 'text-black'
-            }`}>
+            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal mb-4 font-serif tracking-tight reveal stagger-2 ${projectsRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'
+              }`}>
               What I've built
             </h2>
-            <p className={`text-sm sm:text-base font-sans reveal stagger-3 ${projectsRef.isVisible ? 'visible' : ''} ${
-              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-            }`}>
+            <p className={`text-sm sm:text-base font-sans reveal stagger-3 ${projectsRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+              }`}>
               Experiments that started with 'I wonder if...'
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          <div className="space-y-6 sm:space-y-8">
             {featuredProjects.map((project, index) => (
-              <Link
+              <div
                 key={project.id}
-                to={`/projects/${project.slug}`}
-                className={`group card-premium rounded-xl p-5 sm:p-6 reveal ${projectsRef.isVisible ? 'visible' : ''}`}
+                className={`pb-6 sm:pb-8 reveal ${projectsRef.isVisible ? 'visible' : ''} ${
+                  index !== featuredProjects.length - 1 ? 'border-b' : ''
+                } ${theme === 'dark' ? 'border-gray-800' : 'border-gray-200'}`}
                 style={{ transitionDelay: `${(index + 3) * 100}ms` }}
               >
-                <div className="flex items-center justify-between mb-4">
-                  <span className={`text-xs uppercase tracking-wider font-medium font-sans px-2 py-1 rounded ${
-                    theme === 'dark'
-                      ? 'bg-emerald-500/10 text-emerald-400'
-                      : 'bg-emerald-500/10 text-emerald-600'
-                  }`}>
-                    {project.category}
-                  </span>
-                  <span className={`text-xs font-mono ${
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <span className={`text-xs sm:text-sm font-mono flex-shrink-0 mt-1.5 ${
                     theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
                   }`}>
-                    {project.date}
+                    0{index + 1}
                   </span>
-                </div>
-                <h3 className={`text-lg sm:text-xl font-normal mb-3 transition-colors duration-300 font-serif ${
-                  theme === 'dark' ? 'text-white group-hover:text-emerald-400' : 'text-black group-hover:text-emerald-600'
-                }`}>
-                  {project.title}
-                </h3>
-                <p className={`text-sm mb-4 font-sans line-clamp-2 leading-relaxed ${
-                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                }`}>
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.slice(0, 3).map(tech => (
-                    <span key={tech} className={`text-xs px-2 py-1 rounded-md font-mono transition-colors ${
-                      theme === 'dark'
-                        ? 'bg-gray-900 text-gray-400 border border-gray-800'
-                        : 'bg-gray-100 text-gray-600 border border-gray-200'
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                      <span className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-500 font-medium font-sans">
+                        {project.category}
+                      </span>
+                    </div>
+                    
+                    <Link to={`/projects/${project.slug}`}>
+                      <h3 className={`text-xl sm:text-2xl font-normal mb-2 sm:mb-3 font-serif hover:text-emerald-500 transition-colors cursor-pointer ${
+                        theme === 'dark' ? 'text-white' : 'text-black'
+                      }`}>
+                        {project.title}
+                      </h3>
+                    </Link>
+                    
+                    <p className={`text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed font-sans max-w-3xl line-clamp-3 sm:line-clamp-none ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                     }`}>
-                      {tech}
-                    </span>
-                  ))}
+                      {project.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                      {project.technologies.map(tech => (
+                        <span 
+                          key={tech}
+                          className={`text-[10px] sm:text-xs font-sans ${
+                            theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
+                          }`}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex gap-3 sm:gap-4 text-xs sm:text-sm items-center">
+                      {project.github && (
+                        <a 
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`flex items-center gap-1.5 font-sans transition-colors ${
+                            theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'
+                          }`}
+                        >
+                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                          </svg>
+                          Source
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className={`flex items-center gap-2 text-sm font-sans font-medium transition-all duration-300 ${
-                  theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'
-                }`}>
-                  <span>View details</span>
-                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-2" />
-                </div>
-              </Link>
+              </div>
             ))}
           </div>
 
           <Link
             to="/projects"
-            className={`group inline-flex items-center gap-2 mt-8 text-sm sm:text-base font-medium font-sans transition-all duration-300 ${
-              theme === 'dark' ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-600 hover:text-emerald-500'
-            }`}
+            className={`group inline-flex items-center gap-2 mt-8 text-sm sm:text-base font-medium font-sans transition-all duration-300 ${theme === 'dark' ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-600 hover:text-emerald-500'
+              }`}
           >
             View all projects
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-2" />
@@ -383,14 +388,12 @@ export default function Home() {
                 CONSISTENCY &gt; INTENSITY
               </p>
             </div>
-            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal mb-4 font-serif tracking-tight reveal stagger-2 ${githubRef.isVisible ? 'visible' : ''} ${
-              theme === 'dark' ? 'text-white' : 'text-black'
-            }`}>
+            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal mb-4 font-serif tracking-tight reveal stagger-2 ${githubRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'
+              }`}>
               The work shows up here
             </h2>
-            <p className={`text-sm sm:text-base font-sans reveal stagger-3 ${githubRef.isVisible ? 'visible' : ''} ${
-              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-            }`}>
+            <p className={`text-sm sm:text-base font-sans reveal stagger-3 ${githubRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+              }`}>
               When I remember to push
             </p>
           </div>
@@ -414,9 +417,8 @@ export default function Home() {
                   return (
                     <div key={weekIndex} className={week.isGap ? "w-3" : "w-3"}>
                       {monthLabel && (
-                        <div className={`text-[11px] font-mono font-semibold ${
-                          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                        }`}>
+                        <div className={`text-[11px] font-mono font-semibold ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                          }`}>
                           {monthLabel.month}
                         </div>
                       )}
@@ -429,20 +431,16 @@ export default function Home() {
               <div className="flex gap-[2px] sm:gap-[3px] overflow-x-auto pb-2">
                 {/* Day labels */}
                 <div className="flex flex-col gap-[2px] sm:gap-[3px] justify-around flex-shrink-0 pr-1 sm:pr-2">
-                  <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${
-                    theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
-                  }`}>Sun</div>
-                  <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${
-                    theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
-                  }`}>Mon</div>
+                  <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
+                    }`}>Sun</div>
+                  <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
+                    }`}>Mon</div>
                   <div className="h-[10px] sm:h-3"></div>
-                  <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${
-                    theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
-                  }`}>Wed</div>
+                  <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
+                    }`}>Wed</div>
                   <div className="h-[10px] sm:h-3"></div>
-                  <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${
-                    theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
-                  }`}>Fri</div>
+                  <div className={`text-[8px] sm:text-[11px] font-mono font-medium h-[10px] sm:h-3 flex items-center ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
+                    }`}>Fri</div>
                   <div className="h-[10px] sm:h-3"></div>
                 </div>
 
@@ -467,11 +465,10 @@ export default function Home() {
                         return (
                           <div
                             key={dayIndex}
-                            className={`w-[10px] h-[10px] sm:w-3 sm:h-3 rounded-[2px] sm:rounded-[3px] transition-all duration-200 cursor-pointer ${
-                              theme === 'dark'
-                                ? 'hover:ring-2 hover:ring-emerald-400/50 hover:ring-offset-1 hover:ring-offset-black'
-                                : 'hover:ring-2 hover:ring-emerald-500/50 hover:ring-offset-1 hover:ring-offset-white'
-                            }`}
+                            className={`w-[10px] h-[10px] sm:w-3 sm:h-3 rounded-[2px] sm:rounded-[3px] transition-all duration-200 cursor-pointer ${theme === 'dark'
+                              ? 'hover:ring-2 hover:ring-emerald-400/50 hover:ring-offset-1 hover:ring-offset-black'
+                              : 'hover:ring-2 hover:ring-emerald-500/50 hover:ring-offset-1 hover:ring-offset-white'
+                              }`}
                             style={{
                               backgroundColor: bgColor,
                               boxShadow: count > 0 ? (theme === 'dark' ? '0 1px 3px rgba(0,0,0,0.4)' : '0 1px 2px rgba(0,0,0,0.1)') : 'none'
@@ -488,18 +485,16 @@ export default function Home() {
 
               {/* Legend */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-6 px-1 gap-3 sm:gap-0">
-                <span className={`text-[11px] sm:text-[13px] font-mono transition-all duration-300 ${
-                  theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
-                }`}>
+                <span className={`text-[11px] sm:text-[13px] font-mono transition-all duration-300 ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
+                  }`}>
                   {hoveredDate
                     ? `${hoveredDate.count} contribution${hoveredDate.count !== 1 ? 's' : ''} on ${hoveredDate.date}`
                     : <><AnimatedCounter end={contributionData.totalContributions} /> contributions in the last year</>
                   }
                 </span>
                 <div className="flex items-center gap-2 sm:gap-3">
-                  <span className={`text-[10px] sm:text-[11px] font-mono font-medium ${
-                    theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
-                  }`}>Less</span>
+                  <span className={`text-[10px] sm:text-[11px] font-mono font-medium ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
+                    }`}>Less</span>
                   <div className="flex gap-1 sm:gap-1.5">
                     {[0, 1, 2, 3, 4].map(level => (
                       <div
@@ -509,20 +504,19 @@ export default function Home() {
                           backgroundColor: level === 0
                             ? (theme === 'dark' ? '#1a1a1a' : '#ebedf0')
                             : level === 1
-                            ? 'rgba(16, 185, 129, 0.25)'
-                            : level === 2
-                            ? 'rgba(16, 185, 129, 0.45)'
-                            : level === 3
-                            ? 'rgba(16, 185, 129, 0.65)'
-                            : 'rgba(16, 185, 129, 0.9)',
+                              ? 'rgba(16, 185, 129, 0.25)'
+                              : level === 2
+                                ? 'rgba(16, 185, 129, 0.45)'
+                                : level === 3
+                                  ? 'rgba(16, 185, 129, 0.65)'
+                                  : 'rgba(16, 185, 129, 0.9)',
                           boxShadow: level > 0 ? (theme === 'dark' ? '0 1px 2px rgba(0,0,0,0.3)' : '0 1px 2px rgba(0,0,0,0.1)') : 'none'
                         }}
                       />
                     ))}
                   </div>
-                  <span className={`text-[10px] sm:text-xs font-mono ${
-                    theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
-                  }`}>More</span>
+                  <span className={`text-[10px] sm:text-xs font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-500'
+                    }`}>More</span>
                 </div>
               </div>
             </div>
@@ -533,32 +527,55 @@ export default function Home() {
           )}
         </section>
 
-        {/* Competitive Programming - Simple */}
-        <section className="container py-16 sm:py-20">
-          <p className={`text-lg sm:text-xl max-w-2xl font-serif leading-relaxed mb-6 ${
-            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-          }`}>
-            Generate your personalized{' '}
-            <a
-              href="https://codeforces.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-emerald-500 hover:underline"
+        {/* Competitive Programming Section */}
+        <section
+          ref={competitiveRef.ref}
+          className={`container py-16 sm:py-20 reveal ${competitiveRef.isVisible ? 'visible' : ''}`}
+        >
+          <div className="mb-8 sm:mb-10">
+            <div className={`inline-flex items-center gap-2 mb-4 reveal stagger-1 ${competitiveRef.isVisible ? 'visible' : ''}`}>
+              <p className="text-xs uppercase tracking-[0.2em] text-emerald-500 font-sans font-medium">
+                PRACTICE LADDERS
+              </p>
+            </div>
+            <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal mb-4 font-serif tracking-tight reveal stagger-2 ${competitiveRef.isVisible ? 'visible' : ''} ${
+              theme === 'dark' ? 'text-white' : 'text-black'
+            }`}>
+              Competitive Programming
+            </h2>
+            <p className={`text-sm sm:text-base font-sans reveal stagger-3 ${competitiveRef.isVisible ? 'visible' : ''} ${
+              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+            }`}>
+              Personalized practice plans to climb the ranks
+            </p>
+          </div>
+
+          <div className={`card-premium rounded-xl p-5 sm:p-6 reveal stagger-4 ${competitiveRef.isVisible ? 'visible' : ''}`}>
+            <p className={`text-base sm:text-lg mb-6 font-serif leading-relaxed ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+            }`}>
+              Generate your personalized{' '}
+              <a
+                href="https://codeforces.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-500 hover:underline font-medium"
+              >
+                Codeforces
+              </a>
+              {' '}
+              ladder. Track your progress, identify weak areas, and climb the ranks with a customized practice plan based on your performance and goals.
+            </p>
+            <Link
+              to="/competitive"
+              className={`group inline-flex items-center gap-2 text-sm sm:text-base font-medium font-sans transition-all duration-300 ${
+                theme === 'dark' ? 'text-emerald-400 hover:text-emerald-300' : 'text-emerald-600 hover:text-emerald-500'
+              }`}
             >
-              Codeforces
-            </a>
-            {' '}
-            ladder. Track your progress, identify weak areas, and climb the ranks with a customized practice plan based on your performance and goals.
-          </p>
-          <Link
-            to="/competitive"
-            className={`group inline-flex items-center gap-2 text-sm font-sans transition-colors ${
-              theme === 'dark' ? 'text-gray-500 hover:text-white' : 'text-gray-600 hover:text-black'
-            }`}
-          >
-            Climb Your Ladder
-            <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-          </Link>
+              Climb Your Ladder
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-2" />
+            </Link>
+          </div>
         </section>
 
 

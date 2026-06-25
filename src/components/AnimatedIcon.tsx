@@ -74,24 +74,30 @@ export default function AnimatedIcon({
   };
 
   return (
-    <div
-      ref={containerRef}
-      className={className}
-      style={{
-        width: size,
-        height: size,
-        color: 'currentColor',
-        filter: isActive
-          ? 'brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(500%) hue-rotate(125deg)'
-          : theme === 'dark'
-            ? 'brightness(0) saturate(100%) invert(1)'
-            : 'none'
-      }}
-      onMouseEnter={handleMouseEnter}
-      onClick={handleClick}
-    />
+    <>
+      <style>{`
+        .animated-icon-container svg path,
+        .animated-icon-container svg rect,
+        .animated-icon-container svg circle {
+          fill: currentColor !important;
+        }
+        .animated-icon-container svg path[stroke]:not([stroke="none"]),
+        .animated-icon-container svg rect[stroke]:not([stroke="none"]),
+        .animated-icon-container svg circle[stroke]:not([stroke="none"]) {
+          stroke: currentColor !important;
+        }
+      `}</style>
+      <div
+        ref={containerRef}
+        className={`animated-icon-container ${className}`}
+        style={{
+          width: size,
+          height: size,
+          color: 'currentColor',
+        }}
+        onMouseEnter={handleMouseEnter}
+        onClick={handleClick}
+      />
+    </>
   );
 }
-
-
-

@@ -50,7 +50,7 @@ export default function ProjectDetail() {
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-      <div className="container py-12 sm:py-16 md:py-24">
+      <div className="container py-12 sm:py-16 md:py-20">
         {/* Breadcrumb Navigation */}
         <div className={`mb-8 sm:mb-10 md:mb-12 text-sm sm:text-base font-sans ${
           theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
@@ -85,8 +85,7 @@ export default function ProjectDetail() {
               {project.title}
             </h1>
             
-            {/* Project Description */}
-            <p className={`text-base sm:text-lg md:text-xl leading-relaxed font-sans mb-6 sm:mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-base sm:text-lg max-w-none leading-relaxed font-sans mb-6 sm:mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
               {project.description}
             </p>
 

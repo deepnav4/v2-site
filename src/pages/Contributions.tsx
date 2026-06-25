@@ -135,20 +135,20 @@ export default function Contributions() {
       />
 
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-        <div className="container py-10 sm:py-14">
+        <div className="container py-12 sm:py-16 md:py-20">
 
           {/* ── Header ──────────────────────────────────────────── */}
           <div
             ref={headerRef.ref}
-            className={`mb-8 sm:mb-10 reveal ${headerRef.isVisible ? 'visible' : ''}`}
+            className={`mb-8 sm:mb-12 reveal ${headerRef.isVisible ? 'visible' : ''}`}
           >
             <p className={`text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
               OPEN SOURCE
             </p>
-            <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-3 sm:mb-4 font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+            <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               Contributions
             </h1>
-            <p className={`text-sm sm:text-base font-sans reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+            <p className={`text-sm sm:text-base font-sans max-w-3xl leading-relaxed reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
               Pull requests and code contributions across GitHub
               {!loading && (
                 <span className={`ml-2 text-xs font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>

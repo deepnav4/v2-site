@@ -26,11 +26,11 @@ export default function About() {
         url="https://navdeep.dev/about"
       />
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-      <div className="container py-12 sm:py-16 md:py-24">
+      <div className="container py-12 sm:py-16 md:py-20">
         {/* Header Section */}
         <div
           ref={headerRef.ref}
-          className={`mb-12 sm:mb-16 reveal ${headerRef.isVisible ? 'visible' : ''}`}
+          className={`mb-8 sm:mb-12 reveal ${headerRef.isVisible ? 'visible' : ''}`}
         >
           <p className={`text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
             ABOUT ME
@@ -38,7 +38,7 @@ export default function About() {
           <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 leading-tight font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Navdeep Singh
           </h1>
-          <p className={`text-base sm:text-lg mb-6 sm:mb-8 font-sans reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-sm sm:text-base font-sans max-w-3xl leading-relaxed reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
             IT Student · Builder · Problem Solver
           </p>
           

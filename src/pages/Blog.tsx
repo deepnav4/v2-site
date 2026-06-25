@@ -27,20 +27,20 @@ export default function Blog() {
         url={`https://navdeep.dev/blog${selectedTag !== 'All' ? `/tags/${selectedTag}` : ''}`}
       />
       <div className={`min-h-screen ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-      <div className="container py-10 sm:py-14">
+      <div className="container py-12 sm:py-16 md:py-20">
         {/* Header Section */}
         <div
           ref={headerRef.ref}
-          className={`mb-8 sm:mb-10 reveal ${headerRef.isVisible ? 'visible' : ''}`}
+          className={`mb-8 sm:mb-12 reveal ${headerRef.isVisible ? 'visible' : ''}`}
         >
           <p className={`text-xs uppercase tracking-[0.2em] text-emerald-500 mb-3 sm:mb-4 font-sans font-medium reveal stagger-1 ${headerRef.isVisible ? 'visible' : ''}`}>
             LATE NIGHT THINKING
           </p>
-          <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-3 sm:mb-4 font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+          <h1 className={`text-4xl sm:text-5xl md:text-6xl font-normal mb-4 sm:mb-6 font-serif reveal stagger-2 ${headerRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Things I've figured out
           </h1>
           <div className={`flex flex-wrap items-baseline gap-x-4 gap-y-1 reveal stagger-3 ${headerRef.isVisible ? 'visible' : ''}`}>
-            <p className={`text-sm sm:text-base font-sans ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
+            <p className={`text-sm sm:text-base font-sans max-w-3xl leading-relaxed ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>
               Notes on systems, algorithms, and patterns worth remembering
               <span className={`ml-2 text-xs font-mono ${theme === 'dark' ? 'text-gray-600' : 'text-gray-400'}`}>
                 — {filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'}
