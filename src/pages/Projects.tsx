@@ -99,7 +99,6 @@ export default function Projects() {
               Hackathon {projects.filter(p => p.category === 'hackathon').length}
             </button>
           </div>
-        </div>
 
         {/* Projects List */}
         <div

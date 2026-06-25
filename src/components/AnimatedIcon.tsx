@@ -16,8 +16,8 @@ export default function AnimatedIcon({
   size = 24,
   className = '',
   trigger = 'hover',
-  isActive = false,
-  theme = 'dark'
+  isActive: _isActive = false,
+  theme: _theme = 'dark'
 }: AnimatedIconProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<AnimationItem | null>(null);
