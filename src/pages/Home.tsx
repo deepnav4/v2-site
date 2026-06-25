@@ -143,19 +143,19 @@ export default function Home() {
               </span>
             </div> */}
 
-            <p className={`text-xs sm:text-base mb-6 sm:mb-8 font-mono tracking-wide whitespace-nowrap reveal stagger-2 ${heroRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
+            <p className={`text-[10px] sm:text-xs md:text-sm mb-6 sm:mb-8 font-mono tracking-wide whitespace-normal sm:whitespace-nowrap reveal stagger-2 ${heroRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'
               }`}>
               Information Technology Student <span className="mx-1 sm:mx-2 text-emerald-500">/</span> Developer <span className="mx-1 sm:mx-2 text-emerald-500">/</span> Writer
             </p>
 
-            <h1 className={`text-[42px] sm:text-[56px] md:text-[68px] lg:text-[88px] xl:text-[100px] font-normal mb-8 leading-[1.05] font-serif tracking-tight reveal stagger-3 ${heroRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+            <h1 className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-normal mb-8 leading-[1.05] font-serif tracking-tight reveal stagger-3 ${heroRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               I experiment with things
               <br className="hidden sm:block" />
               <span className="sm:hidden"> </span>
               that fascinate me.
             </h1>
 
-            <p className={`text-base sm:text-lg mb-12 max-w-none font-sans leading-relaxed reveal stagger-4 ${heroRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            <p className={`text-sm sm:text-base mb-12 max-w-none font-sans leading-relaxed reveal stagger-4 ${heroRef.isVisible ? 'visible' : ''} ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
               }`}>
               I build full-stack applications with Docker, Redis, and real-time collaboration.
               Welcome to my lab notebook where I share experiments in software, design, and technology.
@@ -186,7 +186,7 @@ export default function Home() {
                 href="https://drive.google.com/file/d/1sxmW7jDX1WN7VbJOK3_y95XuHb59iooh/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative px-6 py-3 rounded-xl font-sans font-medium inline-flex items-center justify-center gap-2 text-base overflow-hidden transition-all duration-300 ${theme === 'dark'
+                className={`group relative px-6 py-3 rounded-xl font-sans font-medium inline-flex items-center justify-center gap-2 text-sm overflow-hidden transition-all duration-300 ${theme === 'dark'
                   ? 'bg-white text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]'
                   : 'bg-black text-white hover:shadow-[0_0_30px_rgba(0,0,0,0.3)]'
                   }`}
@@ -196,7 +196,7 @@ export default function Home() {
               </a>
               <Link
                 to="/about"
-                className={`group px-6 py-3 border rounded-xl font-sans font-medium text-center text-base transition-all duration-300 inline-flex items-center gap-2 ${theme === 'dark'
+                className={`group px-6 py-3 border rounded-xl font-sans font-medium text-center text-sm transition-all duration-300 inline-flex items-center gap-2 ${theme === 'dark'
                   ? 'border-gray-800 text-gray-300 hover:border-emerald-500/50 hover:text-white hover:bg-emerald-500/5'
                   : 'border-gray-300 text-gray-700 hover:border-emerald-500/50 hover:text-black hover:bg-emerald-500/5'
                   }`}

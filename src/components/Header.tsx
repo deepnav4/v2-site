@@ -182,26 +182,7 @@ export default function Header() {
                 <span className="text-sm font-poppins font-normal">Search</span>
               </button>
 
-              <button
-                onClick={toggleFullscreen}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
-                  theme === 'dark'
-                    ? 'text-gray-400 active:text-white'
-                    : 'text-gray-600 active:text-black'
-                }`}
-              >
-                {isFullscreen ? (
-                  <>
-                    <Minimize2 className="w-4 h-4" strokeWidth={1.5} />
-                    <span className="text-sm font-poppins font-normal">Exit Fullscreen</span>
-                  </>
-                ) : (
-                  <>
-                    <Maximize2 className="w-4 h-4" strokeWidth={1.5} />
-                    <span className="text-sm font-poppins font-normal">Fullscreen</span>
-                  </>
-                )}
-              </button>
+
 
               <a
                 href="https://v2.navdeep.site"
